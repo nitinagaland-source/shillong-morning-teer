@@ -40,5 +40,6 @@
       "source": "/notices",
       "destination": "/"
     }
-  ]
+  ],
+  "outputDirectory": "public"
 }
