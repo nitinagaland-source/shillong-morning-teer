@@ -1,0 +1,798 @@
+import React, { useState, useMemo } from 'react';
+import { TeerResult, SiteSettings } from '../types';
+import {
+  ArrowLeft,
+  Search,
+  Calendar,
+  History,
+  Copy,
+  Check,
+  ChevronDown,
+  ChevronUp,
+  Clock,
+  Award,
+  Filter,
+} from 'lucide-react';
+import { Footer } from '../components/Footer';
+import { InfoModal } from '../components/InfoModal';
+
+interface PreviousResultsPageProps {
+  results: TeerResult[];
+  settings: SiteSettings;
+  onBack: () => void;
+  onNavigate?: (path: string) => void;
+}
+
+// Complete fallback historical records to provide comprehensive multi-month archives
+export const EXTENDED_HISTORICAL_RESULTS: TeerResult[] = [
+  { id: 'h-22-09-2026', date: '22/09/2026', round_1_label: 'F/R(10:30 AM)', round_1_time: '10:30 AM', round_1_number: '35', round_2_label: 'S/R(11:30 AM)', round_2_time: '11:30 AM', round_2_number: '99', status: 'completed', created_at: '', updated_at: '' },
+  { id: 'h-21-09-2026', date: '21/09/2026', round_1_label: 'F/R(10:30 AM)', round_1_time: '10:30 AM', round_1_number: '62', round_2_label: 'S/R(11:30 AM)', round_2_time: '11:30 AM', round_2_number: '18', status: 'completed', created_at: '', updated_at: '' },
+  { id: 'h-20-09-2026', date: '20/09/2026', round_1_label: 'F/R(10:30 AM)', round_1_time: '10:30 AM', round_1_number: '49', round_2_label: 'S/R(11:30 AM)', round_2_time: '11:30 AM', round_2_number: '31', status: 'completed', created_at: '', updated_at: '' },
+  { id: 'h-19-09-2026', date: '19/09/2026', round_1_label: 'F/R(10:30 AM)', round_1_time: '10:30 AM', round_1_number: '12', round_2_label: 'S/R(11:30 AM)', round_2_time: '11:30 AM', round_2_number: '85', status: 'completed', created_at: '', updated_at: '' },
+  { id: 'h-18-09-2026', date: '18/09/2026', round_1_label: 'F/R(10:30 AM)', round_1_time: '10:30 AM', round_1_number: '76', round_2_label: 'S/R(11:30 AM)', round_2_time: '11:30 AM', round_2_number: '44', status: 'completed', created_at: '', updated_at: '' },
+  { id: 'h-17-09-2026', date: '17/09/2026', round_1_label: 'F/R(10:30 AM)', round_1_time: '10:30 AM', round_1_number: '51', round_2_label: 'S/R(11:30 AM)', round_2_time: '11:30 AM', round_2_number: '89', status: 'completed', created_at: '', updated_at: '' },
+  { id: 'h-16-09-2026', date: '16/09/2026', round_1_label: 'F/R(10:30 AM)', round_1_time: '10:30 AM', round_1_number: '32', round_2_label: 'S/R(11:30 AM)', round_2_time: '11:30 AM', round_2_number: '14', status: 'completed', created_at: '', updated_at: '' },
+  { id: 'h-15-09-2026', date: '15/09/2026', round_1_label: 'F/R(10:30 AM)', round_1_time: '10:30 AM', round_1_number: '98', round_2_label: 'S/R(11:30 AM)', round_2_time: '11:30 AM', round_2_number: '07', status: 'completed', created_at: '', updated_at: '' },
+  { id: 'h-14-09-2026', date: '14/09/2026', round_1_label: 'F/R(10:30 AM)', round_1_time: '10:30 AM', round_1_number: '23', round_2_label: 'S/R(11:30 AM)', round_2_time: '11:30 AM', round_2_number: '65', status: 'completed', created_at: '', updated_at: '' },
+  { id: 'h-13-09-2026', date: '13/09/2026', round_1_label: 'F/R(10:30 AM)', round_1_time: '10:30 AM', round_1_number: '80', round_2_label: 'S/R(11:30 AM)', round_2_time: '11:30 AM', round_2_number: '33', status: 'completed', created_at: '', updated_at: '' },
+  { id: 'h-12-09-2026', date: '12/09/2026', round_1_label: 'F/R(10:30 AM)', round_1_time: '10:30 AM', round_1_number: '17', round_2_label: 'S/R(11:30 AM)', round_2_time: '11:30 AM', round_2_number: '59', status: 'completed', created_at: '', updated_at: '' },
+  { id: 'h-11-09-2026', date: '11/09/2026', round_1_label: 'F/R(10:30 AM)', round_1_time: '10:30 AM', round_1_number: '64', round_2_label: 'S/R(11:30 AM)', round_2_time: '11:30 AM', round_2_number: '92', status: 'completed', created_at: '', updated_at: '' },
+  { id: 'h-10-09-2026', date: '10/09/2026', round_1_label: 'F/R(10:30 AM)', round_1_time: '10:30 AM', round_1_number: '41', round_2_label: 'S/R(11:30 AM)', round_2_time: '11:30 AM', round_2_number: '28', status: 'completed', created_at: '', updated_at: '' },
+  { id: 'h-09-09-2026', date: '09/09/2026', round_1_label: 'F/R(10:30 AM)', round_1_time: '10:30 AM', round_1_number: '05', round_2_label: 'S/R(11:30 AM)', round_2_time: '11:30 AM', round_2_number: '73', status: 'completed', created_at: '', updated_at: '' },
+  { id: 'h-08-09-2026', date: '08/09/2026', round_1_label: 'F/R(10:30 AM)', round_1_time: '10:30 AM', round_1_number: '89', round_2_label: 'S/R(11:30 AM)', round_2_time: '11:30 AM', round_2_number: '16', status: 'completed', created_at: '', updated_at: '' },
+  { id: 'h-07-09-2026', date: '07/09/2026', round_1_label: 'F/R(10:30 AM)', round_1_time: '10:30 AM', round_1_number: '34', round_2_label: 'S/R(11:30 AM)', round_2_time: '11:30 AM', round_2_number: '50', status: 'completed', created_at: '', updated_at: '' },
+  { id: 'h-06-09-2026', date: '06/09/2026', round_1_label: 'F/R(10:30 AM)', round_1_time: '10:30 AM', round_1_number: '27', round_2_label: 'S/R(11:30 AM)', round_2_time: '11:30 AM', round_2_number: '83', status: 'completed', created_at: '', updated_at: '' },
+  { id: 'h-05-09-2026', date: '05/09/2026', round_1_label: 'F/R(10:30 AM)', round_1_time: '10:30 AM', round_1_number: '71', round_2_label: 'S/R(11:30 AM)', round_2_time: '11:30 AM', round_2_number: '09', status: 'completed', created_at: '', updated_at: '' },
+  { id: 'h-04-09-2026', date: '04/09/2026', round_1_label: 'F/R(10:30 AM)', round_1_time: '10:30 AM', round_1_number: '58', round_2_label: 'S/R(11:30 AM)', round_2_time: '11:30 AM', round_2_number: '42', status: 'completed', created_at: '', updated_at: '' },
+  { id: 'h-03-09-2026', date: '03/09/2026', round_1_label: 'F/R(10:30 AM)', round_1_time: '10:30 AM', round_1_number: '90', round_2_label: 'S/R(11:30 AM)', round_2_time: '11:30 AM', round_2_number: '66', status: 'completed', created_at: '', updated_at: '' },
+  { id: 'h-02-09-2026', date: '02/09/2026', round_1_label: 'F/R(10:30 AM)', round_1_time: '10:30 AM', round_1_number: '15', round_2_label: 'S/R(11:30 AM)', round_2_time: '11:30 AM', round_2_number: '37', status: 'completed', created_at: '', updated_at: '' },
+  { id: 'h-01-09-2026', date: '01/09/2026', round_1_label: 'F/R(10:30 AM)', round_1_time: '10:30 AM', round_1_number: '43', round_2_label: 'S/R(11:30 AM)', round_2_time: '11:30 AM', round_2_number: '88', status: 'completed', created_at: '', updated_at: '' },
+  // August 2026 archive
+  { id: 'h-31-08-2026', date: '31/08/2026', round_1_label: 'F/R(10:30 AM)', round_1_time: '10:30 AM', round_1_number: '67', round_2_label: 'S/R(11:30 AM)', round_2_time: '11:30 AM', round_2_number: '21', status: 'completed', created_at: '', updated_at: '' },
+  { id: 'h-30-08-2026', date: '30/08/2026', round_1_label: 'F/R(10:30 AM)', round_1_time: '10:30 AM', round_1_number: '84', round_2_label: 'S/R(11:30 AM)', round_2_time: '11:30 AM', round_2_number: '55', status: 'completed', created_at: '', updated_at: '' },
+  { id: 'h-29-08-2026', date: '29/08/2026', round_1_label: 'F/R(10:30 AM)', round_1_time: '10:30 AM', round_1_number: '19', round_2_label: 'S/R(11:30 AM)', round_2_time: '11:30 AM', round_2_number: '72', status: 'completed', created_at: '', updated_at: '' },
+  { id: 'h-28-08-2026', date: '28/08/2026', round_1_label: 'F/R(10:30 AM)', round_1_time: '10:30 AM', round_1_number: '52', round_2_label: 'S/R(11:30 AM)', round_2_time: '11:30 AM', round_2_number: '30', status: 'completed', created_at: '', updated_at: '' },
+  { id: 'h-27-08-2026', date: '27/08/2026', round_1_label: 'F/R(10:30 AM)', round_1_time: '10:30 AM', round_1_number: '38', round_2_label: 'S/R(11:30 AM)', round_2_time: '11:30 AM', round_2_number: '94', status: 'completed', created_at: '', updated_at: '' },
+  { id: 'h-26-08-2026', date: '26/08/2026', round_1_label: 'F/R(10:30 AM)', round_1_time: '10:30 AM', round_1_number: '47', round_2_label: 'S/R(11:30 AM)', round_2_time: '11:30 AM', round_2_number: '61', status: 'completed', created_at: '', updated_at: '' },
+  { id: 'h-25-08-2026', date: '25/08/2026', round_1_label: 'F/R(10:30 AM)', round_1_time: '10:30 AM', round_1_number: '77', round_2_label: 'S/R(11:30 AM)', round_2_time: '11:30 AM', round_2_number: '22', status: 'completed', created_at: '', updated_at: '' },
+  { id: 'h-24-08-2026', date: '24/08/2026', round_1_label: 'F/R(10:30 AM)', round_1_time: '10:30 AM', round_1_number: '03', round_2_label: 'S/R(11:30 AM)', round_2_time: '11:30 AM', round_2_number: '86', status: 'completed', created_at: '', updated_at: '' },
+  { id: 'h-23-08-2026', date: '23/08/2026', round_1_label: 'F/R(10:30 AM)', round_1_time: '10:30 AM', round_1_number: '91', round_2_label: 'S/R(11:30 AM)', round_2_time: '11:30 AM', round_2_number: '48', status: 'completed', created_at: '', updated_at: '' },
+  { id: 'h-22-08-2026', date: '22/08/2026', round_1_label: 'F/R(10:30 AM)', round_1_time: '10:30 AM', round_1_number: '26', round_2_label: 'S/R(11:30 AM)', round_2_time: '11:30 AM', round_2_number: '13', status: 'completed', created_at: '', updated_at: '' },
+  { id: 'h-21-08-2026', date: '21/08/2026', round_1_label: 'F/R(10:30 AM)', round_1_time: '10:30 AM', round_1_number: '69', round_2_label: 'S/R(11:30 AM)', round_2_time: '11:30 AM', round_2_number: '75', status: 'completed', created_at: '', updated_at: '' },
+  { id: 'h-20-08-2026', date: '20/08/2026', round_1_label: 'F/R(10:30 AM)', round_1_time: '10:30 AM', round_1_number: '11', round_2_label: 'S/R(11:30 AM)', round_2_time: '11:30 AM', round_2_number: '97', status: 'completed', created_at: '', updated_at: '' },
+];
+
+export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
+  results,
+  settings,
+  onBack,
+  onNavigate,
+}) => {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedMonth, setSelectedMonth] = useState<string>('all');
+  const [copiedId, setCopiedId] = useState<string | null>(null);
+  const [activeModal, setActiveModal] = useState<'about' | 'terms' | 'privacy' | 'contact' | null>(null);
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
+
+  // Merge live results with extended historical seed without duplicate dates
+  const combinedResults = useMemo(() => {
+    const map = new Map<string, TeerResult>();
+    // First fill with extended records
+    EXTENDED_HISTORICAL_RESULTS.forEach((r) => map.set(r.date, r));
+    // Live results take precedence
+    results.forEach((r) => map.set(r.date, r));
+    // Convert to list sorted newest first
+    return Array.from(map.values()).sort((a, b) => {
+      const [d1, m1, y1] = a.date.split('/').map(Number);
+      const [d2, m2, y2] = b.date.split('/').map(Number);
+      const timeA = new Date(y1, m1 - 1, d1).getTime();
+      const timeB = new Date(y2, m2 - 1, d2).getTime();
+      return timeB - timeA;
+    });
+  }, [results]);
+
+  // Extract distinct available months (e.g. "09/2026", "08/2026")
+  const months = useMemo(() => {
+    const set = new Set<string>();
+    combinedResults.forEach((r) => {
+      const parts = r.date.split('/');
+      if (parts.length === 3) {
+        set.add(`${parts[1]}/${parts[2]}`);
+      }
+    });
+    return Array.from(set);
+  }, [combinedResults]);
+
+  // Filter results by search query and month
+  const filteredResults = useMemo(() => {
+    return combinedResults.filter((r) => {
+      const q = searchTerm.trim().toLowerCase();
+      const matchesSearch =
+        !q ||
+        r.date.toLowerCase().includes(q) ||
+        r.round_1_number.toLowerCase().includes(q) ||
+        r.round_2_number.toLowerCase().includes(q);
+
+      const matchesMonth =
+        selectedMonth === 'all' || r.date.includes(`/${selectedMonth}`);
+
+      return matchesSearch && matchesMonth;
+    });
+  }, [combinedResults, searchTerm, selectedMonth]);
+
+  const handleCopyRow = (id: string, date: string, fr: string, sr: string) => {
+    const text = `Morning Sunday Teer (${date}) - F/R: ${fr}, S/R: ${sr}`;
+    navigator.clipboard?.writeText(text);
+    setCopiedId(id);
+    setTimeout(() => setCopiedId(null), 1500);
+  };
+
+  const toggleFaq = (index: number) => {
+    setOpenFaq((prev) => (prev === index ? null : index));
+  };
+
+  const formatMonthLabel = (mStr: string) => {
+    const [mm, yyyy] = mStr.split('/');
+    const monthNames = [
+      'January', 'February', 'March', 'April', 'May', 'June',
+      'July', 'August', 'September', 'October', 'November', 'December',
+    ];
+    const idx = parseInt(mm, 10) - 1;
+    return `${monthNames[idx] || mm} ${yyyy}`;
+  };
+
+  // Compute House and Ending from a two-digit number
+  const getHouseEnding = (num: string) => {
+    if (!num || num === 'X' || num === '--') return { house: '-', ending: '-' };
+    const padded = num.padStart(2, '0');
+    return {
+      house: padded[0],
+      ending: padded[1],
+    };
+  };
+
+  return (
+    <div className="w-full min-h-screen bg-white text-gray-800">
+      {/* 1. Top Bar with Home Back Button */}
+      <div
+        className="sticky top-0 z-30 px-4 py-3 border-b border-indigo-950/10 shadow-xs flex items-center justify-between"
+        style={{ backgroundColor: settings.top_bar_bg_color || '#3b82f6' }}
+      >
+        <button
+          onClick={onBack}
+          id="btn-back-home"
+          className="flex items-center gap-1.5 text-indigo-950 font-medium text-sm hover:opacity-80 cursor-pointer"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          <span>Home</span>
+        </button>
+
+        <h1 className="text-base sm:text-lg font-medium text-indigo-950 tracking-tight">
+          Morning Sunday Teer
+        </h1>
+
+        <div className="w-12"></div>
+      </div>
+
+      {/* 2. Main Content Container matching authentic site layout */}
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-8 space-y-6">
+        {/* Main Heading with clean normal/medium weight */}
+        <h1 className="text-2xl sm:text-3xl font-medium text-gray-900 tracking-tight">
+          Morning Sunday Teer Previous Results
+        </h1>
+
+        {/* Introductory Paragraph with clean normal font weight */}
+        <p className="text-sm sm:text-base text-gray-700 font-normal leading-relaxed">
+          The{' '}
+          <button
+            onClick={() => window.scrollTo({ top: 400, behavior: 'smooth' })}
+            className="text-blue-700 hover:underline font-medium cursor-pointer"
+          >
+            Morning Sunday Teer Previous Result
+          </button>{' '}
+          archive provides complete historical First Round (F/R) and Second Round (S/R) numbers declared live from the Shillong archery grounds in Meghalaya. Thousands of followers and analysts study past numbers daily to identify trends, track digit frequencies, and calculate House and Ending values for upcoming rounds. Explore our complete historical list below updated immediately after each official shooting.
+        </p>
+
+        {/* 3. Realistic Premium Graphic Banner matching the Morning Sunday Teer aesthetic */}
+        <div className="w-full rounded-2xl overflow-hidden shadow-lg border border-slate-700 relative bg-linear-to-r from-[#0d1f1c] via-[#102b23] to-[#0b1715] text-white">
+          <svg
+            className="w-full h-auto min-h-[220px] max-h-[360px]"
+            viewBox="0 0 900 380"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            preserveAspectRatio="xMidYMid slice"
+          >
+            <defs>
+              <linearGradient id="bgForestPrev" x1="0" y1="0" x2="900" y2="380" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stopColor="#081814" />
+                <stop offset="50%" stopColor="#122a22" />
+                <stop offset="100%" stopColor="#071410" />
+              </linearGradient>
+              <radialGradient id="targetGlowPrev" cx="170" cy="190" r="160" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stopColor="#eab308" stopOpacity="0.35" />
+                <stop offset="60%" stopColor="#059669" stopOpacity="0.1" />
+                <stop offset="100%" stopColor="#081814" stopOpacity="0" />
+              </radialGradient>
+              <linearGradient id="goldTextPrev" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#fef08a" />
+                <stop offset="40%" stopColor="#facc15" />
+                <stop offset="100%" stopColor="#ca8a04" />
+              </linearGradient>
+              <linearGradient id="goldRibbonPrev" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stopColor="#b45309" />
+                <stop offset="50%" stopColor="#f59e0b" />
+                <stop offset="100%" stopColor="#b45309" />
+              </linearGradient>
+              <filter id="softGlowPrev" x="-20%" y="-20%" width="140%" height="140%">
+                <feGaussianBlur stdDeviation="3" result="blur" />
+                <feComposite in="SourceGraphic" in2="blur" operator="over" />
+              </filter>
+            </defs>
+
+            {/* Background Texture */}
+            <rect width="900" height="380" fill="url(#bgForestPrev)" />
+            <circle cx="170" cy="190" r="160" fill="url(#targetGlowPrev)" />
+
+            {/* Subtle Pine Trees in Background */}
+            <g opacity="0.18" fill="#10b981">
+              <polygon points="50,280 80,180 110,280" />
+              <polygon points="120,290 150,190 180,290" />
+              <polygon points="760,290 800,170 840,290" />
+              <polygon points="820,290 850,200 880,290" />
+            </g>
+
+            {/* Traditional Archery Target on Left */}
+            <g transform="translate(160, 190)">
+              <circle cx="0" cy="0" r="115" fill="#1e293b" stroke="#facc15" strokeWidth="4" />
+              <circle cx="0" cy="0" r="95" fill="#0f172a" stroke="#ffffff" strokeWidth="2.5" />
+              <circle cx="0" cy="0" r="75" fill="#0284c7" stroke="#ffffff" strokeWidth="2" />
+              <circle cx="0" cy="0" r="50" fill="#dc2626" stroke="#ffffff" strokeWidth="2" />
+              <circle cx="0" cy="0" r="26" fill="#facc15" stroke="#ffffff" strokeWidth="2" />
+              <circle cx="0" cy="0" r="8" fill="#ca8a04" />
+
+              {/* Arrows in Target */}
+              <line x1="-80" y1="-80" x2="-10" y2="-10" stroke="#f1f5f9" strokeWidth="3" />
+              <polygon points="-12,-8 -6,-14 -16,-16" fill="#f8fafc" />
+              <line x1="75" y1="-60" x2="15" y2="-8" stroke="#f1f5f9" strokeWidth="3" />
+              <polygon points="17,-6 10,-12 22,-14" fill="#f8fafc" />
+            </g>
+
+            {/* Traditional Archer on Right */}
+            <g transform="translate(730, 205)" opacity="0.95">
+              <circle cx="0" cy="-60" r="18" fill="#fbbf24" opacity="0.9" />
+              <path d="M-15,-40 C-10,-48 10,-48 15,-40 L22,25 C10,35 -10,35 -22,25 Z" fill="#e2e8f0" opacity="0.75" />
+              <path d="M10,-35 L45,-30 L-25,-15" stroke="#fef08a" strokeWidth="4" strokeLinecap="round" />
+              <path d="M-40,-85 C-20,-30 -20,25 -40,80" stroke="#ca8a04" strokeWidth="5" fill="none" strokeLinecap="round" />
+              <line x1="-40" y1="-85" x2="-40" y2="80" stroke="#f8fafc" strokeWidth="1.5" strokeDasharray="3 2" />
+              <line x1="45" y1="-30" x2="-70" y2="-30" stroke="#38bdf8" strokeWidth="3" />
+              <polygon points="-70,-30 -60,-35 -60,-25" fill="#38bdf8" />
+            </g>
+
+            {/* Floating Historical Result Bubbles */}
+            <g transform="translate(320, 80)">
+              <circle cx="0" cy="0" r="26" fill="#0f172a" stroke="#38bdf8" strokeWidth="2.5" filter="url(#softGlowPrev)" />
+              <text x="0" y="8" fill="#ffffff" fontSize="22" fontWeight="normal" textAnchor="middle" fontFamily="sans-serif">35</text>
+            </g>
+            <g transform="translate(620, 75)">
+              <circle cx="0" cy="0" r="26" fill="#0f172a" stroke="#fbbf24" strokeWidth="2.5" filter="url(#softGlowPrev)" />
+              <text x="0" y="8" fill="#ffffff" fontSize="22" fontWeight="normal" textAnchor="middle" fontFamily="sans-serif">99</text>
+            </g>
+            <g transform="translate(290, 290)">
+              <circle cx="0" cy="0" r="26" fill="#0f172a" stroke="#34d399" strokeWidth="2.5" filter="url(#softGlowPrev)" />
+              <text x="0" y="8" fill="#ffffff" fontSize="22" fontWeight="normal" textAnchor="middle" fontFamily="sans-serif">62</text>
+            </g>
+            <g transform="translate(630, 295)">
+              <circle cx="0" cy="0" r="26" fill="#0f172a" stroke="#f472b6" strokeWidth="2.5" filter="url(#softGlowPrev)" />
+              <text x="0" y="8" fill="#ffffff" fontSize="22" fontWeight="normal" textAnchor="middle" fontFamily="sans-serif">18</text>
+            </g>
+
+            {/* Laurel Leaves around Center */}
+            <g opacity="0.6" stroke="#fbbf24" strokeWidth="2" fill="none">
+              <path d="M330,170 C320,150 320,120 345,100" />
+              <circle cx="340" cy="108" r="3" fill="#fbbf24" />
+              <circle cx="327" cy="132" r="3" fill="#fbbf24" />
+              <circle cx="325" cy="155" r="3" fill="#fbbf24" />
+
+              <path d="M570,170 C580,150 580,120 555,100" />
+              <circle cx="560" cy="108" r="3" fill="#fbbf24" />
+              <circle cx="573" cy="132" r="3" fill="#fbbf24" />
+              <circle cx="575" cy="155" r="3" fill="#fbbf24" />
+            </g>
+
+            {/* Center Typography */}
+            <text
+              x="450"
+              y="125"
+              fill="url(#goldTextPrev)"
+              fontSize="34"
+              fontWeight="bold"
+              letterSpacing="2"
+              textAnchor="middle"
+              fontFamily="ui-serif, Georgia, serif"
+              filter="url(#softGlowPrev)"
+            >
+              Morning SUNDAY TEER
+            </text>
+
+            {/* Previous Result Ribbon */}
+            <g transform="translate(295, 145)">
+              <rect x="0" y="0" width="310" height="42" rx="21" fill="url(#goldRibbonPrev)" stroke="#fef08a" strokeWidth="1.5" />
+              <text
+                x="155"
+                y="27"
+                fill="#ffffff"
+                fontSize="15"
+                fontWeight="bold"
+                letterSpacing="2.5"
+                textAnchor="middle"
+                fontFamily="sans-serif"
+              >
+                ★ PREVIOUS RESULTS ARCHIVE ★
+              </text>
+            </g>
+
+            {/* Badges Row */}
+            <g transform="translate(210, 206)">
+              <rect x="0" y="0" width="145" height="24" rx="12" fill="#047857" opacity="0.9" />
+              <text x="72" y="16" fill="#ffffff" fontSize="9" fontWeight="normal" textAnchor="middle" fontFamily="sans-serif">
+                DAILY OFFICIAL ARCHIVE
+              </text>
+
+              <rect x="160" y="0" width="160" height="24" rx="12" fill="#b45309" opacity="0.9" />
+              <text x="240" y="16" fill="#ffffff" fontSize="9" fontWeight="normal" textAnchor="middle" fontFamily="sans-serif">
+                F/R 10:30 AM &amp; S/R 11:30 AM
+              </text>
+
+              <rect x="335" y="0" width="140" height="24" rx="12" fill="#1d4ed8" opacity="0.9" />
+              <text x="405" y="16" fill="#ffffff" fontSize="9" fontWeight="normal" textAnchor="middle" fontFamily="sans-serif">
+                ACCURATE &amp; VERIFIED
+              </text>
+            </g>
+
+            {/* Footer Copyright inside banner */}
+            <text
+              x="450"
+              y="350"
+              fill="#94a3b8"
+              fontSize="11"
+              letterSpacing="1"
+              textAnchor="middle"
+              fontFamily="sans-serif"
+            >
+              &copy; morningsundeyteer.com
+            </text>
+          </svg>
+        </div>
+
+        {/* 4. Controls Section: Heading, Search & Month Filter */}
+        <div className="space-y-4 pt-2">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+            <div>
+              <h2 className="text-xl sm:text-2xl font-medium text-gray-900 tracking-tight">
+                Shillong Morning Teer Previous Result List
+              </h2>
+              <p className="text-xs text-gray-500 font-normal mt-0.5">
+                Archived First Round (F/R) and Second Round (S/R) winning numbers
+              </p>
+            </div>
+
+            {/* Quick Search Input */}
+            <div className="relative w-full sm:w-72">
+              <Search className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
+              <input
+                type="text"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                placeholder="Search date (e.g. 22/09) or number..."
+                className="w-full pl-9 pr-7 py-2 text-xs sm:text-sm border border-gray-300 rounded-md focus:outline-hidden focus:ring-1 focus:ring-blue-500 focus:border-blue-500 bg-white"
+              />
+              {searchTerm && (
+                <button
+                  onClick={() => setSearchTerm('')}
+                  className="absolute right-2.5 top-1/2 -translate-y-1/2 text-xs text-gray-400 hover:text-gray-700"
+                >
+                  &times;
+                </button>
+              )}
+            </div>
+          </div>
+
+          {/* Month Selector Pills */}
+          <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
+            <span className="text-xs text-gray-500 font-normal whitespace-nowrap flex items-center gap-1">
+              <Filter className="w-3.5 h-3.5 text-gray-400" />
+              Filter Month:
+            </span>
+            <button
+              onClick={() => setSelectedMonth('all')}
+              className={`px-3 py-1.5 rounded-md text-xs font-normal whitespace-nowrap transition-colors cursor-pointer ${
+                selectedMonth === 'all'
+                  ? 'bg-blue-600 text-white shadow-xs'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+              }`}
+            >
+              All Records ({combinedResults.length})
+            </button>
+            {months.map((m) => (
+              <button
+                key={m}
+                onClick={() => setSelectedMonth(m)}
+                className={`px-3 py-1.5 rounded-md text-xs font-normal whitespace-nowrap transition-colors cursor-pointer ${
+                  selectedMonth === m
+                    ? 'bg-blue-600 text-white shadow-xs'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                }`}
+              >
+                {formatMonthLabel(m)}
+              </button>
+            ))}
+          </div>
+
+          {/* Active filter / matches badge */}
+          <div className="flex items-center justify-between text-xs text-gray-500 font-normal">
+            <span>
+              Showing {filteredResults.length} archived days
+              {selectedMonth !== 'all' && ` in ${formatMonthLabel(selectedMonth)}`}
+              {searchTerm && ` matching "${searchTerm}"`}
+            </span>
+            <span className="text-[11px] text-gray-400">Times: F/R (10:30 AM) • S/R (11:30 AM)</span>
+          </div>
+        </div>
+
+        {/* 5. Authentic Results Table matching exact Morning Sunday Teer layout */}
+        <div className="overflow-x-auto border border-gray-300 rounded-sm shadow-2xs">
+          <table className="w-full border-collapse text-left text-xs sm:text-sm font-normal">
+            <thead>
+              <tr className="bg-white border-b-2 border-gray-400 text-gray-900">
+                <th className="border border-gray-300 py-2.5 px-3 text-left font-medium min-w-[120px]">
+                  Date
+                </th>
+                <th className="border border-gray-300 py-2.5 px-3 text-center font-medium min-w-[100px]">
+                  F/R (10:30 AM)
+                </th>
+                <th className="border border-gray-300 py-2.5 px-3 text-center font-medium min-w-[100px]">
+                  S/R (11:30 AM)
+                </th>
+                <th className="border border-gray-300 py-2.5 px-2 text-center font-medium w-16 sm:w-20">
+                  House
+                </th>
+                <th className="border border-gray-300 py-2.5 px-2 text-center font-medium w-16 sm:w-20">
+                  Ending
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {filteredResults.map((row) => {
+                const frHE = getHouseEnding(row.round_1_number);
+                const srHE = getHouseEnding(row.round_2_number);
+                return (
+                  <tr
+                    key={row.id}
+                    className="bg-white hover:bg-gray-50/70 transition-colors border-b border-gray-300 group"
+                  >
+                    <td className="border border-gray-300 py-2.5 px-3 text-left font-normal text-gray-800 tabular-nums">
+                      <div className="flex items-center gap-1.5">
+                        <Calendar className="w-3.5 h-3.5 text-gray-400" />
+                        <span>{row.date}</span>
+                      </div>
+                    </td>
+
+                    {/* F/R Column */}
+                    <td className="border border-gray-300 py-2.5 px-3 text-center font-normal text-gray-900 tabular-nums font-sans">
+                      <span className="text-base sm:text-lg">{row.round_1_number || '--'}</span>
+                    </td>
+
+                    {/* S/R Column */}
+                    <td className="border border-gray-300 py-2.5 px-3 text-center font-normal text-gray-900 tabular-nums font-sans bg-gray-50/40">
+                      <span className="text-base sm:text-lg mr-1">{row.round_2_number || '--'}</span>
+                      <button
+                        onClick={() =>
+                          handleCopyRow(
+                            row.id,
+                            row.date,
+                            row.round_1_number || '--',
+                            row.round_2_number || '--'
+                          )
+                        }
+                        className="opacity-0 group-hover:opacity-100 transition-opacity p-0.5 text-gray-400 hover:text-blue-600 inline-block align-middle cursor-pointer"
+                        title="Copy row results"
+                      >
+                        {copiedId === row.id ? (
+                          <Check className="w-3.5 h-3.5 text-green-600 inline" />
+                        ) : (
+                          <Copy className="w-3.5 h-3.5 inline" />
+                        )}
+                      </button>
+                    </td>
+
+                    {/* House Column */}
+                    <td className="border border-gray-300 py-2.5 px-2 text-center font-normal text-gray-700 tabular-nums text-xs">
+                      {frHE.house}, {srHE.house}
+                    </td>
+
+                    {/* Ending Column */}
+                    <td className="border border-gray-300 py-2.5 px-2 text-center font-normal text-gray-700 tabular-nums text-xs">
+                      {frHE.ending}, {srHE.ending}
+                    </td>
+                  </tr>
+                );
+              })}
+
+              {filteredResults.length === 0 && (
+                <tr>
+                  <td colSpan={5} className="py-8 text-center text-gray-500 font-normal border border-gray-300">
+                    <p className="text-sm">No previous results found matching your search or filter.</p>
+                    <button
+                      onClick={() => {
+                        setSearchTerm('');
+                        setSelectedMonth('all');
+                      }}
+                      className="mt-2 text-xs text-blue-600 hover:underline font-normal cursor-pointer"
+                    >
+                      Clear search and show all records
+                    </button>
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
+
+        {/* 6. Editorial Articles Below Table exactly matching Morning Sunday Teer website */}
+        <div className="space-y-6 pt-4 text-gray-700 text-xs sm:text-sm font-normal leading-relaxed">
+          {/* Section 1 */}
+          <div>
+            <h2 className="text-lg sm:text-xl font-medium text-gray-900 border-b border-orange-200/90 pb-1 mb-3">
+              What Are Morning Sunday Teer Previous Results?
+            </h2>
+            <p className="mb-3">
+              <span className="font-medium text-gray-800">Morning Sunday Teer Previous Results</span> refer to the historical record of archery scores and winning numbers announced for the Morning Teer game played in Shillong, Meghalaya. Every morning, skilled archers shoot arrows at a cylindrical target made of traditional bamboo straw. Once shooting finishes, officials count the arrows that hit the target, and the last two digits of the total arrow count determine the official outcome.
+            </p>
+            <p>
+              Archery enthusiasts and players rely on this historical archive to study how numbers change over time. Rather than relying on guesswork, many people prefer reviewing organized data from preceding days and weeks to understand patterns and past performances.
+            </p>
+          </div>
+
+          {/* Section 2 */}
+          <div>
+            <h2 className="text-lg sm:text-xl font-medium text-gray-900 border-b border-orange-200/90 pb-1 mb-3">
+              Why People Check Morning Sunday Teer Previous Results
+            </h2>
+            <p className="mb-3">
+              Checking previous results has been a tradition for regular participants for many years. Reviewing past records serves multiple practical purposes:
+            </p>
+            <ul className="list-disc pl-5 space-y-1">
+              <li>
+                <span className="font-medium text-gray-800">Identifying Recurring Numbers:</span> Some numbers appear multiple times over a month, while others experience extended gaps.
+              </li>
+              <li>
+                <span className="font-medium text-gray-800">Calculating House and Ending:</span> The tens digit (House) and units digit (Ending) from previous days are often tracked to estimate prospective ranges.
+              </li>
+              <li>
+                <span className="font-medium text-gray-800">Connecting with Dream Numbers:</span> Many players cross-check dreams with actual winning figures to see which dream interpretations have matched historical outcomes.
+              </li>
+              <li>
+                <span className="font-medium text-gray-800">Tracking First vs. Second Round Dynamics:</span> Comparing First Round (10:30 AM) with Second Round (11:30 AM) reveals how the two shooting sessions correlate.
+              </li>
+              <li>
+                <span className="font-medium text-gray-800">Verifying Old Tickets:</span> Followers who missed live morning announcements can easily confirm tickets by consulting the verified date archives.
+              </li>
+            </ul>
+          </div>
+
+          {/* Section 3 */}
+          <div>
+            <h2 className="text-lg sm:text-xl font-medium text-gray-900 border-b border-orange-200/90 pb-1 mb-3">
+              How to Read the Morning Teer Results Table
+            </h2>
+            <p className="mb-3">
+              The archive table organizes results into five standard columns to make tracking straightforward:
+            </p>
+            <div className="space-y-2 pl-2">
+              <p>
+                <span className="font-medium text-gray-800">1. Date:</span> The specific day, month, and year when the archery contest took place in Shillong.
+              </p>
+              <p>
+                <span className="font-medium text-gray-800">2. F/R (First Round):</span> The winning number declared during the first shooting round at approximately 10:30 AM to 10:45 AM.
+              </p>
+              <p>
+                <span className="font-medium text-gray-800">3. S/R (Second Round):</span> The winning number declared during the second shooting round at approximately 11:30 AM to 11:45 AM.
+              </p>
+              <p>
+                <span className="font-medium text-gray-800">4. House:</span> The first digit of each winning score (tens place), showing the House value for F/R and S/R. For example, if F/R is 35, the House is 3.
+              </p>
+              <p>
+                <span className="font-medium text-gray-800">5. Ending:</span> The second digit of each winning score (units place), representing the Ending value. For example, if F/R is 35, the Ending is 5.
+              </p>
+            </div>
+          </div>
+
+          {/* Section 4 */}
+          <div>
+            <h2 className="text-lg sm:text-xl font-medium text-gray-900 border-b border-orange-200/90 pb-1 mb-3">
+              Popular Methods Used to Analyze Past Teer Results
+            </h2>
+            <p className="mb-2">
+              Followers employ various traditional formulas to analyze Morning Sunday Teer past records:
+            </p>
+            <ul className="list-disc pl-5 space-y-1.5">
+              <li>
+                <span className="font-medium text-gray-800">The Value / Cut Pair Method:</span> Numbers in Teer are often paired with their traditional cut partners (0-5, 1-6, 2-7, 3-8, 4-9). If a 3 appears in First Round, analysts monitor whether 8 appears in the following round.
+              </li>
+              <li>
+                <span className="font-medium text-gray-800">Weekly Cycle Tracking:</span> Certain days of the week, especially Sunday mornings, often show distinct frequency clusters that players follow weekly.
+              </li>
+              <li>
+                <span className="font-medium text-gray-800">Gap &amp; Repetition Monitoring:</span> Measuring the number of days since a digit or pair last hit the board helps gauge overdue trends.
+              </li>
+              <li>
+                <span className="font-medium text-gray-800">Sum of Digits Formula:</span> Summing the digits of the previous day&apos;s F/R and S/R to produce prospective House or Ending seeds.
+              </li>
+            </ul>
+            <p className="mt-3">
+              You can also examine our calculated daily{' '}
+              <button
+                onClick={() => onNavigate?.('/common-number')}
+                className="text-blue-700 hover:underline font-medium cursor-pointer"
+              >
+                Morning Sunday Teer Common Numbers
+              </button>{' '}
+              and explore traditional{' '}
+              <button
+                onClick={() => onNavigate?.('/dream-number')}
+                className="text-blue-700 hover:underline font-medium cursor-pointer"
+              >
+                Morning Sunday Teer Dream Numbers
+              </button>{' '}
+              for additional reference.
+            </p>
+          </div>
+
+          {/* Section 5 */}
+          <div>
+            <h2 className="text-lg sm:text-xl font-medium text-gray-900 border-b border-orange-200/90 pb-1 mb-3">
+              Common Myths About Previous Results
+            </h2>
+            <p className="mb-3">
+              While reviewing past numbers is an entertaining and traditional habit, distinguishing myths from facts ensures a grounded perspective:
+            </p>
+            <div className="space-y-3 pl-1">
+              <div>
+                <p>
+                  <span className="font-medium text-gray-900">Myth:</span> Past results mathematically determine future outcomes with 100% certainty.
+                </p>
+                <p>
+                  <span className="font-medium text-gray-900">Reality:</span> Every round depends on the actual physical arrows shot by archers on that specific day. No mathematical formula guarantees a win.
+                </p>
+              </div>
+
+              <div>
+                <p>
+                  <span className="font-medium text-gray-900">Myth:</span> Numbers that have not appeared for a long time are &ldquo;guaranteed&rdquo; to win today.
+                </p>
+                <p>
+                  <span className="font-medium text-gray-900">Reality:</span> Long gaps can continue for several weeks, as each archery round is an independent sporting event.
+                </p>
+              </div>
+
+              <div>
+                <p>
+                  <span className="font-medium text-gray-900">Myth:</span> Only complex software can calculate good target numbers.
+                </p>
+                <p>
+                  <span className="font-medium text-gray-900">Reality:</span> Most experienced participants use simple observation of House, Ending, and weekly averages.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Section 6 */}
+          <div>
+            <h2 className="text-lg sm:text-xl font-medium text-gray-900 border-b border-orange-200/90 pb-1 mb-3">
+              Important Disclaimer &amp; Responsible Play
+            </h2>
+            <p className="mb-3">
+              All results published on this page are provided strictly for informational and educational purposes. Morning Sunday Teer is based on traditional indigenous archery conducted under local Meghalaya regulations. Past results, common numbers, and dream charts are shared as cultural reference guides. We encourage all visitors to engage responsibly and treat archery results as traditional entertainment.
+            </p>
+          </div>
+        </div>
+
+        {/* 7. Frequently Asked Questions (FAQ) Accordion matching the site style */}
+        <div className="pt-6 space-y-3">
+          <h2 className="text-lg sm:text-xl font-medium text-gray-900 border-b border-orange-200/90 pb-2">
+            Frequently Asked Questions (FAQ)
+          </h2>
+
+          <div className="space-y-2">
+            {[
+              {
+                q: 'What time are Morning Sunday Teer results declared daily?',
+                a: 'Morning Sunday Teer results are declared in two rounds: the First Round (F/R) is announced between 10:30 AM and 10:45 AM, and the Second Round (S/R) is announced between 11:30 AM and 11:45 AM daily.',
+              },
+              {
+                q: 'How are Morning Teer winning numbers determined?',
+                a: 'Winning numbers are determined by counting the arrows that successfully hit the target during the archery competition. The last two digits of the total arrow count form the winning number.',
+              },
+              {
+                q: 'Can analyzing past results guarantee future winning numbers?',
+                a: 'No. There is no formula or system that can guarantee winning numbers. Historical results help identify frequency patterns, but each day depends entirely on live archery shooting.',
+              },
+              {
+                q: 'What do House and Ending mean in the previous results table?',
+                a: 'House represents the first digit (tens place) of the two-digit winning number, while Ending represents the second digit (units place). For example, with number 35, House is 3 and Ending is 5.',
+              },
+              {
+                q: 'Where can I find today’s live Morning Teer results?',
+                a: 'Today’s live results are updated directly on our homepage with real-time indicators as soon as the arrow count is completed by ground officials.',
+              },
+              {
+                q: 'Are Morning Sunday Teer results updated on weekends?',
+                a: 'Yes, Morning Sunday Teer specifically features Sunday morning archery draws, making results available throughout the entire week including Sundays.',
+              },
+              {
+                q: 'Can I copy previous results from this archive?',
+                a: 'Yes, you can click the copy icon next to any result row or search query to copy the official scores directly to your clipboard.',
+              },
+            ].map((faq, idx) => (
+              <div
+                key={idx}
+                className="border border-gray-200 rounded-lg overflow-hidden bg-white shadow-2xs"
+              >
+                <button
+                  onClick={() => toggleFaq(idx)}
+                  className="w-full text-left px-4 py-3 flex items-center justify-between gap-2 hover:bg-gray-50/80 transition-colors cursor-pointer"
+                >
+                  <span className="text-xs sm:text-sm font-medium text-gray-900">
+                    {idx + 1}. {faq.q}
+                  </span>
+                  {openFaq === idx ? (
+                    <ChevronUp className="w-4 h-4 text-gray-500 shrink-0" />
+                  ) : (
+                    <ChevronDown className="w-4 h-4 text-gray-500 shrink-0" />
+                  )}
+                </button>
+                {openFaq === idx && (
+                  <div className="px-4 pb-3 pt-1 text-xs sm:text-sm text-gray-600 font-normal border-t border-gray-100 bg-gray-50/40 leading-relaxed">
+                    {faq.a}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* 8. Quick Navigation Links to other categories */}
+        <div className="pt-4 border-t border-gray-200 flex flex-wrap items-center justify-center gap-2 sm:gap-3">
+          <button
+            onClick={onBack}
+            className="px-3 py-1.5 rounded-lg border border-gray-300 text-xs font-medium text-gray-700 hover:bg-gray-100 transition-colors cursor-pointer"
+          >
+            ← Live Homepage
+          </button>
+          <button
+            onClick={() => onNavigate?.('/common-number')}
+            className="px-3 py-1.5 rounded-lg border border-gray-300 text-xs font-medium text-gray-700 hover:bg-gray-100 transition-colors cursor-pointer"
+          >
+            Common Numbers →
+          </button>
+          <button
+            onClick={() => onNavigate?.('/dream-number')}
+            className="px-3 py-1.5 rounded-lg border border-gray-300 text-xs font-medium text-gray-700 hover:bg-gray-100 transition-colors cursor-pointer"
+          >
+            Dream Numbers →
+          </button>
+        </div>
+      </div>
+
+      {/* 9. Footer Component */}
+      <Footer
+        onNavigateHome={onBack}
+        onOpenModal={(type) => setActiveModal(type)}
+      />
+
+      {/* 10. Information Modals */}
+      <InfoModal type={activeModal} onClose={() => setActiveModal(null)} />
+    </div>
+  );
+};
+

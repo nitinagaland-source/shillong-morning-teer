@@ -1,0 +1,14 @@
+node_modules/
+build/
+dist/
+coverage/
+.DS_Store
+*.log
+.env*
+!.env.example
+
+# Generated Vite output
+public/
+.env
+*firebase-adminsdk*.json
+node_modules/
