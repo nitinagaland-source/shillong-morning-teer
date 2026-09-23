@@ -1,5 +1,6 @@
-import 'dotenv/config';
-import express, { NextFunction, Request, Response } from 'express';
+﻿import 'dotenv/config';
+import express from 'express';
+import type { NextFunction, Request, Response } from 'express';
 import crypto from 'crypto';
 import { cert, getApps, initializeApp } from 'firebase-admin/app';
 import { DocumentSnapshot, Firestore, QueryDocumentSnapshot, getFirestore } from 'firebase-admin/firestore';
@@ -1017,3 +1018,4 @@ app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
 });
 
 export default app;
+
