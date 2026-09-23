@@ -121,7 +121,7 @@ export default function App() {
   // Polling is the serverless-safe fallback; the storage event makes another open tab refresh immediately after an admin save.
   useEffect(() => {
     loadAllData();
-    const interval = window.setInterval(loadAllData, 15000);
+    const interval = window.setInterval(loadAllData, 5 * 60 * 1000);
     const onFocus = () => loadAllData();
     const onStorage = (event: StorageEvent) => {
       if (event.key === 'teer-data-updated') loadAllData();

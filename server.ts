@@ -6,7 +6,29 @@ import { DocumentSnapshot, Firestore, QueryDocumentSnapshot, getFirestore } from
 
 const app = express();
 
-// Never cache live API responses. Results and daily numbers must reflect the current IST day immediately.
+// Small in-memory API cache. On Hostinger this process stays alive, so many visitors
+// can share the same Firestore reads instead of exhausting the free daily quota.
+type ApiCacheEntry = { expires: number; value: unknown };
+const apiCache = new Map<string, ApiCacheEntry>();
+async function cached<T>(key: string, ttlMs: number, loader: () => Promise<T>): Promise<T> {
+  const hit = apiCache.get(key);
+  if (hit && hit.expires > Date.now()) return hit.value as T;
+  const value = await loader();
+  apiCache.set(key, { expires: Date.now() + ttlMs, value });
+  return value;
+}
+
+// Any successful admin mutation invalidates cached public data immediately.
+app.use('/api', (req, res, next) => {
+  if (req.method !== 'GET' && req.method !== 'HEAD') {
+    res.on('finish', () => {
+      if (res.statusCode < 400) apiCache.clear();
+    });
+  }
+  next();
+});
+
+// Never browser-cache live API responses. Results and daily numbers must reflect the current IST day immediately.
 app.use('/api', (_req, res, next) => {
   res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
   res.setHeader('Pragma', 'no-cache');
@@ -278,8 +300,8 @@ async function ensureCommonNumbers(todayKey: string) {
       const ref = db.collection('common_numbers').doc(commonDocId(todayKey, row.category_label));
       await db.runTransaction(async (tx) => {
         const snap = await tx.get(ref);
-        const now = new Date().toISOString();
         if (!snap.exists) {
+          const now = new Date().toISOString();
           tx.create(ref, {
             result_date: todayKey,
             category_label: row.category_label,
@@ -288,19 +310,6 @@ async function ensureCommonNumbers(todayKey: string) {
             created_at: now,
             updated_at: now,
           });
-          return;
-        }
-
-        // Keep at least the required number of daily picks even if an older
-        // document was created by a previous version of the app. Existing
-        // admin-selected values are preserved; only missing values are filled.
-        const existing = Array.isArray(snap.data()?.numbers) ? [...snap.data()!.numbers] : [];
-        if (existing.length < row.numbers.length) {
-          for (const candidate of row.numbers) {
-            if (!existing.includes(candidate)) existing.push(candidate);
-            if (existing.length >= row.numbers.length) break;
-          }
-          tx.set(ref, { numbers: existing, updated_at: now }, { merge: true });
         }
       });
     })
@@ -334,15 +343,27 @@ async function ensureDailyDream(todayKey: string) {
   });
 }
 
+let ensuredDailyKey = '';
+let ensuringDaily: Promise<string> | null = null;
 async function ensureDailyState() {
   const todayKey = getTodayISTKey();
-  await Promise.all([
-    ensureSiteSettings(),
-    ensureTodayResult(todayKey),
-    ensureCommonNumbers(todayKey),
-    ensureDailyDream(todayKey),
-  ]);
-  return todayKey;
+  if (ensuredDailyKey === todayKey) return todayKey;
+  if (ensuringDaily) return ensuringDaily;
+  ensuringDaily = (async () => {
+    await Promise.all([
+      ensureSiteSettings(),
+      ensureTodayResult(todayKey),
+      ensureCommonNumbers(todayKey),
+      ensureDailyDream(todayKey),
+    ]);
+    ensuredDailyKey = todayKey;
+    return todayKey;
+  })();
+  try {
+    return await ensuringDaily;
+  } finally {
+    ensuringDaily = null;
+  }
 }
 
 function hashPassword(password: string, salt: string): string {
@@ -625,9 +646,12 @@ app.put('/api/site-settings', requireAdmin, async (req, res, next) => {
 app.get('/api/results/today', async (_req, res, next) => {
   try {
     const todayKey = await ensureDailyState();
-    const data = snapshotToData(await getDb().collection('results').doc(todayKey).get());
-    if (!data) throw new HttpError(404, 'Today result not found.');
-    res.json(todayResultRowToApi(data));
+    const payload = await cached(`today:${todayKey}`, 15_000, async () => {
+      const data = snapshotToData(await getDb().collection('results').doc(todayKey).get());
+      if (!data) throw new HttpError(404, 'Today result not found.');
+      return todayResultRowToApi(data);
+    });
+    res.json(payload);
   } catch (error) { next(error); }
 });
 
@@ -670,12 +694,15 @@ app.post('/api/results/today', requireAdmin, async (req, res, next) => {
 app.get('/api/results/previous', async (req, res, next) => {
   try {
     const todayKey = await ensureDailyState();
-    const snap = await getDb().collection('results')
-      .where('result_date', '<', todayKey)
-      .orderBy('result_date', 'desc')
-      .limit(365)
-      .get();
-    let results = snap.docs.map((d) => resultRowToApi({ id: d.id, ...d.data() }));
+    const baseResults = await cached(`previous:${todayKey}`, 10 * 60_000, async () => {
+      const snap = await getDb().collection('results')
+        .where('result_date', '<', todayKey)
+        .orderBy('result_date', 'desc')
+        .limit(120)
+        .get();
+      return snap.docs.map((d) => resultRowToApi({ id: d.id, ...d.data() }));
+    });
+    let results = [...baseResults];
     const search = cleanText(req.query.search, 50).toLowerCase();
     if (search) results = results.filter((r: any) => JSON.stringify(r).toLowerCase().includes(search));
     res.json(results);
@@ -755,7 +782,7 @@ app.get('/api/common-numbers', async (req, res, next) => {
       const snap = await getDb().collection('common_numbers').where('result_date', '==', key).get();
       docs = snap.docs;
     } else {
-      const snap = await getDb().collection('common_numbers').orderBy('result_date', 'desc').limit(400).get();
+      const snap = await getDb().collection('common_numbers').orderBy('result_date', 'desc').limit(120).get();
       docs = snap.docs;
     }
     const rows = docs.map((d) => commonRowToApi({ id: d.id, ...d.data() }));
@@ -806,18 +833,21 @@ app.delete('/api/common-numbers/:id', requireAdmin, async (req, res, next) => {
 app.get('/api/dream-numbers/daily', async (_req, res, next) => {
   try {
     const todayKey = await ensureDailyState();
-    const data: any = snapshotToData(await getDb().collection('daily_dream_numbers').doc(todayKey).get());
-    if (!data) throw new HttpError(404, 'Daily dream number not found.');
-    res.json({
-      id: data.id,
-      date: keyToDisplay(data.result_date),
-      symbol: data.symbol,
-      direct_numbers: data.direct_numbers || [],
-      house_number: data.house_number,
-      ending_number: data.ending_number,
-      source: data.source,
-      updated_at: data.updated_at,
+    const payload = await cached(`daily-dream:${todayKey}`, 5 * 60_000, async () => {
+      const data: any = snapshotToData(await getDb().collection('daily_dream_numbers').doc(todayKey).get());
+      if (!data) throw new HttpError(404, 'Daily dream number not found.');
+      return {
+        id: data.id,
+        date: keyToDisplay(data.result_date),
+        symbol: data.symbol,
+        direct_numbers: data.direct_numbers || [],
+        house_number: data.house_number,
+        ending_number: data.ending_number,
+        source: data.source,
+        updated_at: data.updated_at,
+      };
     });
+    res.json(payload);
   } catch (error) { next(error); }
 });
 
@@ -844,8 +874,11 @@ app.put('/api/dream-numbers/daily', requireAdmin, async (req, res, next) => {
 
 app.get('/api/dream-numbers', async (req, res, next) => {
   try {
-    const snap = await getDb().collection('dream_numbers').orderBy('keyword', 'asc').limit(500).get();
-    let rows = snap.docs.map((d) => dreamRowToApi({ id: d.id, ...d.data() }));
+    const allRows = await cached('dream-numbers', 60 * 60_000, async () => {
+      const snap = await getDb().collection('dream_numbers').orderBy('keyword', 'asc').limit(200).get();
+      return snap.docs.map((d) => dreamRowToApi({ id: d.id, ...d.data() }));
+    });
+    let rows = [...allRows];
     const q = cleanText(req.query.q, 80).toLowerCase();
     if (q) rows = rows.filter((row: any) => row.keyword.toLowerCase().includes(q));
     res.json(rows);
@@ -901,8 +934,11 @@ app.delete('/api/dream-numbers/:id', requireAdmin, async (req, res, next) => {
 
 app.get('/api/notices', async (_req, res, next) => {
   try {
-    const snap = await getDb().collection('notices').orderBy('created_at', 'desc').limit(100).get();
-    res.json(snap.docs.map((d) => ({ id: d.id, ...d.data() })));
+    const rows = await cached('notices', 5 * 60_000, async () => {
+      const snap = await getDb().collection('notices').orderBy('created_at', 'desc').limit(30).get();
+      return snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+    });
+    res.json(rows);
   } catch (error) { next(error); }
 });
 
