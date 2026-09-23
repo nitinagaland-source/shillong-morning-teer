@@ -17,7 +17,7 @@ export const CategoryGrid: React.FC<CategoryGridProps> = ({ onNavigate }) => {
       {/* 3x2 Grid on all viewports matching exact reference screenshot */}
       <div
         id="categories-grid"
-        className="grid grid-cols-3 gap-1.5 sm:gap-3.5 w-[calc(100%+24px)] -ml-3 sm:w-full sm:ml-0"
+        className="relative left-1/2 grid w-[calc(100vw-12px)] -translate-x-1/2 grid-cols-3 gap-1 sm:left-auto sm:w-full sm:translate-x-0 sm:gap-3.5"
       >
         {/* 1. Common Number */}
         <button
