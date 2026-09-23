@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { Menu, X } from 'lucide-react';
 import { SiteSettings } from '../types';
 
@@ -31,18 +31,18 @@ export const TopBar: React.FC<TopBarProps> = ({ settings, onOpenDrawer, isDrawer
             <img
               src={settings.logo_url}
               alt={settings.site_name || 'Shillongmorningteer'}
-              className="w-11 h-11 sm:w-13 sm:h-13 object-contain shrink-0"
+              className="w-11 h-11 sm:w-13 sm:h-13 object-contain shrink-0 scale-105"
               referrerPolicy="no-referrer"
             />
           ) : (
             <div className="w-11 h-11 sm:w-13 sm:h-13 shrink-0" aria-hidden="true">
               <svg viewBox="0 0 100 100" className="w-full h-full" fill="none">
-                <circle cx="43" cy="57" r="31" stroke="#050505" strokeWidth="8" />
-                <circle cx="43" cy="57" r="19" stroke="#050505" strokeWidth="7" />
+                <circle cx="43" cy="57" r="31" stroke="#050505" strokeWidth="10" />
+                <circle cx="43" cy="57" r="19" stroke="#050505" strokeWidth="9" />
                 <circle cx="43" cy="57" r="7" fill="#050505" />
-                <path d="M43 57 L75 25" stroke="#050505" strokeWidth="7" strokeLinecap="round" />
-                <path d="M70 18 L84 16 L82 30" stroke="#050505" strokeWidth="7" strokeLinecap="round" strokeLinejoin="round" />
-                <path d="M72 28 L85 41" stroke="#050505" strokeWidth="6" strokeLinecap="round" />
+                <path d="M43 57 L75 25" stroke="#050505" strokeWidth="9" strokeLinecap="round" />
+                <path d="M70 18 L84 16 L82 30" stroke="#050505" strokeWidth="9" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M72 28 L85 41" stroke="#050505" strokeWidth="8" strokeLinecap="round" />
               </svg>
             </div>
           )}
@@ -50,7 +50,7 @@ export const TopBar: React.FC<TopBarProps> = ({ settings, onOpenDrawer, isDrawer
           <div className="min-w-0 flex items-center gap-2">
             <span
               id="site-title-text"
-              className="truncate text-[20px] sm:text-[27px] leading-none font-extrabold tracking-[-1.2px] text-black font-sans"
+              className="truncate text-[20px] sm:text-[27px] leading-none font-black tracking-[-1.2px] text-black font-sans"
             >
               {settings.site_name || 'Shillongmorningteer'}
             </span>
@@ -80,3 +80,4 @@ export const TopBar: React.FC<TopBarProps> = ({ settings, onOpenDrawer, isDrawer
     </header>
   );
 };
+
