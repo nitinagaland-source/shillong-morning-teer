@@ -6,7 +6,7 @@ interface CategoryGridProps {
 
 export const CategoryGrid: React.FC<CategoryGridProps> = ({ onNavigate }) => {
   return (
-    <section id="categories-section" className="w-full">
+    <section id="categories-section" className="w-full md:w-[780px] md:relative md:left-1/2 md:-translate-x-1/2">
       <h2
         id="all-categories-heading"
         className="text-lg sm:text-xl font-medium tracking-tight text-gray-900 mb-3 font-sans"
@@ -17,7 +17,7 @@ export const CategoryGrid: React.FC<CategoryGridProps> = ({ onNavigate }) => {
       {/* 3x2 Grid on all viewports matching exact reference screenshot */}
       <div
         id="categories-grid"
-        className="grid grid-cols-3 gap-2.5 sm:gap-3.5 w-full"
+        className="grid grid-cols-3 gap-2 sm:gap-4 w-full"
       >
         {/* 1. Common Number */}
         <button

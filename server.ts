@@ -5,6 +5,14 @@ import { cert, getApps, initializeApp } from 'firebase-admin/app';
 import { DocumentSnapshot, Firestore, QueryDocumentSnapshot, getFirestore } from 'firebase-admin/firestore';
 
 const app = express();
+
+// Never cache live API responses. Results and daily numbers must reflect the current IST day immediately.
+app.use('/api', (_req, res, next) => {
+  res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+  res.setHeader('Pragma', 'no-cache');
+  res.setHeader('Expires', '0');
+  next();
+});
 app.set('trust proxy', 1);
 
 const IS_PRODUCTION = process.env.NODE_ENV === 'production' || Boolean(process.env.VERCEL);

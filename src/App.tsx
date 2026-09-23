@@ -39,6 +39,7 @@ import { HomeEditorialArticle } from './components/HomeEditorialArticle';
 import { Footer } from './components/Footer';
 import { InfoModal } from './components/InfoModal';
 import { RefreshCw, Radio } from 'lucide-react';
+import { getMsUntilNextMidnightIST, getTodayISTDateString } from './lib/dateUtils';
 
 export default function App() {
   // Application Data States
@@ -132,6 +133,32 @@ export default function App() {
       window.removeEventListener('focus', onFocus);
       window.removeEventListener('storage', onStorage);
     };
+  }, [loadAllData]);
+
+  // Reset the visible live result exactly at 12:00 AM IST, then fetch the new day's Firebase state.
+  // This prevents yesterday's numbers from remaining on an already-open browser tab.
+  useEffect(() => {
+    let timer: number | undefined;
+
+    const scheduleMidnightReset = () => {
+      timer = window.setTimeout(async () => {
+        const date = getTodayISTDateString();
+        setTodayResult((prev) => ({
+          ...prev,
+          id: `today-${date.replace(/\//g, '-')}`,
+          date,
+          round_1_number: 'X',
+          round_2_number: 'X',
+          status: 'awaiting',
+          updated_at: new Date().toISOString(),
+        }));
+        await loadAllData();
+        scheduleMidnightReset();
+      }, getMsUntilNextMidnightIST() + 250);
+    };
+
+    scheduleMidnightReset();
+    return () => { if (timer) window.clearTimeout(timer); };
   }, [loadAllData]);
 
   // Handle tile click from CategoryGrid (all 6 tiles are live!)

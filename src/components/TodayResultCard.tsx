@@ -13,9 +13,12 @@ export const TodayResultCard: React.FC<TodayResultCardProps> = ({
   settings,
   isLiveUpdating = true,
 }) => {
-  const round1Number = result.round_1_number?.trim() || 'X';
-  const round2Number = result.round_2_number?.trim() || 'X';
-  const displayDate = result.date || getTodayISTDateString();
+  const todayIST = getTodayISTDateString();
+  const isCurrentDay = !result.date || result.date === todayIST;
+  const isAwaiting = result.status === 'awaiting';
+  const round1Number = isCurrentDay && !isAwaiting ? (result.round_1_number?.trim() || 'X') : 'X';
+  const round2Number = isCurrentDay && !isAwaiting ? (result.round_2_number?.trim() || 'X') : 'X';
+  const displayDate = isCurrentDay ? (result.date || todayIST) : todayIST;
 
   return (
     <section id="today-result-section" className="w-full">

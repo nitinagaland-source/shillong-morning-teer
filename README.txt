@@ -1,10 +1,7 @@
-Vercel routing fix
+Patch contents:
+- server.ts: disables caching for live API data.
+- src/App.tsx: resets visible F/R + S/R to X exactly at 12:00 AM IST and immediately refreshes the new day's Firebase data.
+- src/components/TodayResultCard.tsx: never displays stale/previous-day result numbers; awaiting results always display X.
+- src/components/CategoryGrid.tsx: increases the six category tiles on desktop and slightly improves spacing on mobile.
 
-1. Delete api/[...path].ts from the project.
-2. Copy api/index.ts and vercel.json from this patch into the project root.
-3. npm run lint
-4. npm run build
-5. git add -A && git commit && git push
-6. vercel --prod
-
-This routes every /api/* request through one stable Vercel function and reconstructs the original Express path.
+This patch does not change Firebase credentials, admin credentials, API routing, or Vercel secrets.
