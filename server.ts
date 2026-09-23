@@ -268,7 +268,7 @@ async function ensureTodayResult(todayKey: string) {
 async function ensureCommonNumbers(todayKey: string) {
   const db = getDb();
   const rows = [
-    { category_label: 'Direct', numbers: uniqueRandom(3, randomTwoDigit) },
+    { category_label: 'Direct', numbers: uniqueRandom(4, randomTwoDigit) },
     { category_label: 'House', numbers: uniqueRandom(2, randomDigit) },
     { category_label: 'Ending', numbers: uniqueRandom(2, randomDigit) },
   ];
@@ -278,8 +278,8 @@ async function ensureCommonNumbers(todayKey: string) {
       const ref = db.collection('common_numbers').doc(commonDocId(todayKey, row.category_label));
       await db.runTransaction(async (tx) => {
         const snap = await tx.get(ref);
+        const now = new Date().toISOString();
         if (!snap.exists) {
-          const now = new Date().toISOString();
           tx.create(ref, {
             result_date: todayKey,
             category_label: row.category_label,
@@ -288,6 +288,19 @@ async function ensureCommonNumbers(todayKey: string) {
             created_at: now,
             updated_at: now,
           });
+          return;
+        }
+
+        // Keep at least the required number of daily picks even if an older
+        // document was created by a previous version of the app. Existing
+        // admin-selected values are preserved; only missing values are filled.
+        const existing = Array.isArray(snap.data()?.numbers) ? [...snap.data()!.numbers] : [];
+        if (existing.length < row.numbers.length) {
+          for (const candidate of row.numbers) {
+            if (!existing.includes(candidate)) existing.push(candidate);
+            if (existing.length >= row.numbers.length) break;
+          }
+          tx.set(ref, { numbers: existing, updated_at: now }, { merge: true });
         }
       });
     })

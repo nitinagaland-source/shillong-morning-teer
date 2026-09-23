@@ -12,15 +12,14 @@ export const TopBar: React.FC<TopBarProps> = ({ settings, onOpenDrawer, isDrawer
   return (
     <header
       id="top-bar-header"
-      className="sticky top-0 z-40 w-full transition-colors duration-200 border-b border-indigo-950/10 shadow-xs"
-      style={{ backgroundColor: settings.top_bar_bg_color || '#3b82f6' }}
+      className="sticky top-0 z-40 w-full border-b border-black/10 shadow-xs"
+      style={{ backgroundColor: '#b8e1ec' }}
     >
-      <div className="max-w-md mx-auto px-4 h-14 sm:h-16 flex items-center justify-between">
-        {/* Left: Archery Target Icon + Site Name with normal/medium font */}
+      <div className="max-w-md mx-auto px-3 sm:px-4 h-[72px] sm:h-[78px] flex items-center justify-between">
         <a
           href="/"
           id="top-bar-logo-link"
-          className="flex items-center gap-2.5 group select-none text-indigo-950 no-underline"
+          className="min-w-0 flex items-center gap-2.5 text-black no-underline select-none"
           onClick={(e) => {
             if (window.location.pathname === '/') {
               e.preventDefault();
@@ -31,51 +30,50 @@ export const TopBar: React.FC<TopBarProps> = ({ settings, onOpenDrawer, isDrawer
           {settings.logo_url ? (
             <img
               src={settings.logo_url}
-              alt={settings.site_name}
-              className="w-8 h-8 object-contain"
+              alt={settings.site_name || 'Shillongmorningteer'}
+              className="w-11 h-11 sm:w-13 sm:h-13 object-contain shrink-0"
               referrerPolicy="no-referrer"
             />
           ) : (
-            <div className="relative w-8 h-8 flex items-center justify-center shrink-0">
-              <svg viewBox="0 0 100 100" className="w-8 h-8" fill="none">
-                <circle cx="50" cy="50" r="44" stroke="#1e293b" strokeWidth="6" fill="#ffffff" />
-                <circle cx="50" cy="50" r="30" stroke="#1e293b" strokeWidth="5" fill="#ffffff" />
-                <circle cx="50" cy="50" r="16" fill="#1e293b" />
-                <path
-                  d="M18 18 L48 48"
-                  stroke="#1e293b"
-                  strokeWidth="5"
-                  strokeLinecap="round"
-                />
-                <polygon points="56,44 44,56 46,46" fill="#1e293b" />
-                <path
-                  d="M12 24 L24 12 M8 16 L16 8 M20 28 L28 20"
-                  stroke="#1e293b"
-                  strokeWidth="3.5"
-                  strokeLinecap="round"
-                />
+            <div className="w-11 h-11 sm:w-13 sm:h-13 shrink-0" aria-hidden="true">
+              <svg viewBox="0 0 100 100" className="w-full h-full" fill="none">
+                <circle cx="43" cy="57" r="31" stroke="#050505" strokeWidth="8" />
+                <circle cx="43" cy="57" r="19" stroke="#050505" strokeWidth="7" />
+                <circle cx="43" cy="57" r="7" fill="#050505" />
+                <path d="M43 57 L75 25" stroke="#050505" strokeWidth="7" strokeLinecap="round" />
+                <path d="M70 18 L84 16 L82 30" stroke="#050505" strokeWidth="7" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M72 28 L85 41" stroke="#050505" strokeWidth="6" strokeLinecap="round" />
               </svg>
             </div>
           )}
-          <span
-            id="site-title-text"
-            className="text-[19px] sm:text-[20px] font-medium tracking-tight text-indigo-950 font-sans"
-          >
-            {settings.site_name || 'Shillongmorningteer'}
-          </span>
+
+          <div className="min-w-0 flex items-center gap-2">
+            <span
+              id="site-title-text"
+              className="truncate text-[20px] sm:text-[27px] leading-none font-extrabold tracking-[-1.2px] text-black font-sans"
+            >
+              {settings.site_name || 'Shillongmorningteer'}
+            </span>
+            <span className="inline-flex items-center gap-1 shrink-0" aria-label="Live">
+              <span className="relative flex h-2.5 w-2.5">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-500 opacity-75"></span>
+                <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-red-600"></span>
+              </span>
+              <span className="text-[9px] sm:text-[10px] font-extrabold tracking-wide text-red-700">LIVE</span>
+            </span>
+          </div>
         </a>
 
-        {/* Right: Hamburger Menu Button */}
         <button
           id="hamburger-menu-btn"
           onClick={onOpenDrawer}
           aria-label="Toggle Navigation Drawer"
-          className="w-9 h-9 flex items-center justify-center rounded-lg border border-indigo-950/20 hover:border-indigo-950/40 bg-white/20 active:bg-white/40 transition-all cursor-pointer focus:outline-hidden"
+          className="ml-2 w-11 h-11 sm:w-13 sm:h-13 shrink-0 flex items-center justify-center rounded-xl border border-black/30 bg-white/10 hover:bg-white/25 active:bg-white/35 transition-all cursor-pointer focus:outline-hidden"
         >
           {isDrawerOpen ? (
-            <X className="w-5 h-5 text-indigo-950" />
+            <X className="w-7 h-7 text-black" strokeWidth={2.2} />
           ) : (
-            <Menu className="w-5 h-5 text-indigo-950" />
+            <Menu className="w-7 h-7 text-black" strokeWidth={2.2} />
           )}
         </button>
       </div>

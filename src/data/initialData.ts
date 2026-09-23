@@ -244,7 +244,7 @@ export const initialCommonNumbers: CommonNumberEntry[] = [
     date: '22/09/2026',
     category_label: 'Direct',
     numbers: ['35', '60', '99'],
-    notes: 'Morning Sunday Teer official common direct targets',
+    notes: 'Shillong Morning Teer official common direct targets',
     created_at: '2026-09-22T08:00:00Z',
   },
   {

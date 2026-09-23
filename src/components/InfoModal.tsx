@@ -53,7 +53,7 @@ export const InfoModal: React.FC<InfoModalProps> = ({ type, onClose }) => {
           {type === 'about' && (
             <div className="space-y-3">
               <p>
-                Welcome to <strong>Morning Sunday Teer</strong>, the leading informational portal dedicated to providing accurate, real-time results and analytics for traditional archery sports in Meghalaya.
+                Welcome to <strong>Shillong Morning Teer</strong>, the leading informational portal dedicated to providing accurate, real-time results and analytics for traditional archery sports in Meghalaya.
               </p>
               <h4 className="font-bold text-indigo-950 text-base pt-2">Our Mission</h4>
               <p>
@@ -69,7 +69,7 @@ export const InfoModal: React.FC<InfoModalProps> = ({ type, onClose }) => {
           {type === 'terms' && (
             <div className="space-y-3">
               <p>
-                By accessing and using <strong>Morning Sunday Teer</strong>, you agree to comply with and be bound by the following terms and conditions.
+                By accessing and using <strong>Shillong Morning Teer</strong>, you agree to comply with and be bound by the following terms and conditions.
               </p>
               <h4 className="font-bold text-indigo-950 text-base pt-2">Informational Purposes Only</h4>
               <p>
@@ -121,7 +121,7 @@ export const InfoModal: React.FC<InfoModalProps> = ({ type, onClose }) => {
               ) : (
                 <form onSubmit={handleSubmitContact} className="space-y-4">
                   <p className="text-xs text-slate-600">
-                    Have questions about Morning Sunday Teer results, schedules, or historical records? Send us a message below:
+                    Have questions about Shillong Morning Teer results, schedules, or historical records? Send us a message below:
                   </p>
                   <div>
                     <label className="block text-xs font-bold text-slate-800 mb-1">Your Name</label>
@@ -164,7 +164,7 @@ export const InfoModal: React.FC<InfoModalProps> = ({ type, onClose }) => {
                     <span>Send Message</span>
                   </button>
                   <div className="pt-2 text-[11px] text-slate-500 text-center">
-                    Direct Email: <span className="font-semibold text-slate-700">support@morningsundayteer.com</span>
+                    Direct Email: <span className="font-semibold text-slate-700">support@shillongmorningteer.com</span>
                   </div>
                 </form>
               )}

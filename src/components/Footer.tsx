@@ -55,7 +55,7 @@ export const Footer: React.FC<FooterProps> = ({
 
         {/* Copyright notice */}
         <p className="text-xs text-slate-600 text-center font-normal">
-          Copyright &copy; All rights reserved 2019&ndash;2026 Morning Sunday Teer.
+          Copyright &copy; All rights reserved 2019&ndash;2026 Shillong Morning Teer.
         </p>
       </div>
     </footer>

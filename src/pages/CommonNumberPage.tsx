@@ -56,7 +56,7 @@ export const CommonNumberPage: React.FC<CommonNumberPageProps> = ({
         ending: ending[0] || 'X',
       },
       table2: {
-        direct: direct[2] || 'X',
+        direct: direct.slice(2, 4).join(', ') || 'X',
         house: house[1] || 'X',
         ending: ending[1] || 'X',
       },
@@ -139,7 +139,7 @@ export const CommonNumberPage: React.FC<CommonNumberPageProps> = ({
             <span className="text-indigo-950 text-xs">🎯</span>
           </div>
           <span className="text-base sm:text-lg font-medium text-indigo-950 font-sans uppercase tracking-tight">
-            {settings.site_name || 'Morningsundayteer'}
+            {settings.site_name || 'Shillongmorningteer'}
           </span>
         </div>
 
@@ -413,7 +413,7 @@ export const CommonNumberPage: React.FC<CommonNumberPageProps> = ({
               Benefits of Following Morning Common Numbers
             </h2>
             <p>
-              There are several reasons why people pay attention to morning Sunday teer common number updates.
+              There are several reasons why people pay attention to Shillong Morning Teer common number updates.
             </p>
             <ul className="list-disc pl-5 space-y-1.5 text-gray-700">
               <li>

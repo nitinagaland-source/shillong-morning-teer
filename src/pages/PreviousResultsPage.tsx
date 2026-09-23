@@ -121,7 +121,7 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
   }, [combinedResults, searchTerm, selectedMonth]);
 
   const handleCopyRow = (id: string, date: string, fr: string, sr: string) => {
-    const text = `Morning Sunday Teer (${date}) - F/R: ${fr}, S/R: ${sr}`;
+    const text = `Shillong Morning Teer (${date}) - F/R: ${fr}, S/R: ${sr}`;
     navigator.clipboard?.writeText(text);
     setCopiedId(id);
     setTimeout(() => setCopiedId(null), 1500);
@@ -168,7 +168,7 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
         </button>
 
         <h1 className="text-base sm:text-lg font-medium text-indigo-950 tracking-tight">
-          Morning Sunday Teer
+          Shillong Morning Teer
         </h1>
 
         <div className="w-12"></div>
@@ -178,7 +178,7 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
       <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-8 space-y-6">
         {/* Main Heading with clean normal/medium weight */}
         <h1 className="text-2xl sm:text-3xl font-medium text-gray-900 tracking-tight">
-          Morning Sunday Teer Previous Results
+          Shillong Morning Teer Previous Results
         </h1>
 
         {/* Introductory Paragraph with clean normal font weight */}
@@ -188,12 +188,12 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
             onClick={() => window.scrollTo({ top: 400, behavior: 'smooth' })}
             className="text-blue-700 hover:underline font-medium cursor-pointer"
           >
-            Morning Sunday Teer Previous Result
+            Shillong Morning Teer Previous Result
           </button>{' '}
           archive provides complete historical First Round (F/R) and Second Round (S/R) numbers declared live from the Shillong archery grounds in Meghalaya. Thousands of followers and analysts study past numbers daily to identify trends, track digit frequencies, and calculate House and Ending values for upcoming rounds. Explore our complete historical list below updated immediately after each official shooting.
         </p>
 
-        {/* 3. Realistic Premium Graphic Banner matching the Morning Sunday Teer aesthetic */}
+        {/* 3. Realistic Premium Graphic Banner matching the Shillong Morning Teer aesthetic */}
         <div className="w-full rounded-2xl overflow-hidden shadow-lg border border-slate-700 relative bg-linear-to-r from-[#0d1f1c] via-[#102b23] to-[#0b1715] text-white">
           <svg
             className="w-full h-auto min-h-[220px] max-h-[360px]"
@@ -311,7 +311,7 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
               fontFamily="ui-serif, Georgia, serif"
               filter="url(#softGlowPrev)"
             >
-              Morning SUNDAY TEER
+              Shillong MORNING TEER
             </text>
 
             {/* Previous Result Ribbon */}
@@ -359,7 +359,7 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
               textAnchor="middle"
               fontFamily="sans-serif"
             >
-              &copy; morningsundeyteer.com
+              &copy; shillongmorningteer.com
             </text>
           </svg>
         </div>
@@ -439,98 +439,35 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
           </div>
         </div>
 
-        {/* 5. Authentic Results Table matching exact Morning Sunday Teer layout */}
-        <div className="overflow-x-auto border border-gray-300 rounded-sm shadow-2xs">
-          <table className="w-full border-collapse text-left text-xs sm:text-sm font-normal">
+        {/* 5. Compact reference-style results table */}
+        <div className="mx-auto w-full max-w-[650px] overflow-hidden border-[1.5px] border-black bg-white">
+          <table className="w-full table-fixed border-collapse text-center font-sans text-[13px] sm:text-[15px] leading-tight text-black">
             <thead>
-              <tr className="bg-white border-b-2 border-gray-400 text-gray-900">
-                <th className="border border-gray-300 py-2.5 px-3 text-left font-medium min-w-[120px]">
-                  Date
+              <tr>
+                <th colSpan={4} className="border-b-[1.5px] border-black bg-[#eeeeee] py-1 text-[17px] sm:text-[19px] font-medium">
+                  RESULTS
                 </th>
-                <th className="border border-gray-300 py-2.5 px-3 text-center font-medium min-w-[100px]">
-                  F/R (10:30 AM)
-                </th>
-                <th className="border border-gray-300 py-2.5 px-3 text-center font-medium min-w-[100px]">
-                  S/R (11:30 AM)
-                </th>
-                <th className="border border-gray-300 py-2.5 px-2 text-center font-medium w-16 sm:w-20">
-                  House
-                </th>
-                <th className="border border-gray-300 py-2.5 px-2 text-center font-medium w-16 sm:w-20">
-                  Ending
-                </th>
+              </tr>
+              <tr className="bg-[#43cfbf]">
+                <th className="w-[42%] border-r-[1.5px] border-black py-1 font-medium text-[16px] sm:text-[18px]">CITY</th>
+                <th className="w-[30%] border-r-[1.5px] border-black py-1 font-medium text-[16px] sm:text-[18px]">DATE</th>
+                <th className="w-[14%] border-r-[1.5px] border-black py-1 font-medium text-[16px] sm:text-[18px]">F/R</th>
+                <th className="w-[14%] py-1 font-medium text-[16px] sm:text-[18px]">S/R</th>
               </tr>
             </thead>
             <tbody>
-              {filteredResults.map((row) => {
-                const frHE = getHouseEnding(row.round_1_number);
-                const srHE = getHouseEnding(row.round_2_number);
-                return (
-                  <tr
-                    key={row.id}
-                    className="bg-white hover:bg-gray-50/70 transition-colors border-b border-gray-300 group"
-                  >
-                    <td className="border border-gray-300 py-2.5 px-3 text-left font-normal text-gray-800 tabular-nums">
-                      <div className="flex items-center gap-1.5">
-                        <Calendar className="w-3.5 h-3.5 text-gray-400" />
-                        <span>{row.date}</span>
-                      </div>
-                    </td>
-
-                    {/* F/R Column */}
-                    <td className="border border-gray-300 py-2.5 px-3 text-center font-normal text-gray-900 tabular-nums font-sans">
-                      <span className="text-base sm:text-lg">{row.round_1_number || '--'}</span>
-                    </td>
-
-                    {/* S/R Column */}
-                    <td className="border border-gray-300 py-2.5 px-3 text-center font-normal text-gray-900 tabular-nums font-sans bg-gray-50/40">
-                      <span className="text-base sm:text-lg mr-1">{row.round_2_number || '--'}</span>
-                      <button
-                        onClick={() =>
-                          handleCopyRow(
-                            row.id,
-                            row.date,
-                            row.round_1_number || '--',
-                            row.round_2_number || '--'
-                          )
-                        }
-                        className="opacity-0 group-hover:opacity-100 transition-opacity p-0.5 text-gray-400 hover:text-blue-600 inline-block align-middle cursor-pointer"
-                        title="Copy row results"
-                      >
-                        {copiedId === row.id ? (
-                          <Check className="w-3.5 h-3.5 text-green-600 inline" />
-                        ) : (
-                          <Copy className="w-3.5 h-3.5 inline" />
-                        )}
-                      </button>
-                    </td>
-
-                    {/* House Column */}
-                    <td className="border border-gray-300 py-2.5 px-2 text-center font-normal text-gray-700 tabular-nums text-xs">
-                      {frHE.house}, {srHE.house}
-                    </td>
-
-                    {/* Ending Column */}
-                    <td className="border border-gray-300 py-2.5 px-2 text-center font-normal text-gray-700 tabular-nums text-xs">
-                      {frHE.ending}, {srHE.ending}
-                    </td>
-                  </tr>
-                );
-              })}
-
+              {filteredResults.map((row) => (
+                <tr key={row.id} className="bg-white">
+                  <td className="border-r-[1.5px] border-t-[1.5px] border-black px-1 py-[3px] text-[15px] sm:text-[17px] font-normal">Shillong</td>
+                  <td className="border-r-[1.5px] border-t-[1.5px] border-black px-1 py-[3px] text-[15px] sm:text-[17px] tabular-nums">{row.date}</td>
+                  <td className="border-r-[1.5px] border-t-[1.5px] border-black px-1 py-[3px] text-[15px] sm:text-[17px] tabular-nums">{row.round_1_number || '--'}</td>
+                  <td className="border-t-[1.5px] border-black px-1 py-[3px] text-[15px] sm:text-[17px] tabular-nums">{row.round_2_number || '--'}</td>
+                </tr>
+              ))}
               {filteredResults.length === 0 && (
                 <tr>
-                  <td colSpan={5} className="py-8 text-center text-gray-500 font-normal border border-gray-300">
-                    <p className="text-sm">No previous results found matching your search or filter.</p>
-                    <button
-                      onClick={() => {
-                        setSearchTerm('');
-                        setSelectedMonth('all');
-                      }}
-                      className="mt-2 text-xs text-blue-600 hover:underline font-normal cursor-pointer"
-                    >
-                      Clear search and show all records
-                    </button>
+                  <td colSpan={4} className="border-t-[1.5px] border-black py-6 text-center text-gray-600">
+                    No previous results found.
                   </td>
                 </tr>
               )}
@@ -538,15 +475,15 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
           </table>
         </div>
 
-        {/* 6. Editorial Articles Below Table exactly matching Morning Sunday Teer website */}
+        {/* 6. Editorial Articles Below Table exactly matching Shillong Morning Teer website */}
         <div className="space-y-6 pt-4 text-gray-700 text-xs sm:text-sm font-normal leading-relaxed">
           {/* Section 1 */}
           <div>
             <h2 className="text-lg sm:text-xl font-medium text-gray-900 border-b border-orange-200/90 pb-1 mb-3">
-              What Are Morning Sunday Teer Previous Results?
+              What Are Shillong Morning Teer Previous Results?
             </h2>
             <p className="mb-3">
-              <span className="font-medium text-gray-800">Morning Sunday Teer Previous Results</span> refer to the historical record of archery scores and winning numbers announced for the Morning Teer game played in Shillong, Meghalaya. Every morning, skilled archers shoot arrows at a cylindrical target made of traditional bamboo straw. Once shooting finishes, officials count the arrows that hit the target, and the last two digits of the total arrow count determine the official outcome.
+              <span className="font-medium text-gray-800">Shillong Morning Teer Previous Results</span> refer to the historical record of archery scores and winning numbers announced for the Morning Teer game played in Shillong, Meghalaya. Every morning, skilled archers shoot arrows at a cylindrical target made of traditional bamboo straw. Once shooting finishes, officials count the arrows that hit the target, and the last two digits of the total arrow count determine the official outcome.
             </p>
             <p>
               Archery enthusiasts and players rely on this historical archive to study how numbers change over time. Rather than relying on guesswork, many people prefer reviewing organized data from preceding days and weeks to understand patterns and past performances.
@@ -556,7 +493,7 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
           {/* Section 2 */}
           <div>
             <h2 className="text-lg sm:text-xl font-medium text-gray-900 border-b border-orange-200/90 pb-1 mb-3">
-              Why People Check Morning Sunday Teer Previous Results
+              Why People Check Shillong Morning Teer Previous Results
             </h2>
             <p className="mb-3">
               Checking previous results has been a tradition for regular participants for many years. Reviewing past records serves multiple practical purposes:
@@ -586,23 +523,20 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
               How to Read the Morning Teer Results Table
             </h2>
             <p className="mb-3">
-              The archive table organizes results into five standard columns to make tracking straightforward:
+              The archive table organizes results into four simple columns to match the official reference layout:
             </p>
             <div className="space-y-2 pl-2">
               <p>
-                <span className="font-medium text-gray-800">1. Date:</span> The specific day, month, and year when the archery contest took place in Shillong.
+                <span className="font-medium text-gray-800">1. City:</span> Shows Shillong as the location for the Morning Teer result.
               </p>
               <p>
-                <span className="font-medium text-gray-800">2. F/R (First Round):</span> The winning number declared during the first shooting round at approximately 10:30 AM to 10:45 AM.
+                <span className="font-medium text-gray-800">2. Date:</span> The specific day, month, and year of the result.
               </p>
               <p>
-                <span className="font-medium text-gray-800">3. S/R (Second Round):</span> The winning number declared during the second shooting round at approximately 11:30 AM to 11:45 AM.
+                <span className="font-medium text-gray-800">3. F/R (First Round):</span> The winning number published for the first round at about 10:30 AM.
               </p>
               <p>
-                <span className="font-medium text-gray-800">4. House:</span> The first digit of each winning score (tens place), showing the House value for F/R and S/R. For example, if F/R is 35, the House is 3.
-              </p>
-              <p>
-                <span className="font-medium text-gray-800">5. Ending:</span> The second digit of each winning score (units place), representing the Ending value. For example, if F/R is 35, the Ending is 5.
+                <span className="font-medium text-gray-800">4. S/R (Second Round):</span> The winning number published for the second round at about 11:30 AM.
               </p>
             </div>
           </div>
@@ -613,7 +547,7 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
               Popular Methods Used to Analyze Past Teer Results
             </h2>
             <p className="mb-2">
-              Followers employ various traditional formulas to analyze Morning Sunday Teer past records:
+              Followers employ various traditional formulas to analyze Shillong Morning Teer past records:
             </p>
             <ul className="list-disc pl-5 space-y-1.5">
               <li>
@@ -635,14 +569,14 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
                 onClick={() => onNavigate?.('/common-number')}
                 className="text-blue-700 hover:underline font-medium cursor-pointer"
               >
-                Morning Sunday Teer Common Numbers
+                Shillong Morning Teer Common Numbers
               </button>{' '}
               and explore traditional{' '}
               <button
                 onClick={() => onNavigate?.('/dream-number')}
                 className="text-blue-700 hover:underline font-medium cursor-pointer"
               >
-                Morning Sunday Teer Dream Numbers
+                Shillong Morning Teer Dream Numbers
               </button>{' '}
               for additional reference.
             </p>
@@ -692,7 +626,7 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
               Important Disclaimer &amp; Responsible Play
             </h2>
             <p className="mb-3">
-              All results published on this page are provided strictly for informational and educational purposes. Morning Sunday Teer is based on traditional indigenous archery conducted under local Meghalaya regulations. Past results, common numbers, and dream charts are shared as cultural reference guides. We encourage all visitors to engage responsibly and treat archery results as traditional entertainment.
+              All results published on this page are provided strictly for informational and educational purposes. Shillong Morning Teer is based on traditional indigenous archery conducted under local Meghalaya regulations. Past results, common numbers, and dream charts are shared as cultural reference guides. We encourage all visitors to engage responsibly and treat archery results as traditional entertainment.
             </p>
           </div>
         </div>
@@ -706,8 +640,8 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
           <div className="space-y-2">
             {[
               {
-                q: 'What time are Morning Sunday Teer results declared daily?',
-                a: 'Morning Sunday Teer results are declared in two rounds: the First Round (F/R) is announced between 10:30 AM and 10:45 AM, and the Second Round (S/R) is announced between 11:30 AM and 11:45 AM daily.',
+                q: 'What time are Shillong Morning Teer results declared daily?',
+                a: 'Shillong Morning Teer results are declared in two rounds: the First Round (F/R) is announced between 10:30 AM and 10:45 AM, and the Second Round (S/R) is announced between 11:30 AM and 11:45 AM daily.',
               },
               {
                 q: 'How are Morning Teer winning numbers determined?',
@@ -718,16 +652,16 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
                 a: 'No. There is no formula or system that can guarantee winning numbers. Historical results help identify frequency patterns, but each day depends entirely on live archery shooting.',
               },
               {
-                q: 'What do House and Ending mean in the previous results table?',
-                a: 'House represents the first digit (tens place) of the two-digit winning number, while Ending represents the second digit (units place). For example, with number 35, House is 3 and Ending is 5.',
+                q: 'What does the City column mean in the previous results table?',
+                a: 'The City column identifies Shillong as the location for the archived Morning Teer result.',
               },
               {
                 q: 'Where can I find today’s live Morning Teer results?',
                 a: 'Today’s live results are updated directly on our homepage with real-time indicators as soon as the arrow count is completed by ground officials.',
               },
               {
-                q: 'Are Morning Sunday Teer results updated on weekends?',
-                a: 'Yes, Morning Sunday Teer specifically features Sunday morning archery draws, making results available throughout the entire week including Sundays.',
+                q: 'Are Shillong Morning Teer results updated on weekends?',
+                a: 'Yes, Shillong Morning Teer specifically features Sunday morning archery draws, making results available throughout the entire week including Sundays.',
               },
               {
                 q: 'Can I copy previous results from this archive?',

@@ -31,7 +31,7 @@ export interface DreamChartRow {
   ending: string;
 }
 
-// Complete 60 official dream interpretations matching the Morning Sunday Teer Dream Chart
+// Complete 60 official dream interpretations matching the Shillong Morning Teer Dream Chart
 export const OFFICIAL_DREAM_CHART: DreamChartRow[] = [
   { slNo: 1, dream: 'Quarrel b/w husband & wife', direct: '03, 08, 13', house: '0', ending: '3' },
   { slNo: 2, dream: 'Erotic dream', direct: '17, 40, 53', house: '4', ending: '7' },
@@ -107,6 +107,12 @@ export const DreamNumberPage: React.FC<DreamNumberPageProps> = ({
   const [dailyDream, setDailyDream] = useState<DailyDreamData | null>(null);
 
   useEffect(() => {
+    const oldTitle = document.title;
+    document.title = 'Shillong Morning Teer Dream Numbers';
+    return () => { document.title = oldTitle; };
+  }, []);
+
+  useEffect(() => {
     let mounted = true;
     const loadDailyDream = async () => {
       try {
@@ -171,7 +177,7 @@ export const DreamNumberPage: React.FC<DreamNumberPageProps> = ({
         </button>
 
         <h1 className="text-base sm:text-lg font-bold text-indigo-950 tracking-tight">
-          Morning Sunday Teer
+          Shillong Morning Teer
         </h1>
 
         <div className="w-12"></div>
@@ -181,7 +187,7 @@ export const DreamNumberPage: React.FC<DreamNumberPageProps> = ({
       <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-8 space-y-6">
         {/* Main Heading */}
         <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 tracking-tight">
-          Morning Sunday Teer Dream Numbers
+          Shillong Morning Teer Dream Numbers
         </h1>
 
         {dailyDream && (
@@ -218,7 +224,7 @@ export const DreamNumberPage: React.FC<DreamNumberPageProps> = ({
             onClick={() => window.scrollTo({ top: 400, behavior: 'smooth' })}
             className="text-blue-700 hover:underline font-semibold cursor-pointer"
           >
-            Morning Sunday Teer Dream Numbers
+            Shillong Morning Teer Dream Numbers
           </button>
           . Some believe that dreams can inspire lucky number ideas. Others simply enjoy the
           tradition because it has been shared by families and friends for many years. No one
@@ -228,7 +234,7 @@ export const DreamNumberPage: React.FC<DreamNumberPageProps> = ({
             onClick={onBack}
             className="text-blue-700 hover:underline font-semibold cursor-pointer"
           >
-            Morning Sunday Teer
+            Shillong Morning Teer
           </button>{' '}
           culture.
         </p>
@@ -360,7 +366,7 @@ export const DreamNumberPage: React.FC<DreamNumberPageProps> = ({
               fontFamily="ui-serif, Georgia, serif"
               filter="url(#softGlow)"
             >
-              Morning SUNDAY TEER
+              Shillong MORNING TEER
             </text>
 
             {/* Star Dream Number Ribbon */}
@@ -388,10 +394,10 @@ export const DreamNumberPage: React.FC<DreamNumberPageProps> = ({
                 ACCURATE PREDICTION
               </text>
 
-              {/* Badge 2: EVERY SUNDAY */}
+              {/* Badge 2: DAILY MORNING */}
               <rect x="150" y="0" width="130" height="24" rx="12" fill="#b45309" opacity="0.9" />
               <text x="215" y="16" fill="#ffffff" fontSize="9" fontWeight="bold" textAnchor="middle" fontFamily="sans-serif">
-                EVERY SUNDAY
+                DAILY MORNING
               </text>
 
               {/* Badge 3: LIVE RESULT 11:30 AM */}
@@ -411,7 +417,7 @@ export const DreamNumberPage: React.FC<DreamNumberPageProps> = ({
               textAnchor="middle"
               fontFamily="sans-serif"
             >
-              &copy; morningsundeyteer.com
+              &copy; shillongmorningteer.com
             </text>
           </svg>
         </div>
@@ -419,7 +425,7 @@ export const DreamNumberPage: React.FC<DreamNumberPageProps> = ({
         {/* Dream Chart Table Section Heading */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 pt-4">
           <h2 className="text-xl sm:text-2xl font-bold text-gray-900 tracking-tight">
-            Morning Sunday Dream Chart
+            Shillong Morning Dream Chart
           </h2>
 
           {/* Quick Search Input */}
@@ -515,10 +521,10 @@ export const DreamNumberPage: React.FC<DreamNumberPageProps> = ({
           {/* Section 1 */}
           <div>
             <h2 className="text-lg sm:text-xl font-bold text-gray-900 border-b border-orange-200/90 pb-1 mb-3">
-              What Are Morning Sunday Teer Dream Numbers?
+              What Are Shillong Morning Teer Dream Numbers?
             </h2>
             <p className="mb-3">
-              <span className="font-semibold text-gray-800">Morning Sunday Teer Dream Numbers</span> are number ideas that some people connect with dreams seen before Sunday morning. According to local traditions, different dreams may represent different number combinations. Many players enjoy checking these dream-based numbers before choosing their guesses.
+              <span className="font-semibold text-gray-800">Shillong Morning Teer Dream Numbers</span> are number ideas that some people connect with dreams seen before Sunday morning. According to local traditions, different dreams may represent different number combinations. Many players enjoy checking these dream-based numbers before choosing their guesses.
             </p>
             <p>
               These numbers do not come from science. They come from stories, customs, and personal belief. Every family or community may even have different ways to explain the same dream. That variety is one reason why this tradition continues to stay interesting.
@@ -528,7 +534,7 @@ export const DreamNumberPage: React.FC<DreamNumberPageProps> = ({
           {/* Section 2 */}
           <div>
             <h2 className="text-lg sm:text-xl font-bold text-gray-900 border-b border-orange-200/90 pb-1 mb-3">
-              How People Use Morning Sunday Teer Dream Numbers
+              How People Use Shillong Morning Teer Dream Numbers
             </h2>
             <p className="mb-3">
               Everyone has a different approach. Some players only use dream numbers after a memorable dream. Others check{' '}
@@ -576,7 +582,7 @@ export const DreamNumberPage: React.FC<DreamNumberPageProps> = ({
                 onClick={() => onNavigate?.('common-number')}
                 className="text-blue-700 hover:underline font-semibold cursor-pointer"
               >
-                Morning Sunday Teer Common Numbers
+                Shillong Morning Teer Common Numbers
               </button>{' '}
               and dream interpretations continue to attract attention every week.
             </p>
@@ -588,7 +594,7 @@ export const DreamNumberPage: React.FC<DreamNumberPageProps> = ({
               Popular Types of Dreams People Often Discuss
             </h2>
             <p className="mb-2">
-              Many dreams appear again and again in conversations about Morning Sunday Teer Dream Numbers.
+              Many dreams appear again and again in conversations about Shillong Morning Teer Dream Numbers.
             </p>
             <p className="mb-2">People often talk about:</p>
             <ul className="list-disc pl-5 space-y-1">
@@ -623,14 +629,14 @@ export const DreamNumberPage: React.FC<DreamNumberPageProps> = ({
             </p>
             <p>
               This habit has naturally connected Sunday mornings with{' '}
-              <span className="font-semibold text-gray-800">Morning Sunday Teer Dream Numbers</span>. Whether the dream has any deeper meaning or not, people enjoy discussing it before starting the day.
+              <span className="font-semibold text-gray-800">Shillong Morning Teer Dream Numbers</span>. Whether the dream has any deeper meaning or not, people enjoy discussing it before starting the day.
             </p>
           </div>
 
           {/* Section 6 */}
           <div>
             <h2 className="text-lg sm:text-xl font-bold text-gray-900 border-b border-orange-200/90 pb-1 mb-3">
-              Common Myths About Morning Sunday Teer Dream Numbers
+              Common Myths About Shillong Morning Teer Dream Numbers
             </h2>
             <p className="mb-3">
               Many myths continue to circulate. Understanding them helps separate tradition from reality.
@@ -664,7 +670,7 @@ export const DreamNumberPage: React.FC<DreamNumberPageProps> = ({
               </div>
             </div>
             <p className="mt-3">
-              Knowing these facts encourages a more balanced view of Morning Sunday Teer Dream Numbers.
+              Knowing these facts encourages a more balanced view of Shillong Morning Teer Dream Numbers.
             </p>
           </div>
 
@@ -674,7 +680,7 @@ export const DreamNumberPage: React.FC<DreamNumberPageProps> = ({
               Final Thoughts
             </h2>
             <p className="mb-3">
-              <span className="font-semibold text-gray-800">Morning Sunday Teer Dream Numbers</span> remain a fascinating part of traditional dream culture. They combine storytelling, personal memories, local customs, and shared conversations into a tradition that many people continue to enjoy.
+              <span className="font-semibold text-gray-800">Shillong Morning Teer Dream Numbers</span> remain a fascinating part of traditional dream culture. They combine storytelling, personal memories, local customs, and shared conversations into a tradition that many people continue to enjoy.
             </p>
             <p className="mb-3">
               Dreams can inspire ideas, spark discussions, and strengthen community bonds. At the same time, they should be viewed as personal interpretations rather than reliable predictions. When approached responsibly, learning about dream meanings can be both entertaining and meaningful.
@@ -687,17 +693,17 @@ export const DreamNumberPage: React.FC<DreamNumberPageProps> = ({
           {/* Section 8: FAQs Accordion matching the screenshot */}
           <div>
             <h2 className="text-lg sm:text-xl font-bold text-gray-900 border-b border-orange-200/90 pb-1 mb-3">
-              FAQs About Morning Sunday Teer Dream Numbers
+              FAQs About Shillong Morning Teer Dream Numbers
             </h2>
 
             <div className="space-y-2">
               {[
                 {
-                  q: '1. What are Morning Sunday Teer Dream Numbers?',
-                  a: 'Morning Sunday Teer Dream Numbers are traditional number interpretations associated with specific dreams and symbols shared among players before the Sunday archery round.',
+                  q: '1. What are Shillong Morning Teer Dream Numbers?',
+                  a: 'Shillong Morning Teer Dream Numbers are traditional number interpretations associated with specific dreams and symbols shared among players before the Sunday archery round.',
                 },
                 {
-                  q: '2. Are Morning Sunday Teer Dream Numbers scientifically proven?',
+                  q: '2. Are Shillong Morning Teer Dream Numbers scientifically proven?',
                   a: 'No, dream numbers are based purely on cultural lore, historical customs, and personal traditions, without any scientific or empirical basis.',
                 },
                 {
@@ -757,7 +763,7 @@ export const DreamNumberPage: React.FC<DreamNumberPageProps> = ({
                 action: () => onBack(),
               },
               {
-                title: 'MORNING SUNDAY TEER',
+                title: 'SHILLONG MORNING TEER',
                 color: 'from-emerald-700 to-emerald-900',
                 action: () => onBack(),
               },

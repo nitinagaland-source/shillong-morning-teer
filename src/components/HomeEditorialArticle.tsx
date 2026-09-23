@@ -61,7 +61,7 @@ export const HomeEditorialArticle: React.FC = () => {
     },
     {
       q: '13. What is the name of a reliable website for Morning Teer results?',
-      a: 'Morningsundayteer (morningsundayteer.com / shillongmorningteer.com) is the premier trusted online source for fast, reliable, and verified morning archery results, daily common numbers, and historical archive tables.',
+      a: 'Shillongmorningteer (shillongmorningteer.com / shillongmorningteer.com) is the premier trusted online source for fast, reliable, and verified morning archery results, daily common numbers, and historical archive tables.',
     },
   ];
 
@@ -69,7 +69,7 @@ export const HomeEditorialArticle: React.FC = () => {
     <div id="home-editorial-article" className="mt-8 pt-6 border-t border-gray-200">
       {/* Main Heading in normal/medium font */}
       <h1 className="text-lg sm:text-xl font-medium text-gray-900 leading-snug tracking-tight">
-        Morning Sunday Teer Result Today {todayStr} | Morning Teer Common Number
+        Shillong Morning Teer Result Today {todayStr} | Morning Teer Common Number
       </h1>
 
       {/* Article Body */}
