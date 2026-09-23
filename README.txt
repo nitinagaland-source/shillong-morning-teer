@@ -1,7 +1,5 @@
-Patch contents:
-- server.ts: disables caching for live API data.
-- src/App.tsx: resets visible F/R + S/R to X exactly at 12:00 AM IST and immediately refreshes the new day's Firebase data.
-- src/components/TodayResultCard.tsx: never displays stale/previous-day result numbers; awaiting results always display X.
-- src/components/CategoryGrid.tsx: increases the six category tiles on desktop and slightly improves spacing on mobile.
-
-This patch does not change Firebase credentials, admin credentials, API routing, or Vercel secrets.
+Shillong Morning Teer result release guard
+- F/R stays X before 10:30 AM IST.
+- S/R stays X before 11:30 AM IST.
+- A result is only public after an admin publishes it at/after its official time.
+- Old/test values without a publish timestamp stay hidden until re-published.

@@ -74,6 +74,20 @@ function getTodayISTKey(date = new Date()): string {
   return `${year}-${month}-${day}`;
 }
 
+function getISTMinuteOfDay(date = new Date()): number {
+  const parts = new Intl.DateTimeFormat('en-GB', {
+    timeZone: 'Asia/Kolkata',
+    hour: '2-digit',
+    minute: '2-digit',
+    hourCycle: 'h23',
+  }).formatToParts(date);
+  const values = Object.fromEntries(parts.map((part) => [part.type, part.value]));
+  return Number(values.hour || 0) * 60 + Number(values.minute || 0);
+}
+
+const FR_RELEASE_MINUTE_IST = 10 * 60 + 30;
+const SR_RELEASE_MINUTE_IST = 11 * 60 + 30;
+
 function keyToDisplay(dateKey: string): string {
   const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(dateKey);
   if (!m) return dateKey;
@@ -139,6 +153,28 @@ function resultRowToApi(row: any) {
     created_at: row.created_at,
     updated_at: row.updated_at,
   };
+}
+
+function todayResultRowToApi(row: any) {
+  const apiRow = resultRowToApi(row);
+  const minuteOfDay = getISTMinuteOfDay();
+
+  // A result is public only after its official release time AND after an admin
+  // explicitly publishes it using the secured admin endpoint. This prevents
+  // yesterday's/test values from leaking into a new day.
+  const frVisible =
+    minuteOfDay >= FR_RELEASE_MINUTE_IST &&
+    Boolean(row.round_1_published_at) &&
+    apiRow.round_1_number !== 'X';
+  const srVisible =
+    minuteOfDay >= SR_RELEASE_MINUTE_IST &&
+    Boolean(row.round_2_published_at) &&
+    apiRow.round_2_number !== 'X';
+
+  apiRow.round_1_number = frVisible ? apiRow.round_1_number : 'X';
+  apiRow.round_2_number = srVisible ? apiRow.round_2_number : 'X';
+  apiRow.status = frVisible && srVisible ? 'completed' : frVisible || srVisible ? 'partial' : 'awaiting';
+  return apiRow;
 }
 
 function commonRowToApi(row: any) {
@@ -578,7 +614,7 @@ app.get('/api/results/today', async (_req, res, next) => {
     const todayKey = await ensureDailyState();
     const data = snapshotToData(await getDb().collection('results').doc(todayKey).get());
     if (!data) throw new HttpError(404, 'Today result not found.');
-    res.json(resultRowToApi(data));
+    res.json(todayResultRowToApi(data));
   } catch (error) { next(error); }
 });
 
@@ -587,22 +623,34 @@ app.post('/api/results/today', requireAdmin, async (req, res, next) => {
     const todayKey = await ensureDailyState();
     const r1 = normalizeResultNumber(req.body?.round_1_number);
     const r2 = normalizeResultNumber(req.body?.round_2_number);
+    const minuteOfDay = getISTMinuteOfDay();
+
+    if (r1 !== 'X' && minuteOfDay < FR_RELEASE_MINUTE_IST) {
+      throw new HttpError(400, 'F/R can only be published at or after 10:30 AM IST.');
+    }
+    if (r2 !== 'X' && minuteOfDay < SR_RELEASE_MINUTE_IST) {
+      throw new HttpError(400, 'S/R can only be published at or after 11:30 AM IST.');
+    }
+
     const status = r1 !== 'X' && r2 !== 'X' ? 'completed' : r1 !== 'X' || r2 !== 'X' ? 'partial' : 'awaiting';
+    const now = new Date().toISOString();
     const patch = {
       round_1_label: cleanText(req.body?.round_1_label || 'F/R(10:30 AM)', 60),
       round_1_time: cleanText(req.body?.round_1_time || '10:30 AM', 20),
       round_1_number: r1,
+      round_1_published_at: r1 === 'X' ? null : now,
       round_2_label: cleanText(req.body?.round_2_label || 'S/R(11:30 AM)', 60),
       round_2_time: cleanText(req.body?.round_2_time || '11:30 AM', 20),
       round_2_number: r2,
+      round_2_published_at: r2 === 'X' ? null : now,
       status,
-      updated_at: new Date().toISOString(),
+      updated_at: now,
     };
     const ref = getDb().collection('results').doc(todayKey);
     await ref.set(patch, { merge: true });
     const data = snapshotToData(await ref.get());
     await audit('TODAY_RESULT_UPDATED', req, { round1: r1, round2: r2 }, 'results', ref.id);
-    res.json({ data: resultRowToApi(data) });
+    res.json({ data: todayResultRowToApi(data) });
   } catch (error) { next(error); }
 });
 
