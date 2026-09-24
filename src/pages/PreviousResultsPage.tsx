@@ -49,10 +49,9 @@ export const EXTENDED_HISTORICAL_RESULTS: TeerResult[] = (() => {
     const dd = String(date.getDate()).padStart(2, '0');
     const mm = String(date.getMonth() + 1).padStart(2, '0');
     const yyyy = date.getFullYear();
-
     const formattedDate = `${dd}/${mm}/${yyyy}`;
 
-    const useGeneratedArchive = date <= randomCutoff;
+    const generated = date <= randomCutoff;
 
     records.push({
       id: `archive-${yyyy}-${mm}-${dd}`,
@@ -60,25 +59,21 @@ export const EXTENDED_HISTORICAL_RESULTS: TeerResult[] = (() => {
 
       round_1_label: 'F/R(10:30 AM)',
       round_1_time: '10:30 AM',
-
-      round_1_number: useGeneratedArchive ? makeArchiveNumber(
+      round_1_number: generated
+        ? makeArchiveNumber(
             ((date.getDate() * 7 + date.getMonth() * 13 + yyyy) % 90) + 10
           )
         : 'X',
 
       round_2_label: 'S/R(11:30 AM)',
       round_2_time: '11:30 AM',
-
-      round_2_number: useGeneratedArchive ? makeArchiveNumber(
-            ((date.getDate() * 11 +
-              date.getMonth() * 17 +
-              yyyy * 3) %
-              90) +
-              10
+      round_2_number: generated
+        ? makeArchiveNumber(
+            ((date.getDate() * 11 + date.getMonth() * 17 + yyyy * 3) % 90) + 10
           )
         : 'X',
 
-      status: useGeneratedArchive ? 'completed' : 'awaiting',
+      status: generated ? 'completed' : 'awaiting',
       created_at: '',
       updated_at: '',
     });
@@ -775,6 +770,10 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
     </div>
   );
 };
+
+
+
+
 
 
 
