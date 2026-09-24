@@ -136,8 +136,7 @@ export const CommonNumberPage: React.FC<CommonNumberPageProps> = ({
 
         <div className="flex items-center gap-2">
           <div className="w-7 h-7 rounded-full border-2 border-[#48c9c0] flex items-center justify-center bg-white shadow-2xs">
-            <span className="text-[#111827] text-xs">ðŸŽ¯</span>
-          </div>
+            </div>
           <span className="text-base sm:text-lg font-medium text-[#111827] font-sans uppercase tracking-tight">
             {settings.site_name || 'Shillongmorningteer'}
           </span>
@@ -938,7 +937,6 @@ export const CommonNumberPage: React.FC<CommonNumberPageProps> = ({
             onClick={() => handleNavClick('/')}
             className="flex flex-col items-center justify-center p-2 rounded-xl bg-[#48c9c0] text-white hover:bg-[#48c9c0] transition-all text-center aspect-square shadow-xs cursor-pointer group"
           >
-            <span className="text-lg mb-1 group-hover:scale-110 transition-transform">ðŸŽ¯</span>
             <span className="text-[10px] sm:text-xs font-normal uppercase tracking-tight">Teer Result</span>
           </button>
 
@@ -946,7 +944,6 @@ export const CommonNumberPage: React.FC<CommonNumberPageProps> = ({
             onClick={() => handleNavClick('/dream-number')}
             className="flex flex-col items-center justify-center p-2 rounded-xl bg-[#ff604e] text-white hover:opacity-90 transition-all text-center aspect-square shadow-xs cursor-pointer group"
           >
-            <span className="text-lg mb-1 group-hover:scale-110 transition-transform">ðŸ’­</span>
             <span className="text-[10px] sm:text-xs font-normal uppercase tracking-tight">Dream Number</span>
           </button>
 
@@ -954,7 +951,6 @@ export const CommonNumberPage: React.FC<CommonNumberPageProps> = ({
             onClick={() => handleNavClick('/deal')}
             className="flex flex-col items-center justify-center p-2 rounded-xl bg-purple-600 text-white hover:bg-purple-700 transition-all text-center aspect-square shadow-xs cursor-pointer group"
           >
-            <span className="text-lg mb-1 group-hover:scale-110 transition-transform">ðŸŽ</span>
             <span className="text-[10px] sm:text-xs font-normal uppercase tracking-tight">Win Prizes</span>
           </button>
 
@@ -970,7 +966,6 @@ export const CommonNumberPage: React.FC<CommonNumberPageProps> = ({
             onClick={() => handleNavClick('/previous-results')}
             className="flex flex-col items-center justify-center p-2 rounded-xl bg-slate-700 text-white hover:bg-slate-800 transition-all text-center aspect-square shadow-xs cursor-pointer group"
           >
-            <span className="text-lg mb-1 group-hover:scale-110 transition-transform">ðŸ“…</span>
             <span className="text-[10px] sm:text-xs font-normal uppercase tracking-tight">Previous Result</span>
           </button>
 
@@ -978,7 +973,6 @@ export const CommonNumberPage: React.FC<CommonNumberPageProps> = ({
             onClick={() => handleNavClick('/predict-target')}
             className="flex flex-col items-center justify-center p-2 rounded-xl bg-[#48c9c0] text-white hover:bg-[#48c9c0] transition-all text-center aspect-square shadow-xs cursor-pointer group"
           >
-            <span className="text-lg mb-1 group-hover:scale-110 transition-transform">ðŸ¹</span>
             <span className="text-[10px] sm:text-xs font-normal uppercase tracking-tight">Predict Target</span>
           </button>
         </div>
@@ -995,6 +989,7 @@ export const CommonNumberPage: React.FC<CommonNumberPageProps> = ({
     </div>
   );
 };
+
 
 
 
