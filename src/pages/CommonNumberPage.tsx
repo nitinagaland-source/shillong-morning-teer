@@ -159,7 +159,7 @@ export const CommonNumberPage: React.FC<CommonNumberPageProps> = ({
             SHILLONG
           </div>
 
-          <div className="grid grid-cols-3 border-b border-black bg-[#48c9c0] text-center text-[16px] sm:text-[18px] font-normal leading-none">
+          <div className="grid grid-cols-3 border-b border-black bg-[#b8e1ec] text-center text-[16px] sm:text-[18px] font-normal leading-none">
             <div className="py-1.5 border-r border-black">Direct</div>
             <div className="py-1.5 border-r border-black">House</div>
             <div className="py-1.5">Ending</div>
@@ -171,7 +171,7 @@ export const CommonNumberPage: React.FC<CommonNumberPageProps> = ({
             <div className="py-1.5">{tableData.table1.ending}</div>
           </div>
 
-          <div className="grid grid-cols-3 border-b border-black bg-[#48c9c0] text-center text-[16px] sm:text-[18px] font-normal leading-none">
+          <div className="grid grid-cols-3 border-b border-black bg-[#b8e1ec] text-center text-[16px] sm:text-[18px] font-normal leading-none">
             <div className="py-1.5 border-r border-black">Direct</div>
             <div className="py-1.5 border-r border-black">House</div>
             <div className="py-1.5">Ending</div>
@@ -936,7 +936,7 @@ export const CommonNumberPage: React.FC<CommonNumberPageProps> = ({
         <div className="grid grid-cols-3 sm:grid-cols-6 gap-2 my-8 pt-6 border-t border-gray-200">
           <button
             onClick={() => handleNavClick('/')}
-            className="flex flex-col items-center justify-center p-2 rounded-xl bg-blue-600 text-white hover:bg-blue-700 transition-all text-center aspect-square shadow-xs cursor-pointer group"
+            className="flex flex-col items-center justify-center p-2 rounded-xl bg-[#b8e1ec] text-white hover:bg-[#b8e1ec] transition-all text-center aspect-square shadow-xs cursor-pointer group"
           >
             <span className="text-lg mb-1 group-hover:scale-110 transition-transform">ðŸŽ¯</span>
             <span className="text-[10px] sm:text-xs font-normal uppercase tracking-tight">Teer Result</span>
@@ -995,4 +995,5 @@ export const CommonNumberPage: React.FC<CommonNumberPageProps> = ({
     </div>
   );
 };
+
 

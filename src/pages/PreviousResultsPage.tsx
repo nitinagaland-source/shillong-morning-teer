@@ -197,6 +197,15 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
 
         {/* 3. Realistic Premium Graphic Banner matching the Shillong Morning Teer aesthetic */}
         <div className="w-full rounded-2xl overflow-hidden shadow-lg border border-slate-700 relative bg-linear-to-r from-[#0d1f1c] via-[#102b23] to-[#0b1715] text-white">
+          <div id="previous-banner-live" className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none">
+            <div className="inline-flex items-center gap-2 rounded-full bg-white/95 px-5 py-2.5 shadow-xl border border-red-200">
+              <span className="relative flex h-4 w-4">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-500 opacity-75"></span>
+                <span className="relative inline-flex h-4 w-4 rounded-full bg-red-600"></span>
+              </span>
+              <span className="text-[18px] sm:text-[21px] leading-none font-black tracking-wide text-red-700">LIVE</span>
+            </div>
+          </div>
           <svg
             className="w-full h-auto min-h-[220px] max-h-[360px]"
             viewBox="0 0 900 380"
@@ -393,7 +402,7 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
               onClick={() => { setSelectedMonth('all'); setCurrentPage(1); }}
               className={`px-3 py-1.5 rounded-md text-xs font-normal whitespace-nowrap transition-colors cursor-pointer ${
                 selectedMonth === 'all'
-                  ? 'bg-blue-600 text-white shadow-xs'
+                  ? 'bg-[#b8e1ec] text-white shadow-xs'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
             >
@@ -405,7 +414,7 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
                 onClick={() => { setSelectedMonth(m); setCurrentPage(1); }}
                 className={`px-3 py-1.5 rounded-md text-xs font-normal whitespace-nowrap transition-colors cursor-pointer ${
                   selectedMonth === m
-                    ? 'bg-blue-600 text-white shadow-xs'
+                    ? 'bg-[#b8e1ec] text-white shadow-xs'
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                 }`}
               >
@@ -737,6 +746,8 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
     </div>
   );
 };
+
+
 
 
 

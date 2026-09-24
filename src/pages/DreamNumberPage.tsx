@@ -194,7 +194,7 @@ export const DreamNumberPage: React.FC<DreamNumberPageProps> = ({
                 SHILLONG
               </div>
 
-              <div className="grid grid-cols-3 border-b border-black bg-[#48c9c0] text-center text-[16px] sm:text-[18px] font-normal leading-none">
+              <div className="grid grid-cols-3 border-b border-black bg-[#b8e1ec] text-center text-[16px] sm:text-[18px] font-normal leading-none">
                 <div className="py-1.5 border-r border-black">Direct</div>
                 <div className="py-1.5 border-r border-black">House</div>
                 <div className="py-1.5">Ending</div>
@@ -243,6 +243,15 @@ export const DreamNumberPage: React.FC<DreamNumberPageProps> = ({
 
         {/* Realistic Premium Graphic Banner matching the screenshot */}
         <div className="w-full rounded-2xl overflow-hidden shadow-lg border border-slate-700 relative bg-linear-to-r from-[#0d1f1c] via-[#102b23] to-[#0b1715] text-white">
+          <div id="dream-banner-live" className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none">
+            <div className="inline-flex items-center gap-2 rounded-full bg-white/95 px-5 py-2.5 shadow-xl border border-red-200">
+              <span className="relative flex h-4 w-4">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-500 opacity-75"></span>
+                <span className="relative inline-flex h-4 w-4 rounded-full bg-red-600"></span>
+              </span>
+              <span className="text-[18px] sm:text-[21px] leading-none font-black tracking-wide text-red-700">LIVE</span>
+            </div>
+          </div>
           <svg
             className="w-full h-auto min-h-[220px] max-h-[360px]"
             viewBox="0 0 900 380"
@@ -793,6 +802,8 @@ export const DreamNumberPage: React.FC<DreamNumberPageProps> = ({
     </div>
   );
 };
+
+
 
 
 
