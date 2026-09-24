@@ -682,7 +682,7 @@ export const DreamNumberPage: React.FC<DreamNumberPageProps> = ({
               {[
                 {
                   q: '1. What are Shillong Morning Teer Dream Numbers?',
-                  a: 'Shillong Morning Teer Dream Numbers are traditional number interpretations associated with specific dreams and symbols shared among players before the Sunday archery round.',
+                  a: 'Shillong Morning Teer Dream Numbers are traditional number interpretations associated with specific dreams and symbols shared among players before the Shillong Morning Teer rounds.',
                 },
                 {
                   q: '2. Are Shillong Morning Teer Dream Numbers scientifically proven?',
@@ -694,15 +694,15 @@ export const DreamNumberPage: React.FC<DreamNumberPageProps> = ({
                 },
                 {
                   q: '4. Why do people keep a dream journal?',
-                  a: 'Keeping a dream journal helps individuals recall intricate dream details, patterns, and emotions right after waking up on Sunday mornings.',
+                  a: 'Keeping a dream journal helps individuals recall intricate dream details, patterns, and emotions before the Shillong Morning Teer morning rounds.',
                 },
                 {
                   q: '5. Should I depend only on dream numbers?',
                   a: 'No. Dream numbers should only be enjoyed as cultural folklore and friendly conversation, never as guaranteed predictions or financial dependencies.',
                 },
                 {
-                  q: '6. Why are Sunday morning dreams considered special?',
-                  a: 'Because Sunday mornings allow for more leisurely, restful sleep without alarms, enabling clearer dream recall and shared family morning discussions.',
+                  q: '6. Why are dreams discussed in Shillong Morning Teer?',
+                  a: 'Dream discussions are a traditional part of Shillong Morning Teer culture, and many people enjoy recalling and sharing dream details before the morning rounds.',
                 },
                 {
                   q: '7. Why are dream number charts different?',
@@ -793,6 +793,7 @@ export const DreamNumberPage: React.FC<DreamNumberPageProps> = ({
     </div>
   );
 };
+
 
 
 

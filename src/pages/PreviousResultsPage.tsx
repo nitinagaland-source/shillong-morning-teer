@@ -669,7 +669,7 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
               },
               {
                 q: 'Are Shillong Morning Teer results updated on weekends?',
-                a: 'Yes, Shillong Morning Teer specifically features Sunday morning archery draws, making results available throughout the entire week including Sundays.',
+                a: 'Yes, Shillong Morning Teer results are available throughout the week, and archived results can be checked by date.',
               },
               {
                 q: 'Can I copy previous results from this archive?',
@@ -737,6 +737,7 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
     </div>
   );
 };
+
 
 
 
