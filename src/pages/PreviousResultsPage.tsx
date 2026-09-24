@@ -32,33 +32,36 @@ const makeArchiveNumber = (value: number) => {
 export const EXTENDED_HISTORICAL_RESULTS: TeerResult[] = (() => {
   const records: TeerResult[] = [];
 
-  const start = new Date(2019, 0, 1);
+  // Archive begins from 1 January 2019
+  const startDate = new Date(2019, 0, 1);
 
-  const yesterday = new Date();
-  yesterday.setHours(0, 0, 0, 0);
-  yesterday.setDate(yesterday.getDate() - 1);
+  // Previous Results must contain every day up to yesterday
+  const endDate = new Date();
+  endDate.setHours(0, 0, 0, 0);
+  endDate.setDate(endDate.getDate() - 1);
 
-  const randomCutoff = new Date(2026, 7, 31, 23, 59, 59, 999);
+  // Generated placeholder numbers stop permanently on 31 August 2026
+  const generatedUntil = new Date(2026, 7, 31, 23, 59, 59, 999);
 
   for (
-    const date = new Date(start);
-    date <= yesterday;
+    const date = new Date(startDate);
+    date <= endDate;
     date.setDate(date.getDate() + 1)
   ) {
     const dd = String(date.getDate()).padStart(2, '0');
     const mm = String(date.getMonth() + 1).padStart(2, '0');
     const yyyy = date.getFullYear();
-    const formattedDate = `${dd}/${mm}/${yyyy}`;
 
-    const generated = date <= randomCutoff;
+    const displayDate = `${dd}/${mm}/${yyyy}`;
+    const useGeneratedNumbers = date <= generatedUntil;
 
     records.push({
       id: `archive-${yyyy}-${mm}-${dd}`,
-      date: formattedDate,
+      date: displayDate,
 
       round_1_label: 'F/R(10:30 AM)',
       round_1_time: '10:30 AM',
-      round_1_number: generated
+      round_1_number: useGeneratedNumbers
         ? makeArchiveNumber(
             ((date.getDate() * 7 + date.getMonth() * 13 + yyyy) % 90) + 10
           )
@@ -66,13 +69,13 @@ export const EXTENDED_HISTORICAL_RESULTS: TeerResult[] = (() => {
 
       round_2_label: 'S/R(11:30 AM)',
       round_2_time: '11:30 AM',
-      round_2_number: generated
+      round_2_number: useGeneratedNumbers
         ? makeArchiveNumber(
             ((date.getDate() * 11 + date.getMonth() * 17 + yyyy * 3) % 90) + 10
           )
         : 'X',
 
-      status: generated ? 'completed' : 'awaiting',
+      status: useGeneratedNumbers ? 'completed' : 'awaiting',
       created_at: '',
       updated_at: '',
     });
@@ -769,6 +772,7 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
     </div>
   );
 };
+
 
 
 
