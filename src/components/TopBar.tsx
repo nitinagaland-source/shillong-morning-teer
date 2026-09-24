@@ -39,12 +39,12 @@ export const TopBar: React.FC<TopBarProps> = ({ settings, onOpenDrawer, isDrawer
           <div className="min-w-0 flex items-center gap-2">
             <span
               id="site-title-text"
-              className="text-[22px] sm:text-[27px] leading-none text-black whitespace-nowrap"
+              className="text-[25px] sm:text-[30px] leading-none text-black whitespace-nowrap"
               style={{
                 fontFamily: '"Arial Narrow", "Roboto Condensed", Arial, sans-serif',
                 fontWeight: 800,
                 letterSpacing: '-1.2px',
-                transform: 'scaleX(0.76)',
+                transform: 'scaleX(0.82)',
                 transformOrigin: 'left center'
               }}
             >
@@ -77,4 +77,5 @@ export const TopBar: React.FC<TopBarProps> = ({ settings, onOpenDrawer, isDrawer
     </header>
   );
 };
+
 
