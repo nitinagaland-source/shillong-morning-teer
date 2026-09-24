@@ -20,7 +20,7 @@ export const TopBar: React.FC<TopBarProps> = ({ settings, onOpenDrawer, isDrawer
         <a
           href="/"
           id="top-bar-logo-link"
-          className="min-w-0 flex items-center gap-2 text-black no-underline select-none flex-1"
+          className="min-w-0 flex items-center gap-1 text-black no-underline select-none flex-1"
           onClick={(e) => {
             if (window.location.pathname === '/') {
               e.preventDefault();
@@ -36,10 +36,10 @@ export const TopBar: React.FC<TopBarProps> = ({ settings, onOpenDrawer, isDrawer
             />
           </div>
 
-          <div className="min-w-0 flex items-center gap-2">
+          <div className="min-w-0 flex items-center gap-1">
             <span
               id="site-title-text"
-              className="text-[25px] sm:text-[30px] leading-none text-black whitespace-nowrap"
+              className="text-[25px] sm:text-[30px] leading-none text-black whitespace-nowrap mr-[-34px] sm:mr-[-40px]"
               style={{
                 fontFamily: '"Arial Narrow", "Roboto Condensed", Arial, sans-serif',
                 fontWeight: 800,
@@ -51,7 +51,7 @@ export const TopBar: React.FC<TopBarProps> = ({ settings, onOpenDrawer, isDrawer
               Shillongmorningteer
             </span>
 
-            <span className="inline-flex items-center gap-1 shrink-0 ml-0.5" aria-label="Live">
+            <span className="inline-flex items-center gap-1 shrink-0" aria-label="Live">
               <span className="relative flex h-3.5 w-3.5">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-500 opacity-75"></span>
                 <span className="relative inline-flex h-3.5 w-3.5 rounded-full bg-red-600"></span>
@@ -77,6 +77,7 @@ export const TopBar: React.FC<TopBarProps> = ({ settings, onOpenDrawer, isDrawer
     </header>
   );
 };
+
 
 
 

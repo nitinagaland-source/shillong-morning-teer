@@ -262,7 +262,7 @@ export default function App() {
       />
 
       {/* Main Mobile-First Feed Container */}
-      <main className="max-w-[440px] md:max-w-2xl mx-auto px-4 py-5 space-y-6">
+      <main className="max-w-[440px] md:max-w-2xl mx-auto px-4 pt-2 pb-5 space-y-6">
         {/* Section 1: Today's Result Table */}
         <TodayResultCard
           result={todayResult}
@@ -313,4 +313,5 @@ export default function App() {
     </div>
   );
 }
+
 

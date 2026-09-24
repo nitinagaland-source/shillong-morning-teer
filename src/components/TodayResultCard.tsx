@@ -18,7 +18,7 @@ export const TodayResultCard: React.FC<TodayResultCardProps> = ({ result, settin
 
   return (
     <section id="today-result-section" className="w-full">
-      <div className="text-center mb-4 sm:mb-5">
+      <div className="text-center mb-2 sm:mb-2">
         <h2 id="current-date-header" className="text-[24px] sm:text-[28px] font-bold tracking-tight text-black font-sans">
           {displayDate}
         </h2>
@@ -28,12 +28,12 @@ export const TodayResultCard: React.FC<TodayResultCardProps> = ({ result, settin
         <div id="game-title-bar" className="w-full bg-[#eef1f5] py-3 sm:py-3.5 px-4 text-center border-b-2 border-black">
           <h1 className="text-[17px] sm:text-[20px] font-extrabold tracking-wide text-black uppercase font-sans">
             {settings.game_name || 'SHILLONG MORNING TEER'}
-<span className="ml-1 inline-flex items-center gap-0.5 align-middle">
-  <span className="relative inline-flex h-2.5 w-2.5">
+<span className="ml-1 inline-flex items-center gap-1 align-middle">
+  <span className="relative inline-flex h-3.5 w-3.5">
     <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-500 opacity-75"></span>
-    <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-red-600"></span>
+    <span className="relative inline-flex h-3.5 w-3.5 rounded-full bg-red-600"></span>
   </span>
-  <span className="text-[10px] sm:text-[11px] font-black text-red-700">LIVE</span>
+  <span className="text-[13px] sm:text-[14px] font-black text-red-700">LIVE</span>
 </span>
           </h1>
         </div>
@@ -63,6 +63,7 @@ export const TodayResultCard: React.FC<TodayResultCardProps> = ({ result, settin
     </section>
   );
 };
+
 
 
 
