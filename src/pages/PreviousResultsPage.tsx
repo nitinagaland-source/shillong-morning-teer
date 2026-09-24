@@ -100,21 +100,7 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
   const combinedResults = useMemo(() => {
     const map = new Map<string, TeerResult>();
     // First fill with extended records
-    EXTENDED_HISTORICAL_RESULTS.forEach((r: any) => {
-      const parts = r.date.split('/');
-      const isSeptember2026 =
-        parts.length === 3 &&
-        parts[1] === '09' &&
-        parts[2] === '2026';
-
-      const isTrustedRealResult =
-        r.source === 'manual' ||
-        r.source === 'live';
-
-      if (!isSeptember2026 || isTrustedRealResult) {
-        map.set(r.date, r);
-      }
-    });
+    EXTENDED_HISTORICAL_RESULTS.forEach((r) => map.set(r.date, r));
     // Live results take precedence
     results.forEach((r: any) => {
       const parts = r.date.split('/');
@@ -772,6 +758,7 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
     </div>
   );
 };
+
 
 
 
