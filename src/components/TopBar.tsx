@@ -27,39 +27,37 @@ export const TopBar: React.FC<TopBarProps> = ({ settings, onOpenDrawer, isDrawer
             }
           }}
         >
-          {settings.logo_url ? (
-            <img
-              src={settings.logo_url}
-              alt={settings.site_name || 'Shillongmorningteer'}
-              className="w-11 h-11 sm:w-13 sm:h-13 object-contain shrink-0 scale-105"
-              referrerPolicy="no-referrer"
-            />
-          ) : (
-            <div className="w-11 h-11 sm:w-13 sm:h-13 shrink-0" aria-hidden="true">
-              <svg viewBox="0 0 100 100" className="w-full h-full" fill="none">
-                <circle cx="43" cy="57" r="31" stroke="#050505" strokeWidth="10" />
-                <circle cx="43" cy="57" r="19" stroke="#050505" strokeWidth="9" />
-                <circle cx="43" cy="57" r="7" fill="#050505" />
-                <path d="M43 57 L75 25" stroke="#050505" strokeWidth="9" strokeLinecap="round" />
-                <path d="M70 18 L84 16 L82 30" stroke="#050505" strokeWidth="9" strokeLinecap="round" strokeLinejoin="round" />
-                <path d="M72 28 L85 41" stroke="#050505" strokeWidth="8" strokeLinecap="round" />
-              </svg>
-            </div>
-          )}
+          <div className="w-12 h-12 sm:w-14 sm:h-14 shrink-0" aria-hidden="true">
+            <svg viewBox="0 0 100 100" className="w-full h-full" fill="none">
+              <circle cx="45" cy="55" r="31" stroke="#000" strokeWidth="9"/>
+              <circle cx="45" cy="55" r="20" stroke="#000" strokeWidth="8"/>
+              <circle cx="45" cy="55" r="8" fill="#000"/>
+              <path d="M45 55 L76 24" stroke="#000" strokeWidth="8" strokeLinecap="round"/>
+              <path d="M72 17 L88 15 L85 31" stroke="#000" strokeWidth="8" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M75 27 L87 39" stroke="#000" strokeWidth="7" strokeLinecap="round"/>
+            </svg>
+          </div>
 
           <div className="min-w-0 flex items-center gap-2">
             <span
-              id="site-title-text"
-              className="truncate text-[20px] sm:text-[27px] leading-none font-black tracking-[-1.2px] text-black font-sans"
-            >
-              {settings.site_name || 'Shillongmorningteer'}
-            </span>
+          id="site-title-text"
+          className="text-[28px] sm:text-[34px] leading-none text-black whitespace-nowrap"
+          style={{
+            fontFamily: "Arial Narrow, Impact, sans-serif",
+            fontWeight: 900,
+            letterSpacing: "-1.5px",
+            transform: "scaleX(0.82)",
+            transformOrigin: "left center"
+          }}
+        >
+          Shillongmorningteer
+        </span>
             <span className="inline-flex items-center gap-1 shrink-0" aria-label="Live">
-              <span className="relative flex h-2.5 w-2.5">
+              <span className="relative flex h-3.5 w-3.5">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-500 opacity-75"></span>
-                <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-red-600"></span>
+                <span className="relative inline-flex h-3.5 w-3.5 rounded-full bg-red-600"></span>
               </span>
-              <span className="text-[9px] sm:text-[10px] font-extrabold tracking-wide text-red-700">LIVE</span>
+              <span className="text-[12px] sm:text-[14px] font-black tracking-wide text-red-700">LIVE</span>
             </span>
           </div>
         </a>
@@ -80,4 +78,6 @@ export const TopBar: React.FC<TopBarProps> = ({ settings, onOpenDrawer, isDrawer
     </header>
   );
 };
+
+
 
