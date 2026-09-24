@@ -29,10 +29,10 @@ export const TopBar: React.FC<TopBarProps> = ({ settings, onOpenDrawer, isDrawer
         >
           <div className="w-12 h-12 sm:w-14 sm:h-14 shrink-0" aria-hidden="true">
             <svg viewBox="0 0 100 100" className="w-full h-full" fill="none">
-              <circle cx="45" cy="55" r="31" stroke="#000" strokeWidth="9"/>
-              <circle cx="45" cy="55" r="20" stroke="#000" strokeWidth="8"/>
-              <circle cx="45" cy="55" r="8" fill="#000"/>
-              <path d="M45 55 L76 24" stroke="#000" strokeWidth="8" strokeLinecap="round"/>
+              <circle cx="44" cy="55" r="30" stroke="#000" strokeWidth="8"/>
+              <circle cx="44" cy="55" r="18" stroke="#000" strokeWidth="7"/>
+              <circle cx="44" cy="55" r="7" fill="#000"/>
+              <path d="M44 55 L76 23" stroke="#000" strokeWidth="8" strokeLinecap="round"/>
               <path d="M72 17 L88 15 L85 31" stroke="#000" strokeWidth="8" strokeLinecap="round" strokeLinejoin="round"/>
               <path d="M75 27 L87 39" stroke="#000" strokeWidth="7" strokeLinecap="round"/>
             </svg>
@@ -41,12 +41,12 @@ export const TopBar: React.FC<TopBarProps> = ({ settings, onOpenDrawer, isDrawer
           <div className="min-w-0 flex items-center gap-2">
             <span
           id="site-title-text"
-          className="text-[28px] sm:text-[34px] leading-none text-black whitespace-nowrap"
+          className="text-[27px] sm:text-[32px] leading-none text-black whitespace-nowrap"
           style={{
-            fontFamily: "Arial Narrow, Impact, sans-serif",
-            fontWeight: 900,
-            letterSpacing: "-1.5px",
-            transform: "scaleX(0.82)",
+            fontFamily: "\"Arial Narrow\", \"Roboto Condensed\", Arial, sans-serif",
+            fontWeight: 800,
+            letterSpacing: "-1.2px",
+            transform: "scaleX(0.76)",
             transformOrigin: "left center"
           }}
         >
@@ -78,6 +78,7 @@ export const TopBar: React.FC<TopBarProps> = ({ settings, onOpenDrawer, isDrawer
     </header>
   );
 };
+
 
 
 
