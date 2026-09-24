@@ -1,4 +1,4 @@
-import { SiteSettings, TeerResult, CommonNumberEntry, DreamNumberEntry, NoticeEntry, AdminSession } from '../types';
+﻿import { SiteSettings, TeerResult, CommonNumberEntry, DreamNumberEntry, NoticeEntry, AdminSession } from '../types';
 
 const API_BASE = '/api';
 const authFetch = (input: RequestInfo | URL, init: RequestInit = {}) => fetch(input, { ...init, credentials: 'include' });
@@ -118,3 +118,4 @@ export async function checkAdminSession(_token?: string): Promise<boolean> {
 export async function adminLogout(): Promise<void> {
   await authFetch(`${API_BASE}/auth/logout`, { method: 'POST' });
 }
+

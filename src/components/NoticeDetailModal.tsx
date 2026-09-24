@@ -69,3 +69,4 @@ export const NoticeDetailModal: React.FC<NoticeDetailModalProps> = ({ notice, on
   );
 };
 
+

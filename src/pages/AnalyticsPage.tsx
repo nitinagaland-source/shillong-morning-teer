@@ -266,7 +266,7 @@ export const AnalyticsPage: React.FC<AnalyticsPageProps> = ({
               </div>
               <div
                 style={{ width: `${stats.evenPercent}%` }}
-                className="bg-sky-600 h-full flex items-center justify-center text-[9px] font-normal text-white"
+                className="bg-[#48c9c0] h-full flex items-center justify-center text-[9px] font-normal text-white"
               >
                 {stats.evenPercent}% Even
               </div>
@@ -337,4 +337,6 @@ export const AnalyticsPage: React.FC<AnalyticsPageProps> = ({
     </div>
   );
 };
+
+
 

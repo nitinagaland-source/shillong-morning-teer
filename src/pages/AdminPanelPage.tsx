@@ -1175,7 +1175,7 @@ export const AdminPanelPage: React.FC<AdminPanelPageProps> = ({
 
                 <button
                   type="submit"
-                  className="py-2.5 px-5 bg-sky-600 hover:bg-sky-700 text-white font-bold text-sm rounded-xl cursor-pointer shadow-xs flex items-center gap-1.5"
+                  className="py-2.5 px-5 bg-[#48c9c0] hover:bg-[#48c9c0] text-white font-bold text-sm rounded-xl cursor-pointer shadow-xs flex items-center gap-1.5"
                 >
                   <Check className="w-4 h-4" />
                   <span>{editingDnId ? 'Update Interpretation' : 'Save Dream Interpretation'}</span>
@@ -1438,4 +1438,5 @@ export const AdminPanelPage: React.FC<AdminPanelPageProps> = ({
     </div>
   );
 };
+
 

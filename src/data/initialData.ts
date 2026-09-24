@@ -1,4 +1,4 @@
-import { SiteSettings, TeerResult, CommonNumberEntry, DreamNumberEntry, NoticeEntry } from '../types';
+﻿import { SiteSettings, TeerResult, CommonNumberEntry, DreamNumberEntry, NoticeEntry } from '../types';
 import { getTodayISTDateString } from '../lib/dateUtils';
 
 export const initialSiteSettings: SiteSettings = {
@@ -470,3 +470,4 @@ export const initialNotices: NoticeEntry[] = [
     created_at: '2026-09-10T12:00:00Z',
   },
 ];
+

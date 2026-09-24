@@ -1,4 +1,4 @@
-// Date utility helpers for Shillong Morning Teer (IST UTC+5:30)
+﻿// Date utility helpers for Shillong Morning Teer (IST UTC+5:30)
 
 export function getTodayISTDateString(d = new Date()): string {
   const utc = d.getTime() + (d.getTimezoneOffset() * 60000);
@@ -77,3 +77,4 @@ export function getDailyDreamPredictions(dateStr: string): DailyDreamPrediction 
     topSymbols: pickedSymbols,
   };
 }
+

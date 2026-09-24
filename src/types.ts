@@ -1,4 +1,4 @@
-export interface SiteSettings {
+﻿export interface SiteSettings {
   id: string;
   site_name: string;
   game_name: string;
@@ -53,3 +53,4 @@ export interface AdminSession {
   role: 'superadmin' | 'editor';
   expires_at: number;
 }
+

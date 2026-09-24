@@ -176,3 +176,4 @@ export const InfoModal: React.FC<InfoModalProps> = ({ type, onClose }) => {
   );
 };
 
+

@@ -191,3 +191,5 @@ export const DealPage: React.FC<DealPageProps> = ({ settings, onBack }) => {
   );
 };
 
+
+

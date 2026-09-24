@@ -78,3 +78,4 @@ export const NoticesFeed: React.FC<NoticesFeedProps> = ({
   );
 };
 
+
