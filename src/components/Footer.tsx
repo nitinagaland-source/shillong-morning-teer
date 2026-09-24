@@ -44,13 +44,17 @@ export const Footer: React.FC<FooterProps> = ({
         </div>
 
         {/* Contact Us Centered */}
-        <div className="mb-6">
+        <div className="mb-6 text-center">
           <button
             onClick={() => onOpenModal?.('contact')}
             className="text-slate-800 hover:text-[#111827] font-normal text-sm sm:text-[15px] transition-colors cursor-pointer text-center"
           >
             Contact Us
           </button>
+
+          <div className="mt-2 text-sm text-slate-700 font-normal">
+            www.shillongmorningteer.site
+          </div>
         </div>
 
         {/* Copyright notice */}
@@ -61,6 +65,7 @@ export const Footer: React.FC<FooterProps> = ({
     </footer>
   );
 };
+
 
 
 
