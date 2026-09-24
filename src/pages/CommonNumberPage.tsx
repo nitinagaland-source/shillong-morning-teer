@@ -185,9 +185,6 @@ export const CommonNumberPage: React.FC<CommonNumberPageProps> = ({
 
         {/* DISCLAIMER BOX (Exact Light Cream/Yellow with Italic Font) */}
         {/* ============================================================== */}
-        <div className="mt-8 mb-6 p-4 rounded-lg bg-[#fefce8] border border-[#e7dec3] text-center text-xs sm:text-sm text-gray-700 italic leading-relaxed shadow-2xs">
-          Disclaimer: These common numbers are purely based on certain calculations done using past results. There is no guarantee of the accuracy of these numbers. Please play responsibly.
-        </div>
 
         {/* ============================================================== */}
         {/* MAIN ARTICLE: Morning Teer Common Number {Date} Free FR & SR Tips */}
@@ -989,6 +986,7 @@ export const CommonNumberPage: React.FC<CommonNumberPageProps> = ({
     </div>
   );
 };
+
 
 
 
