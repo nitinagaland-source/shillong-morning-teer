@@ -48,7 +48,7 @@ export default function App() {
   const [previousResults, setPreviousResults] = useState<TeerResult[]>(initialPreviousResults);
   const [commonNumbers, setCommonNumbers] = useState<CommonNumberEntry[]>(initialCommonNumbers);
   const [dreamNumbers, setDreamNumbers] = useState<DreamNumberEntry[]>(initialDreamNumbers);
-  const [notices, setNotices] = useState<NoticeEntry[]>(initialNotices);
+  const [notices, setNotices] = useState<NoticeEntry[]>(initialNotices.filter((notice) => notice.title !== 'Sunday & Public Holiday Archery Schedules'));
 
   // Navigation / View State
   const [currentView, setCurrentView] = useState<
@@ -79,7 +79,7 @@ export default function App() {
       if (p.status === 'fulfilled') setPreviousResults(p.value);
       if (c.status === 'fulfilled') setCommonNumbers(c.value);
       if (d.status === 'fulfilled') setDreamNumbers(d.value);
-      if (n.status === 'fulfilled') setNotices(n.value);
+      if (n.status === 'fulfilled') setNotices(n.value.filter((notice) => notice.title !== 'Sunday & Public Holiday Archery Schedules'));
     } catch (err) {
       console.warn('Backend sync failed, continuing with cached seed:', err);
     }
@@ -313,6 +313,7 @@ export default function App() {
     </div>
   );
 }
+
 
 
 
