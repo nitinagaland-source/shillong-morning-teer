@@ -28,7 +28,7 @@ export const TopBar: React.FC<TopBarProps> = ({ onOpenDrawer, isDrawerOpen }) =>
             }
           }}
         >
-          <div className="w-[52px] h-[52px] shrink-0 mr-1" aria-hidden="true">
+          <div className="w-11 h-11 shrink-0 mr-1" aria-hidden="true">
             <svg
               viewBox="0 0 100 100"
               className="w-full h-full"
@@ -62,7 +62,7 @@ export const TopBar: React.FC<TopBarProps> = ({ onOpenDrawer, isDrawerOpen }) =>
           <div className="min-w-0 flex items-center">
             <span
               id="site-title-text"
-              className="whitespace-nowrap text-[26px] sm:text-[30px] leading-none text-black"
+              className="whitespace-nowrap text-[22px] sm:text-[27px] leading-none text-black"
               style={{
                 fontFamily: 'Impact, Haettenschweiler, "Arial Narrow Bold", "Arial Narrow", sans-serif',
                 fontWeight: 900,
@@ -73,7 +73,7 @@ export const TopBar: React.FC<TopBarProps> = ({ onOpenDrawer, isDrawerOpen }) =>
             </span>
 
             <span
-              className="ml-2 inline-flex items-center gap-1 shrink-0"
+              className="ml-1 inline-flex items-center gap-1 shrink-0"
               aria-label="Live"
             >
               <span className="relative flex h-3.5 w-3.5">
@@ -81,7 +81,7 @@ export const TopBar: React.FC<TopBarProps> = ({ onOpenDrawer, isDrawerOpen }) =>
                 <span className="relative inline-flex h-3.5 w-3.5 rounded-full bg-red-600"></span>
               </span>
 
-              <span className="text-[12px] sm:text-[14px] font-black leading-none text-red-700">
+              <span className="text-[13px] sm:text-[14px] font-black leading-none text-red-700">
                 LIVE
               </span>
             </span>
@@ -105,3 +105,4 @@ export const TopBar: React.FC<TopBarProps> = ({ onOpenDrawer, isDrawerOpen }) =>
     </header>
   );
 };
+
