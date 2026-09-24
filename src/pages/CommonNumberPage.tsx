@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+﻿import React, { useState, useEffect, useCallback } from 'react';
 import { CommonNumberEntry, SiteSettings } from '../types';
 import { ArrowLeft, ChevronDown, ChevronUp, ShieldCheck } from 'lucide-react';
 import { Footer } from '../components/Footer';
@@ -136,7 +136,7 @@ export const CommonNumberPage: React.FC<CommonNumberPageProps> = ({
 
         <div className="flex items-center gap-2">
           <div className="w-7 h-7 rounded-full border-2 border-indigo-900 flex items-center justify-center bg-white shadow-2xs">
-            <span className="text-indigo-950 text-xs">🎯</span>
+            <span className="text-indigo-950 text-xs">ðŸŽ¯</span>
           </div>
           <span className="text-base sm:text-lg font-medium text-indigo-950 font-sans uppercase tracking-tight">
             {settings.site_name || 'Shillongmorningteer'}
@@ -149,54 +149,41 @@ export const CommonNumberPage: React.FC<CommonNumberPageProps> = ({
       {/* Main Content Container matching Exact Screenshot */}
       <main className="max-w-[440px] md:max-w-2xl mx-auto px-4 pt-5 pb-12">
         {/* Date Display */}
-        <div className="text-center font-medium text-lg sm:text-xl text-gray-800 py-2 tracking-tight">
+        <div className="text-center font-medium text-[18px] sm:text-[20px] text-black py-2">
           {currentDate}
         </div>
 
-        {/* ============================================================== */}
-        {/* TABLE 1: SHILLONG (Aesthetic Modern Card) */}
-        {/* ============================================================== */}
-        <div className="w-full rounded-2xl border border-indigo-200/80 bg-white shadow-md shadow-indigo-900/5 overflow-hidden">
-          {/* Main Title Row */}
-          <div className="bg-linear-to-r from-blue-50 via-indigo-50 to-blue-50 border-b border-indigo-200/80 py-2 text-center font-medium text-sm sm:text-base tracking-wider text-indigo-950 uppercase">
+        {/* Exact Common Number Table */}
+        <div className="mt-1 w-full overflow-hidden border border-black bg-white">
+          <div className="border-b border-black py-1 text-center text-[18px] sm:text-[20px] font-normal leading-none">
             SHILLONG
           </div>
 
-          {/* Subheaders Row with Elegant Indigo Palette */}
-          <div className="grid grid-cols-3 bg-linear-to-r from-blue-600 via-indigo-600 to-blue-700 text-white font-medium text-sm sm:text-base border-b border-indigo-800 text-center">
-            <div className="py-2 border-r border-white/20">Direct</div>
-            <div className="py-2 border-r border-white/20">House</div>
-            <div className="py-2">Ending</div>
+          <div className="grid grid-cols-3 border-b border-black bg-[#48c9c0] text-center text-[16px] sm:text-[18px] font-normal leading-none">
+            <div className="py-1.5 border-r border-black">Direct</div>
+            <div className="py-1.5 border-r border-black">House</div>
+            <div className="py-1.5">Ending</div>
           </div>
 
-          {/* Data Row 1 */}
-          <div className="grid grid-cols-3 bg-white text-gray-900 font-normal text-base sm:text-xl text-center tabular-nums font-sans">
-            <div className="py-3.5 border-r border-slate-100">{tableData.table1.direct}</div>
-            <div className="py-3.5 border-r border-slate-100">{tableData.table1.house}</div>
-            <div className="py-3.5">{tableData.table1.ending}</div>
-          </div>
-        </div>
-
-        {/* ============================================================== */}
-        {/* TABLE 2: SECOND ROW (Aesthetic Modern Card) */}
-        {/* ============================================================== */}
-        <div className="w-full rounded-2xl border border-indigo-200/80 bg-white shadow-md shadow-indigo-900/5 overflow-hidden mt-4 sm:mt-5">
-          {/* Subheaders Row with Elegant Indigo Palette */}
-          <div className="grid grid-cols-3 bg-linear-to-r from-blue-600 via-indigo-600 to-blue-700 text-white font-medium text-sm sm:text-base border-b border-indigo-800 text-center">
-            <div className="py-2 border-r border-white/20">Direct</div>
-            <div className="py-2 border-r border-white/20">House</div>
-            <div className="py-2">Ending</div>
+          <div className="grid grid-cols-3 border-b border-black bg-white text-center text-[17px] sm:text-[19px] font-normal leading-none">
+            <div className="py-1.5 border-r border-black">{tableData.table1.direct}</div>
+            <div className="py-1.5 border-r border-black">{tableData.table1.house}</div>
+            <div className="py-1.5">{tableData.table1.ending}</div>
           </div>
 
-          {/* Data Row 2 */}
-          <div className="grid grid-cols-3 bg-white text-gray-900 font-normal text-base sm:text-xl text-center tabular-nums font-sans">
-            <div className="py-3.5 border-r border-slate-100">{tableData.table2.direct}</div>
-            <div className="py-3.5 border-r border-slate-100">{tableData.table2.house}</div>
-            <div className="py-3.5">{tableData.table2.ending}</div>
+          <div className="grid grid-cols-3 border-b border-black bg-[#48c9c0] text-center text-[16px] sm:text-[18px] font-normal leading-none">
+            <div className="py-1.5 border-r border-black">Direct</div>
+            <div className="py-1.5 border-r border-black">House</div>
+            <div className="py-1.5">Ending</div>
+          </div>
+
+          <div className="grid grid-cols-3 bg-white text-center text-[17px] sm:text-[19px] font-normal leading-none">
+            <div className="py-1.5 border-r border-black">{tableData.table2.direct}</div>
+            <div className="py-1.5 border-r border-black">{tableData.table2.house}</div>
+            <div className="py-1.5">{tableData.table2.ending}</div>
           </div>
         </div>
 
-        {/* ============================================================== */}
         {/* DISCLAIMER BOX (Exact Light Cream/Yellow with Italic Font) */}
         {/* ============================================================== */}
         <div className="mt-8 mb-6 p-4 rounded-lg bg-[#fefce8] border border-[#e7dec3] text-center text-xs sm:text-sm text-gray-700 italic leading-relaxed shadow-2xs">
@@ -951,7 +938,7 @@ export const CommonNumberPage: React.FC<CommonNumberPageProps> = ({
             onClick={() => handleNavClick('/')}
             className="flex flex-col items-center justify-center p-2 rounded-xl bg-blue-600 text-white hover:bg-blue-700 transition-all text-center aspect-square shadow-xs cursor-pointer group"
           >
-            <span className="text-lg mb-1 group-hover:scale-110 transition-transform">🎯</span>
+            <span className="text-lg mb-1 group-hover:scale-110 transition-transform">ðŸŽ¯</span>
             <span className="text-[10px] sm:text-xs font-normal uppercase tracking-tight">Teer Result</span>
           </button>
 
@@ -959,7 +946,7 @@ export const CommonNumberPage: React.FC<CommonNumberPageProps> = ({
             onClick={() => handleNavClick('/dream-number')}
             className="flex flex-col items-center justify-center p-2 rounded-xl bg-[#ff604e] text-white hover:opacity-90 transition-all text-center aspect-square shadow-xs cursor-pointer group"
           >
-            <span className="text-lg mb-1 group-hover:scale-110 transition-transform">💭</span>
+            <span className="text-lg mb-1 group-hover:scale-110 transition-transform">ðŸ’­</span>
             <span className="text-[10px] sm:text-xs font-normal uppercase tracking-tight">Dream Number</span>
           </button>
 
@@ -967,7 +954,7 @@ export const CommonNumberPage: React.FC<CommonNumberPageProps> = ({
             onClick={() => handleNavClick('/deal')}
             className="flex flex-col items-center justify-center p-2 rounded-xl bg-purple-600 text-white hover:bg-purple-700 transition-all text-center aspect-square shadow-xs cursor-pointer group"
           >
-            <span className="text-lg mb-1 group-hover:scale-110 transition-transform">🎁</span>
+            <span className="text-lg mb-1 group-hover:scale-110 transition-transform">ðŸŽ</span>
             <span className="text-[10px] sm:text-xs font-normal uppercase tracking-tight">Win Prizes</span>
           </button>
 
@@ -975,7 +962,7 @@ export const CommonNumberPage: React.FC<CommonNumberPageProps> = ({
             onClick={() => handleNavClick('/common-number')}
             className="flex flex-col items-center justify-center p-2 rounded-xl bg-orange-600 text-white hover:bg-orange-700 transition-all text-center aspect-square shadow-xs cursor-pointer group ring-2 ring-orange-400"
           >
-            <span className="text-lg mb-1 group-hover:scale-110 transition-transform">©</span>
+            <span className="text-lg mb-1 group-hover:scale-110 transition-transform">Â©</span>
             <span className="text-[10px] sm:text-xs font-normal uppercase tracking-tight">Common Number</span>
           </button>
 
@@ -983,7 +970,7 @@ export const CommonNumberPage: React.FC<CommonNumberPageProps> = ({
             onClick={() => handleNavClick('/previous-results')}
             className="flex flex-col items-center justify-center p-2 rounded-xl bg-slate-700 text-white hover:bg-slate-800 transition-all text-center aspect-square shadow-xs cursor-pointer group"
           >
-            <span className="text-lg mb-1 group-hover:scale-110 transition-transform">📅</span>
+            <span className="text-lg mb-1 group-hover:scale-110 transition-transform">ðŸ“…</span>
             <span className="text-[10px] sm:text-xs font-normal uppercase tracking-tight">Previous Result</span>
           </button>
 
@@ -991,7 +978,7 @@ export const CommonNumberPage: React.FC<CommonNumberPageProps> = ({
             onClick={() => handleNavClick('/predict-target')}
             className="flex flex-col items-center justify-center p-2 rounded-xl bg-indigo-600 text-white hover:bg-indigo-700 transition-all text-center aspect-square shadow-xs cursor-pointer group"
           >
-            <span className="text-lg mb-1 group-hover:scale-110 transition-transform">🏹</span>
+            <span className="text-lg mb-1 group-hover:scale-110 transition-transform">ðŸ¹</span>
             <span className="text-[10px] sm:text-xs font-normal uppercase tracking-tight">Predict Target</span>
           </button>
         </div>
@@ -1008,3 +995,4 @@ export const CommonNumberPage: React.FC<CommonNumberPageProps> = ({
     </div>
   );
 };
+
