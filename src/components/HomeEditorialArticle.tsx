@@ -498,13 +498,13 @@ export const HomeEditorialArticle: React.FC = () => {
                     onClick={() => toggleFaq(idx)}
                     className="w-full flex items-center justify-between p-3.5 text-left focus:outline-hidden cursor-pointer gap-3 bg-white hover:bg-gray-50/60 transition-colors"
                   >
-                    <span className="font-normal text-sm sm:text-[15px] text-gray-900 group-hover:text-[#48c9c0] leading-snug">
+                    <span className="font-normal text-sm sm:text-[15px] text-gray-900 group-hover:text-[#111827] leading-snug">
                       {faq.q}
                     </span>
                     {isOpen ? (
-                      <ChevronUp className="w-4 h-4 text-[#48c9c0] shrink-0 transition-transform" />
+                      <ChevronUp className="w-4 h-4 text-[#111827] shrink-0 transition-transform" />
                     ) : (
-                      <ChevronDown className="w-4 h-4 text-gray-400 group-hover:text-[#48c9c0] shrink-0 transition-transform" />
+                      <ChevronDown className="w-4 h-4 text-gray-400 group-hover:text-[#111827] shrink-0 transition-transform" />
                     )}
                   </button>
 
@@ -522,6 +522,7 @@ export const HomeEditorialArticle: React.FC = () => {
     </div>
   );
 };
+
 
 
 

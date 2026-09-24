@@ -74,13 +74,13 @@ export const PredictTargetPage: React.FC<PredictTargetPageProps> = ({
       >
         <button
           onClick={onBack}
-          className="flex items-center gap-1.5 text-[#48c9c0] font-normal text-sm hover:opacity-80 cursor-pointer"
+          className="flex items-center gap-1.5 text-[#111827] font-normal text-sm hover:opacity-80 cursor-pointer"
         >
           <ArrowLeft className="w-5 h-5" />
           <span>Home</span>
         </button>
 
-        <h1 className="text-base sm:text-lg font-medium text-[#48c9c0] font-sans uppercase tracking-tight">
+        <h1 className="text-base sm:text-lg font-medium text-[#111827] font-sans uppercase tracking-tight">
           Predict Target
         </h1>
 
@@ -264,6 +264,8 @@ export const PredictTargetPage: React.FC<PredictTargetPageProps> = ({
     </div>
   );
 };
+
+
 
 
 

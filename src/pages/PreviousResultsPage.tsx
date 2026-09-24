@@ -163,13 +163,13 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
         <button
           onClick={onBack}
           id="btn-back-home"
-          className="flex items-center gap-1.5 text-[#48c9c0] font-medium text-sm hover:opacity-80 cursor-pointer"
+          className="flex items-center gap-1.5 text-[#111827] font-medium text-sm hover:opacity-80 cursor-pointer"
         >
           <ArrowLeft className="w-4 h-4" />
           <span>Home</span>
         </button>
 
-        <h1 className="text-base sm:text-lg font-medium text-[#48c9c0] tracking-tight">
+        <h1 className="text-base sm:text-lg font-medium text-[#111827] tracking-tight">
           Shillong Morning Teer
         </h1>
 
@@ -188,7 +188,7 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
           The{' '}
           <button
             onClick={() => window.scrollTo({ top: 400, behavior: 'smooth' })}
-            className="text-[#48c9c0] hover:underline font-medium cursor-pointer"
+            className="text-[#111827] hover:underline font-medium cursor-pointer"
           >
             Shillong Morning Teer Previous Result
           </button>{' '}
@@ -584,14 +584,14 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
               You can also examine our calculated daily{' '}
               <button
                 onClick={() => onNavigate?.('/common-number')}
-                className="text-[#48c9c0] hover:underline font-medium cursor-pointer"
+                className="text-[#111827] hover:underline font-medium cursor-pointer"
               >
                 Shillong Morning Teer Common Numbers
               </button>{' '}
               and explore traditional{' '}
               <button
                 onClick={() => onNavigate?.('/dream-number')}
-                className="text-[#48c9c0] hover:underline font-medium cursor-pointer"
+                className="text-[#111827] hover:underline font-medium cursor-pointer"
               >
                 Shillong Morning Teer Dream Numbers
               </button>{' '}
@@ -746,6 +746,8 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
     </div>
   );
 };
+
+
 
 
 

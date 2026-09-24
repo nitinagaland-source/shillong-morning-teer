@@ -19,7 +19,7 @@ export const DealPage: React.FC<DealPageProps> = ({ settings, onBack }) => {
       title: 'Polo Ground Shillong - Archery Ground Entry Pass',
       category: 'Ground Access',
       badge: 'OFFICIAL PASS',
-      badgeColor: 'bg-[#b8e8e3] text-[#48c9c0] border-[#48c9c0]',
+      badgeColor: 'bg-[#b8e8e3] text-[#111827] border-[#48c9c0]',
       description: 'Official spectator entrance to the Shillong archery shooting ring at Polo Ground. Witness the 50 traditional archers live during Morning F/R & S/R shooting.',
       validity: 'Valid Monday to Saturday',
       code: 'POLO-GROUND-ENTRY-2026',
@@ -30,7 +30,7 @@ export const DealPage: React.FC<DealPageProps> = ({ settings, onBack }) => {
       title: 'Morning Teer Club Daily Common Number Alerts',
       category: 'Community Club',
       badge: 'VERIFIED CLUB',
-      badgeColor: 'bg-[#b8e8e3] text-[#48c9c0] border-[#48c9c0]',
+      badgeColor: 'bg-[#b8e8e3] text-[#111827] border-[#48c9c0]',
       description: 'Join the registered Meghalaya archery enthusiast community. Receive verified morning house and ending calculation sheets directly at 9:30 AM before shooting commences.',
       validity: 'Daily 09:30 AM IST',
       code: 'TEER-VIP-ALERT-MORNING',
@@ -75,13 +75,13 @@ export const DealPage: React.FC<DealPageProps> = ({ settings, onBack }) => {
       >
         <button
           onClick={onBack}
-          className="flex items-center gap-1.5 text-[#48c9c0] font-normal text-sm hover:opacity-80 cursor-pointer"
+          className="flex items-center gap-1.5 text-[#111827] font-normal text-sm hover:opacity-80 cursor-pointer"
         >
           <ArrowLeft className="w-5 h-5" />
           <span>Home</span>
         </button>
 
-        <h1 className="text-base sm:text-lg font-medium text-[#48c9c0] font-sans uppercase tracking-tight">
+        <h1 className="text-base sm:text-lg font-medium text-[#111827] font-sans uppercase tracking-tight">
           Archery Deals &amp; Passes
         </h1>
 
@@ -92,11 +92,11 @@ export const DealPage: React.FC<DealPageProps> = ({ settings, onBack }) => {
         {/* Intro */}
         <div className="bg-white rounded-2xl p-4 border border-gray-200 shadow-2xs space-y-2">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-[#b8e8e3] text-[#48c9c0] flex items-center justify-center font-normal">
+            <div className="w-8 h-8 rounded-lg bg-[#b8e8e3] text-[#111827] flex items-center justify-center font-normal">
               <Tag className="w-4 h-4" />
             </div>
             <div>
-              <h2 className="text-base font-medium text-[#48c9c0] leading-tight">
+              <h2 className="text-base font-medium text-[#111827] leading-tight">
                 Community Passes &amp; Archery Deals
               </h2>
               <p className="text-xs text-gray-500 font-medium">
@@ -120,7 +120,7 @@ export const DealPage: React.FC<DealPageProps> = ({ settings, onBack }) => {
                 >
                   {deal.badge}
                 </span>
-                <span className="text-xs font-normal text-[#48c9c0] bg-[#b8e8e3] px-2 py-0.5 rounded-md border border-[#48c9c0]">
+                <span className="text-xs font-normal text-[#111827] bg-[#b8e8e3] px-2 py-0.5 rounded-md border border-[#48c9c0]">
                   {deal.discount}
                 </span>
               </div>
@@ -152,7 +152,7 @@ export const DealPage: React.FC<DealPageProps> = ({ settings, onBack }) => {
                 >
                   {copiedCode === deal.code ? (
                     <>
-                      <Check className="w-3.5 h-3.5 text-[#48c9c0]" />
+                      <Check className="w-3.5 h-3.5 text-[#111827]" />
                       <span>Copied!</span>
                     </>
                   ) : (
@@ -168,12 +168,12 @@ export const DealPage: React.FC<DealPageProps> = ({ settings, onBack }) => {
         </div>
 
         {/* Verification note */}
-        <div className="bg-[#b8e8e3]/70 p-3.5 rounded-xl border border-[#48c9c0] text-xs text-[#48c9c0] space-y-1">
+        <div className="bg-[#b8e8e3]/70 p-3.5 rounded-xl border border-[#48c9c0] text-xs text-[#111827] space-y-1">
           <div className="flex items-center gap-1.5 font-bold">
-            <ShieldCheck className="w-4 h-4 text-[#48c9c0]" />
+            <ShieldCheck className="w-4 h-4 text-[#111827]" />
             <span>Community Verified Archery Programs</span>
           </div>
-          <p className="text-[11px] leading-relaxed text-[#48c9c0]/90">
+          <p className="text-[11px] leading-relaxed text-[#111827]/90">
             All passes and club alerts are free community initiatives to preserve traditional Meghalaya archery culture. We never charge for club common number access.
           </p>
         </div>
@@ -190,6 +190,8 @@ export const DealPage: React.FC<DealPageProps> = ({ settings, onBack }) => {
     </div>
   );
 };
+
+
 
 
 

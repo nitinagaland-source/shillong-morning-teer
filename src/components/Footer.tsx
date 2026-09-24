@@ -16,28 +16,28 @@ export const Footer: React.FC<FooterProps> = ({
         <div className="grid grid-cols-2 gap-x-8 sm:gap-x-16 gap-y-3.5 text-center w-full max-w-sm sm:max-w-md mb-4">
           <button
             onClick={onNavigateHome}
-            className="text-slate-800 hover:text-[#48c9c0] font-normal text-sm sm:text-[15px] transition-colors cursor-pointer text-center"
+            className="text-slate-800 hover:text-[#111827] font-normal text-sm sm:text-[15px] transition-colors cursor-pointer text-center"
           >
             Home
           </button>
 
           <button
             onClick={() => onOpenModal?.('terms')}
-            className="text-slate-800 hover:text-[#48c9c0] font-normal text-sm sm:text-[15px] transition-colors cursor-pointer text-center"
+            className="text-slate-800 hover:text-[#111827] font-normal text-sm sm:text-[15px] transition-colors cursor-pointer text-center"
           >
             Terms &amp; Conditions
           </button>
 
           <button
             onClick={() => onOpenModal?.('about')}
-            className="text-slate-800 hover:text-[#48c9c0] font-normal text-sm sm:text-[15px] transition-colors cursor-pointer text-center"
+            className="text-slate-800 hover:text-[#111827] font-normal text-sm sm:text-[15px] transition-colors cursor-pointer text-center"
           >
             About Us
           </button>
 
           <button
             onClick={() => onOpenModal?.('privacy')}
-            className="text-slate-800 hover:text-[#48c9c0] font-normal text-sm sm:text-[15px] transition-colors cursor-pointer text-center"
+            className="text-slate-800 hover:text-[#111827] font-normal text-sm sm:text-[15px] transition-colors cursor-pointer text-center"
           >
             Privacy Policy
           </button>
@@ -47,7 +47,7 @@ export const Footer: React.FC<FooterProps> = ({
         <div className="mb-6">
           <button
             onClick={() => onOpenModal?.('contact')}
-            className="text-slate-800 hover:text-[#48c9c0] font-normal text-sm sm:text-[15px] transition-colors cursor-pointer text-center"
+            className="text-slate-800 hover:text-[#111827] font-normal text-sm sm:text-[15px] transition-colors cursor-pointer text-center"
           >
             Contact Us
           </button>
@@ -61,6 +61,7 @@ export const Footer: React.FC<FooterProps> = ({
     </footer>
   );
 };
+
 
 
 

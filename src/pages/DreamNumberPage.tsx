@@ -164,13 +164,13 @@ export const DreamNumberPage: React.FC<DreamNumberPageProps> = ({
         <button
           onClick={onBack}
           id="btn-back-home"
-          className="flex items-center gap-1.5 text-[#48c9c0] font-bold text-sm hover:opacity-80 cursor-pointer"
+          className="flex items-center gap-1.5 text-[#111827] font-bold text-sm hover:opacity-80 cursor-pointer"
         >
           <ArrowLeft className="w-4 h-4" />
           <span>Home</span>
         </button>
 
-        <h1 className="text-base sm:text-lg font-bold text-[#48c9c0] tracking-tight">
+        <h1 className="text-base sm:text-lg font-bold text-[#111827] tracking-tight">
           SHILLONG MORNING TEER
         </h1>
 
@@ -224,7 +224,7 @@ export const DreamNumberPage: React.FC<DreamNumberPageProps> = ({
           Many people enjoy talking about{' '}
           <button
             onClick={() => window.scrollTo({ top: 400, behavior: 'smooth' })}
-            className="text-[#48c9c0] hover:underline font-semibold cursor-pointer"
+            className="text-[#111827] hover:underline font-semibold cursor-pointer"
           >
             Shillong Morning Teer Dream Numbers
           </button>
@@ -234,7 +234,7 @@ export const DreamNumberPage: React.FC<DreamNumberPageProps> = ({
           beliefs around dreams remain a popular part of the{' '}
           <button
             onClick={onBack}
-            className="text-[#48c9c0] hover:underline font-semibold cursor-pointer"
+            className="text-[#111827] hover:underline font-semibold cursor-pointer"
           >
             SHILLONG MORNING TEER
           </button>{' '}
@@ -485,7 +485,7 @@ export const DreamNumberPage: React.FC<DreamNumberPageProps> = ({
                     <span className="inline-block mr-1">{row.direct}</span>
                     <button
                       onClick={() => handleCopy(row.slNo, row.direct)}
-                      className="opacity-0 group-hover:opacity-100 transition-opacity p-0.5 text-gray-400 hover:text-[#48c9c0] inline-block align-middle cursor-pointer"
+                      className="opacity-0 group-hover:opacity-100 transition-opacity p-0.5 text-gray-400 hover:text-[#111827] inline-block align-middle cursor-pointer"
                       title="Copy number"
                     >
                       {copiedId === row.slNo ? (
@@ -531,7 +531,7 @@ export const DreamNumberPage: React.FC<DreamNumberPageProps> = ({
               Everyone has a different approach. Some players only use dream numbers after a memorable dream. Others check{' '}
               <button
                 onClick={() => window.scrollTo({ top: 400, behavior: 'smooth' })}
-                className="text-[#48c9c0] hover:underline font-semibold cursor-pointer"
+                className="text-[#111827] hover:underline font-semibold cursor-pointer"
               >
                 dream charts
               </button>{' '}
@@ -541,7 +541,7 @@ export const DreamNumberPage: React.FC<DreamNumberPageProps> = ({
               Many people combine dream ideas with{' '}
               <button
                 onClick={() => onNavigate?.('previous-results')}
-                className="text-[#48c9c0] hover:underline font-semibold cursor-pointer"
+                className="text-[#111827] hover:underline font-semibold cursor-pointer"
               >
                 previous results
               </button>
@@ -571,7 +571,7 @@ export const DreamNumberPage: React.FC<DreamNumberPageProps> = ({
               These reasons explain why{' '}
               <button
                 onClick={() => onNavigate?.('common-number')}
-                className="text-[#48c9c0] hover:underline font-semibold cursor-pointer"
+                className="text-[#111827] hover:underline font-semibold cursor-pointer"
               >
                 Shillong Morning Teer Common Numbers
               </button>{' '}
@@ -802,6 +802,8 @@ export const DreamNumberPage: React.FC<DreamNumberPageProps> = ({
     </div>
   );
 };
+
+
 
 
 

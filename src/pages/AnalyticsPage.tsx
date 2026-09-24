@@ -137,13 +137,13 @@ export const AnalyticsPage: React.FC<AnalyticsPageProps> = ({
       >
         <button
           onClick={onBack}
-          className="flex items-center gap-1.5 text-[#48c9c0] font-normal text-sm hover:opacity-80 cursor-pointer"
+          className="flex items-center gap-1.5 text-[#111827] font-normal text-sm hover:opacity-80 cursor-pointer"
         >
           <ArrowLeft className="w-5 h-5" />
           <span>Home</span>
         </button>
 
-        <h1 className="text-base sm:text-lg font-medium text-[#48c9c0] font-sans uppercase tracking-tight">
+        <h1 className="text-base sm:text-lg font-medium text-[#111827] font-sans uppercase tracking-tight">
           Archery Analytics
         </h1>
 
@@ -155,11 +155,11 @@ export const AnalyticsPage: React.FC<AnalyticsPageProps> = ({
         <div className="bg-white rounded-2xl p-4 border border-gray-200 shadow-2xs space-y-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-lg bg-[#b8e8e3] text-[#48c9c0] flex items-center justify-center font-normal">
+              <div className="w-8 h-8 rounded-lg bg-[#b8e8e3] text-[#111827] flex items-center justify-center font-normal">
                 <BarChart2 className="w-4 h-4" />
               </div>
               <div>
-                <h2 className="text-base font-medium text-[#48c9c0] leading-tight">
+                <h2 className="text-base font-medium text-[#111827] leading-tight">
                   Historical Statistical Analysis
                 </h2>
                 <p className="text-xs text-gray-500 font-medium">
@@ -209,7 +209,7 @@ export const AnalyticsPage: React.FC<AnalyticsPageProps> = ({
             <div className="bg-[#b8e8e3]/70 p-3 rounded-xl border border-[#48c9c0] text-xs space-y-1.5 animate-in fade-in duration-150">
               <div className="flex items-center justify-between font-normal text-gray-900">
                 <span>Target #{lookupData.number}</span>
-                <span className="text-[#48c9c0]">Appeared {lookupData.totalHits} times</span>
+                <span className="text-[#111827]">Appeared {lookupData.totalHits} times</span>
               </div>
               <div className="grid grid-cols-2 gap-2 text-[11px] text-gray-600 pt-1">
                 <div>First Round (F/R): <b className="text-gray-900">{lookupData.frHits}</b></div>
@@ -226,7 +226,7 @@ export const AnalyticsPage: React.FC<AnalyticsPageProps> = ({
         <div className="bg-white rounded-2xl p-4 border border-gray-200 shadow-2xs space-y-3">
           <div className="flex items-center justify-between pb-2 border-b border-gray-100">
             <h3 className="text-sm font-medium text-gray-900 flex items-center gap-1.5">
-              <TrendingUp className="w-4 h-4 text-[#48c9c0]" />
+              <TrendingUp className="w-4 h-4 text-[#111827]" />
               Highest Frequency Targets
             </h3>
             <span className="text-[11px] text-gray-400 font-medium">Top Repeaters</span>
@@ -241,7 +241,7 @@ export const AnalyticsPage: React.FC<AnalyticsPageProps> = ({
                 <span className="text-2xl font-normal text-gray-900 font-sans tabular-nums block">
                   {num}
                 </span>
-                <span className="text-[10px] font-bold text-[#48c9c0] bg-[#b8e8e3]/70 px-1.5 py-0.5 rounded-full inline-block mt-1">
+                <span className="text-[10px] font-bold text-[#111827] bg-[#b8e8e3]/70 px-1.5 py-0.5 rounded-full inline-block mt-1">
                   {count} hits
                 </span>
               </div>
@@ -252,7 +252,7 @@ export const AnalyticsPage: React.FC<AnalyticsPageProps> = ({
         {/* 3. Odd vs Even Distribution */}
         <div className="bg-white rounded-2xl p-4 border border-gray-200 shadow-2xs space-y-3">
           <h3 className="text-sm font-medium text-gray-900 flex items-center gap-1.5">
-            <Activity className="w-4 h-4 text-[#48c9c0]" />
+            <Activity className="w-4 h-4 text-[#111827]" />
             Odd vs. Even Ratio
           </h3>
 
@@ -274,7 +274,7 @@ export const AnalyticsPage: React.FC<AnalyticsPageProps> = ({
 
             <div className="flex justify-between text-xs font-bold text-gray-600 px-1">
               <span className="text-amber-700">Odd Digits (1, 3, 5, 7, 9)</span>
-              <span className="text-[#48c9c0]">Even Digits (0, 2, 4, 6, 8)</span>
+              <span className="text-[#111827]">Even Digits (0, 2, 4, 6, 8)</span>
             </div>
           </div>
         </div>
@@ -337,6 +337,8 @@ export const AnalyticsPage: React.FC<AnalyticsPageProps> = ({
     </div>
   );
 };
+
+
 
 
 

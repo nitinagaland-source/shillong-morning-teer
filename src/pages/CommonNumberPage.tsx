@@ -128,7 +128,7 @@ export const CommonNumberPage: React.FC<CommonNumberPageProps> = ({
       >
         <button
           onClick={onBack}
-          className="flex items-center gap-1.5 text-[#48c9c0] font-normal text-sm hover:opacity-80 cursor-pointer"
+          className="flex items-center gap-1.5 text-[#111827] font-normal text-sm hover:opacity-80 cursor-pointer"
         >
           <ArrowLeft className="w-5 h-5" />
           <span>Home</span>
@@ -136,9 +136,9 @@ export const CommonNumberPage: React.FC<CommonNumberPageProps> = ({
 
         <div className="flex items-center gap-2">
           <div className="w-7 h-7 rounded-full border-2 border-[#48c9c0] flex items-center justify-center bg-white shadow-2xs">
-            <span className="text-[#48c9c0] text-xs">ðŸŽ¯</span>
+            <span className="text-[#111827] text-xs">ðŸŽ¯</span>
           </div>
-          <span className="text-base sm:text-lg font-medium text-[#48c9c0] font-sans uppercase tracking-tight">
+          <span className="text-base sm:text-lg font-medium text-[#111827] font-sans uppercase tracking-tight">
             {settings.site_name || 'Shillongmorningteer'}
           </span>
         </div>
@@ -202,19 +202,19 @@ export const CommonNumberPage: React.FC<CommonNumberPageProps> = ({
           {/* Intro Paragraph 1 */}
           <p>
             If you follow <span className="font-medium text-gray-800">Teer games</span> regularly, you have probably heard people talk about the{' '}
-            <span className="text-[#48c9c0] font-normal hover:underline cursor-pointer">morning teer common number</span>. It is one of the most searched topics among Teer enthusiasts. Many players check these numbers before placing their choices because they believe common numbers may reflect{' '}
+            <span className="text-[#111827] font-normal hover:underline cursor-pointer">morning teer common number</span>. It is one of the most searched topics among Teer enthusiasts. Many players check these numbers before placing their choices because they believe common numbers may reflect{' '}
             <span className="font-medium text-gray-800">patterns, trends, and public predictions</span>.
           </p>
 
           {/* Intro Paragraph 2 */}
           <p>
-            The idea behind a <span className="text-[#48c9c0] font-normal hover:underline cursor-pointer">Morning Teer</span> common number is simple. It represents numbers that are commonly suggested by analysts, enthusiasts, and prediction followers for a particular day. These numbers are not official results. Instead, they are forecasts based on observations, past outcomes, local methods, and number trends.
+            The idea behind a <span className="text-[#111827] font-normal hover:underline cursor-pointer">Morning Teer</span> common number is simple. It represents numbers that are commonly suggested by analysts, enthusiasts, and prediction followers for a particular day. These numbers are not official results. Instead, they are forecasts based on observations, past outcomes, local methods, and number trends.
           </p>
 
           {/* Intro Paragraph 3 */}
           <p>
             Now, we will explore everything about morning teer <span className="font-medium text-gray-800">common number</span>, how it is calculated, why people follow it, and what factors may influence daily predictions. Players also check the{' '}
-            <span className="text-[#48c9c0] font-normal hover:underline cursor-pointer">house and ending targets</span> alongside these numbers for better accuracy.
+            <span className="text-[#111827] font-normal hover:underline cursor-pointer">house and ending targets</span> alongside these numbers for better accuracy.
           </p>
 
           {/* Section: What Is a Morning Teer Common Number? */}
@@ -467,7 +467,7 @@ export const CommonNumberPage: React.FC<CommonNumberPageProps> = ({
             <p>
               Some focus heavily on mathematics and statistical trends. Others prefer traditional methods passed down through local communities.
             </p>
-            <p className="font-bold text-[#48c9c0]">Popular approaches include:</p>
+            <p className="font-bold text-[#111827]">Popular approaches include:</p>
             <ul className="list-disc pl-5 space-y-1 text-gray-700">
               <li>Frequency analysis</li>
               <li>Gap analysis</li>
@@ -636,7 +636,7 @@ export const CommonNumberPage: React.FC<CommonNumberPageProps> = ({
             <p>
               When many people discuss the same number, it naturally becomes part of daily prediction conversations. This popularity can make a number appear on multiple common number lists.
             </p>
-            <p className="font-bold text-[#48c9c0]">Community favorites often emerge through:</p>
+            <p className="font-bold text-[#111827]">Community favorites often emerge through:</p>
             <ul className="list-disc pl-5 space-y-1 text-gray-700">
               <li>Recent winning trends</li>
               <li>Strong historical records</li>
@@ -660,7 +660,7 @@ export const CommonNumberPage: React.FC<CommonNumberPageProps> = ({
             <p>
               Many enthusiasts spend time reviewing charts and historical records. They search for repeating sequences and recurring intervals.
             </p>
-            <p className="font-bold text-[#48c9c0]">Some common observations include:</p>
+            <p className="font-bold text-[#111827]">Some common observations include:</p>
             <ul className="list-disc pl-5 space-y-1 text-gray-700">
               <li>Numbers repeating after fixed gaps</li>
               <li>Consecutive appearances</li>
@@ -684,7 +684,7 @@ export const CommonNumberPage: React.FC<CommonNumberPageProps> = ({
             <p>
               In reality, prediction analysis is about probabilities rather than certainty.
             </p>
-            <p className="font-bold text-[#48c9c0]">Common mistakes include:</p>
+            <p className="font-bold text-[#111827]">Common mistakes include:</p>
             <ul className="list-disc pl-5 space-y-1 text-gray-700">
               <li>Ignoring historical data</li>
               <li>Following rumors without analysis</li>
@@ -705,7 +705,7 @@ export const CommonNumberPage: React.FC<CommonNumberPageProps> = ({
             <p>
               A personal tracking system can help improve analysis skills. It does not need to be complicated.
             </p>
-            <p className="font-bold text-[#48c9c0]">Many enthusiasts use a notebook to record:</p>
+            <p className="font-bold text-[#111827]">Many enthusiasts use a notebook to record:</p>
             <ul className="list-disc pl-5 space-y-1 text-gray-700">
               <li>Daily results</li>
               <li>Common numbers</li>
@@ -787,7 +787,7 @@ export const CommonNumberPage: React.FC<CommonNumberPageProps> = ({
             <p>
               Many prediction methods organize numbers into groups. This makes large datasets easier to understand.
             </p>
-            <p className="font-bold text-[#48c9c0]">Common grouping methods include:</p>
+            <p className="font-bold text-[#111827]">Common grouping methods include:</p>
             <ul className="list-disc pl-5 space-y-1 text-gray-700">
               <li>Odd numbers</li>
               <li>Even numbers</li>
@@ -815,7 +815,7 @@ export const CommonNumberPage: React.FC<CommonNumberPageProps> = ({
             <p>
               Online charts, digital records, and forecasting tools allow users to review large amounts of information quickly.
             </p>
-            <p className="font-bold text-[#48c9c0]">Benefits of modern analysis tools include:</p>
+            <p className="font-bold text-[#111827]">Benefits of modern analysis tools include:</p>
             <ul className="list-disc pl-5 space-y-1 text-gray-700">
               <li>Faster trend detection</li>
               <li>Better record keeping</li>
@@ -858,7 +858,7 @@ export const CommonNumberPage: React.FC<CommonNumberPageProps> = ({
             <p>
               The future of forecasting may involve more advanced analytical methods.
             </p>
-            <p className="font-bold text-[#48c9c0]">As data collection improves, enthusiasts may gain access to:</p>
+            <p className="font-bold text-[#111827]">As data collection improves, enthusiasts may gain access to:</p>
             <ul className="list-disc pl-5 space-y-1 text-gray-700">
               <li>Larger historical databases</li>
               <li>Better trend analysis tools</li>
@@ -911,7 +911,7 @@ export const CommonNumberPage: React.FC<CommonNumberPageProps> = ({
                   >
                     <button
                       onClick={() => toggleFaq(index)}
-                      className="w-full text-left p-3.5 flex items-center justify-between gap-3 font-bold text-sm sm:text-base text-[#48c9c0] hover:bg-[#b8e8e3]/50 transition-colors cursor-pointer"
+                      className="w-full text-left p-3.5 flex items-center justify-between gap-3 font-bold text-sm sm:text-base text-[#111827] hover:bg-[#48c9c0]/50 transition-colors cursor-pointer"
                     >
                       <span>{faq.q}</span>
                       <span className="shrink-0 text-red-500">
@@ -995,6 +995,8 @@ export const CommonNumberPage: React.FC<CommonNumberPageProps> = ({
     </div>
   );
 };
+
+
 
 
 

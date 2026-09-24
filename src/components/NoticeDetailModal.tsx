@@ -20,11 +20,11 @@ export const NoticeDetailModal: React.FC<NoticeDetailModalProps> = ({ notice, on
         {/* Header */}
         <div className="flex items-start justify-between pb-3 border-b border-gray-100">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-[#b8e8e3] text-[#48c9c0] flex items-center justify-center">
+            <div className="w-8 h-8 rounded-lg bg-[#b8e8e3] text-[#111827] flex items-center justify-center">
               <Bell className="w-4 h-4" />
             </div>
             <div>
-              <span className="text-[11px] font-bold uppercase tracking-wider text-[#48c9c0] bg-[#b8e8e3] px-2 py-0.5 rounded-full border border-[#48c9c0]/60">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-[#111827] bg-[#b8e8e3] px-2 py-0.5 rounded-full border border-[#48c9c0]/60">
                 Official Notice
               </span>
               <p className="text-xs text-gray-500 font-medium flex items-center gap-1 mt-1">
@@ -43,14 +43,14 @@ export const NoticeDetailModal: React.FC<NoticeDetailModalProps> = ({ notice, on
 
         {/* Content */}
         <div className="py-4 overflow-y-auto space-y-3">
-          <h2 className="text-lg sm:text-xl font-black text-[#48c9c0] font-sans leading-snug">
+          <h2 className="text-lg sm:text-xl font-black text-[#111827] font-sans leading-snug">
             {notice.title}
           </h2>
           <div className="text-sm text-gray-700 leading-relaxed whitespace-pre-line bg-[#b8e8e3]/30 p-3.5 rounded-xl border border-[#48c9c0]">
             {notice.body}
           </div>
           <div className="flex items-center gap-2 text-xs text-gray-500 pt-2 border-t border-gray-100">
-            <ShieldCheck className="w-4 h-4 text-[#48c9c0]" />
+            <ShieldCheck className="w-4 h-4 text-[#111827]" />
             <span>Verified by Shillong Morning Teer Administrator</span>
           </div>
         </div>
@@ -68,6 +68,7 @@ export const NoticeDetailModal: React.FC<NoticeDetailModalProps> = ({ notice, on
     </div>
   );
 };
+
 
 
 
