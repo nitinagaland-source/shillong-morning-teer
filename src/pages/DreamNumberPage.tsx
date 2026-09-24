@@ -183,31 +183,39 @@ export const DreamNumberPage: React.FC<DreamNumberPageProps> = ({
         <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 tracking-tight">
           Shillong Morning Teer Dream Numbers
         </h1>
-
         {dailyDream && (
-          <section className="rounded-2xl border border-indigo-200 bg-indigo-50/70 p-4 sm:p-5">
-            <div className="flex items-center justify-between gap-3 mb-3">
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-wide text-indigo-700">Daily Dream Pick</p>
-                <h2 className="text-lg font-semibold text-gray-900">{dailyDream.symbol}</h2>
-              </div>
-              <span className="text-xs text-gray-500">{dailyDream.date}</span>
+          <section className="w-full">
+            <div className="text-center font-medium text-[18px] sm:text-[20px] text-black py-2">
+              {dailyDream.date}
             </div>
-            <div className="grid grid-cols-3 gap-2 text-center">
-              <div className="rounded-xl bg-white border border-indigo-100 p-3">
-                <div className="text-[11px] uppercase text-gray-500 mb-1">Direct</div>
-                <div className="font-semibold text-indigo-950">{dailyDream.direct_numbers.join(', ')}</div>
+
+            <div className="w-full overflow-hidden border border-black bg-white">
+              <div className="border-b border-black bg-[#eeeeee] py-1 text-center text-[18px] sm:text-[20px] font-normal leading-none">
+                SHILLONG
               </div>
-              <div className="rounded-xl bg-white border border-indigo-100 p-3">
-                <div className="text-[11px] uppercase text-gray-500 mb-1">House</div>
-                <div className="font-semibold text-indigo-950">{dailyDream.house_number}</div>
+
+              <div className="grid grid-cols-3 border-b border-black bg-[#48c9c0] text-center text-[16px] sm:text-[18px] font-normal leading-none">
+                <div className="py-1.5 border-r border-black">Direct</div>
+                <div className="py-1.5 border-r border-black">House</div>
+                <div className="py-1.5">Ending</div>
               </div>
-              <div className="rounded-xl bg-white border border-indigo-100 p-3">
-                <div className="text-[11px] uppercase text-gray-500 mb-1">Ending</div>
-                <div className="font-semibold text-indigo-950">{dailyDream.ending_number}</div>
+
+              <div className="grid grid-cols-3 bg-white text-center text-[17px] sm:text-[19px] font-normal leading-none">
+                <div className="py-1.5 border-r border-black">
+                  {dailyDream.direct_numbers.join(', ')}
+                </div>
+                <div className="py-1.5 border-r border-black">
+                  {dailyDream.house_number}
+                </div>
+                <div className="py-1.5">
+                  {dailyDream.ending_number}
+                </div>
               </div>
             </div>
-            <p className="mt-3 text-[11px] text-gray-500">Generated once per day at 12:00 AM IST and stored for the full day.</p>
+
+            <div className="mt-2 text-center text-[12px] text-gray-600">
+              Daily Dream Pick: {dailyDream.symbol}
+            </div>
           </section>
         )}
 
@@ -785,5 +793,6 @@ export const DreamNumberPage: React.FC<DreamNumberPageProps> = ({
     </div>
   );
 };
+
 
 
