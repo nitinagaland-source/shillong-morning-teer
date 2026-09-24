@@ -8,18 +8,19 @@ interface TopBarProps {
   isDrawerOpen?: boolean;
 }
 
-export const TopBar: React.FC<TopBarProps> = ({ settings, onOpenDrawer, isDrawerOpen }) => {
+export const TopBar: React.FC<TopBarProps> = ({ onOpenDrawer, isDrawerOpen }) => {
   return (
     <header
       id="top-bar-header"
       className="sticky top-0 z-40 w-full border-b border-black/10 shadow-xs"
       style={{ backgroundColor: '#b8e1ec' }}
     >
-      <div className="max-w-md mx-auto px-3 sm:px-4 h-[72px] sm:h-[78px] flex items-center justify-between">
+      <div className="max-w-md mx-auto px-3 h-[72px] sm:h-[78px] flex items-center justify-between gap-2">
+
         <a
           href="/"
           id="top-bar-logo-link"
-          className="min-w-0 flex items-center gap-2.5 text-black no-underline select-none"
+          className="min-w-0 flex items-center text-black no-underline select-none"
           onClick={(e) => {
             if (window.location.pathname === '/') {
               e.preventDefault();
@@ -27,37 +28,62 @@ export const TopBar: React.FC<TopBarProps> = ({ settings, onOpenDrawer, isDrawer
             }
           }}
         >
-          <div className="w-12 h-12 sm:w-14 sm:h-14 shrink-0" aria-hidden="true">
-            <svg viewBox="0 0 100 100" className="w-full h-full" fill="none">
-              <circle cx="44" cy="55" r="30" stroke="#000" strokeWidth="8"/>
-              <circle cx="44" cy="55" r="18" stroke="#000" strokeWidth="7"/>
-              <circle cx="44" cy="55" r="7" fill="#000"/>
-              <path d="M44 55 L76 23" stroke="#000" strokeWidth="8" strokeLinecap="round"/>
-              <path d="M72 17 L88 15 L85 31" stroke="#000" strokeWidth="8" strokeLinecap="round" strokeLinejoin="round"/>
-              <path d="M75 27 L87 39" stroke="#000" strokeWidth="7" strokeLinecap="round"/>
+          <div className="w-[52px] h-[52px] shrink-0 mr-1" aria-hidden="true">
+            <svg
+              viewBox="0 0 100 100"
+              className="w-full h-full"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <circle cx="43" cy="58" r="31" fill="none" stroke="#050505" strokeWidth="9" />
+              <circle cx="43" cy="58" r="20" fill="none" stroke="#050505" strokeWidth="8" />
+              <circle cx="43" cy="58" r="8" fill="#050505" />
+
+              <path
+                d="M43 58 L75 26"
+                stroke="#050505"
+                strokeWidth="8"
+                strokeLinecap="round"
+              />
+
+              <path
+                d="M69 19 L88 15 L84 34 L76 26 Z"
+                fill="#050505"
+              />
+
+              <path
+                d="M74 29 L87 42"
+                stroke="#050505"
+                strokeWidth="7"
+                strokeLinecap="round"
+              />
             </svg>
           </div>
 
-          <div className="min-w-0 flex items-center gap-2">
+          <div className="min-w-0 flex items-center">
             <span
-          id="site-title-text"
-          className="text-[27px] sm:text-[32px] leading-none text-black whitespace-nowrap"
-          style={{
-            fontFamily: "\"Arial Narrow\", \"Roboto Condensed\", Arial, sans-serif",
-            fontWeight: 800,
-            letterSpacing: "-1.2px",
-            transform: "scaleX(0.76)",
-            transformOrigin: "left center"
-          }}
-        >
-          Shillongmorningteer
-        </span>
-            <span className="inline-flex items-center gap-1 shrink-0" aria-label="Live">
+              id="site-title-text"
+              className="whitespace-nowrap text-[26px] sm:text-[30px] leading-none text-black"
+              style={{
+                fontFamily: 'Impact, Haettenschweiler, "Arial Narrow Bold", "Arial Narrow", sans-serif',
+                fontWeight: 900,
+                letterSpacing: '-0.7px'
+              }}
+            >
+              Shillongmorningteer
+            </span>
+
+            <span
+              className="ml-2 inline-flex items-center gap-1 shrink-0"
+              aria-label="Live"
+            >
               <span className="relative flex h-3.5 w-3.5">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-500 opacity-75"></span>
                 <span className="relative inline-flex h-3.5 w-3.5 rounded-full bg-red-600"></span>
               </span>
-              <span className="text-[12px] sm:text-[14px] font-black tracking-wide text-red-700">LIVE</span>
+
+              <span className="text-[12px] sm:text-[14px] font-black leading-none text-red-700">
+                LIVE
+              </span>
             </span>
           </div>
         </a>
@@ -66,7 +92,7 @@ export const TopBar: React.FC<TopBarProps> = ({ settings, onOpenDrawer, isDrawer
           id="hamburger-menu-btn"
           onClick={onOpenDrawer}
           aria-label="Toggle Navigation Drawer"
-          className="ml-2 w-11 h-11 sm:w-13 sm:h-13 shrink-0 flex items-center justify-center rounded-xl border border-black/30 bg-white/10 hover:bg-white/25 active:bg-white/35 transition-all cursor-pointer focus:outline-hidden"
+          className="ml-auto w-11 h-11 sm:w-13 sm:h-13 shrink-0 flex items-center justify-center rounded-xl border border-black/30 bg-white/10 hover:bg-white/25 active:bg-white/35 transition-all cursor-pointer focus:outline-hidden"
         >
           {isDrawerOpen ? (
             <X className="w-7 h-7 text-black" strokeWidth={2.2} />
@@ -74,11 +100,8 @@ export const TopBar: React.FC<TopBarProps> = ({ settings, onOpenDrawer, isDrawer
             <Menu className="w-7 h-7 text-black" strokeWidth={2.2} />
           )}
         </button>
+
       </div>
     </header>
   );
 };
-
-
-
-
