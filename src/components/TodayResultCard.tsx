@@ -28,7 +28,7 @@ export const TodayResultCard: React.FC<TodayResultCardProps> = ({ result, settin
         <div id="game-title-bar" className="w-full bg-[#eef1f5] py-3 sm:py-3.5 px-4 text-center border-b-2 border-black">
           <h1 className="text-[17px] sm:text-[20px] font-extrabold tracking-wide text-black uppercase font-sans">
             {settings.game_name || 'SHILLONG MORNING TEER'}
-<span className="ml-2 inline-flex items-center gap-1 align-middle">
+<span className="ml-1 inline-flex items-center gap-0.5 align-middle">
   <span className="relative inline-flex h-2.5 w-2.5">
     <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-500 opacity-75"></span>
     <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-red-600"></span>
@@ -63,6 +63,7 @@ export const TodayResultCard: React.FC<TodayResultCardProps> = ({ result, settin
     </section>
   );
 };
+
 
 
 
