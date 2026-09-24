@@ -157,19 +157,19 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
     <div className="w-full min-h-screen bg-white text-gray-800">
       {/* 1. Top Bar with Home Back Button */}
       <div
-        className="sticky top-0 z-30 px-4 py-3 border-b border-indigo-950/10 shadow-xs flex items-center justify-between"
+        className="sticky top-0 z-30 px-4 py-3 border-b border-[#48c9c0]/10 shadow-xs flex items-center justify-between"
         style={{ backgroundColor: settings.top_bar_bg_color || '#48c9c0' }}
       >
         <button
           onClick={onBack}
           id="btn-back-home"
-          className="flex items-center gap-1.5 text-indigo-950 font-medium text-sm hover:opacity-80 cursor-pointer"
+          className="flex items-center gap-1.5 text-[#48c9c0] font-medium text-sm hover:opacity-80 cursor-pointer"
         >
           <ArrowLeft className="w-4 h-4" />
           <span>Home</span>
         </button>
 
-        <h1 className="text-base sm:text-lg font-medium text-indigo-950 tracking-tight">
+        <h1 className="text-base sm:text-lg font-medium text-[#48c9c0] tracking-tight">
           Shillong Morning Teer
         </h1>
 
@@ -188,7 +188,7 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
           The{' '}
           <button
             onClick={() => window.scrollTo({ top: 400, behavior: 'smooth' })}
-            className="text-blue-700 hover:underline font-medium cursor-pointer"
+            className="text-[#48c9c0] hover:underline font-medium cursor-pointer"
           >
             Shillong Morning Teer Previous Result
           </button>{' '}
@@ -256,7 +256,7 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
             <g transform="translate(160, 190)">
               <circle cx="0" cy="0" r="115" fill="#1e293b" stroke="#facc15" strokeWidth="4" />
               <circle cx="0" cy="0" r="95" fill="#0f172a" stroke="#ffffff" strokeWidth="2.5" />
-              <circle cx="0" cy="0" r="75" fill="#0284c7" stroke="#ffffff" strokeWidth="2" />
+              <circle cx="0" cy="0" r="75" fill="#48c9c0" stroke="#ffffff" strokeWidth="2" />
               <circle cx="0" cy="0" r="50" fill="#dc2626" stroke="#ffffff" strokeWidth="2" />
               <circle cx="0" cy="0" r="26" fill="#facc15" stroke="#ffffff" strokeWidth="2" />
               <circle cx="0" cy="0" r="8" fill="#ca8a04" />
@@ -275,8 +275,8 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
               <path d="M10,-35 L45,-30 L-25,-15" stroke="#fef08a" strokeWidth="4" strokeLinecap="round" />
               <path d="M-40,-85 C-20,-30 -20,25 -40,80" stroke="#ca8a04" strokeWidth="5" fill="none" strokeLinecap="round" />
               <line x1="-40" y1="-85" x2="-40" y2="80" stroke="#f8fafc" strokeWidth="1.5" strokeDasharray="3 2" />
-              <line x1="45" y1="-30" x2="-70" y2="-30" stroke="#38bdf8" strokeWidth="3" />
-              <polygon points="-70,-30 -60,-35 -60,-25" fill="#38bdf8" />
+              <line x1="45" y1="-30" x2="-70" y2="-30" stroke="#48c9c0" strokeWidth="3" />
+              <polygon points="-70,-30 -60,-35 -60,-25" fill="#48c9c0" />
             </g>
 
             
@@ -379,7 +379,7 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
                 value={searchTerm}
                 onChange={(e) => { setSearchTerm(e.target.value); setCurrentPage(1); }}
                 placeholder="Search date (e.g. 22/09) or number..."
-                className="w-full pl-9 pr-7 py-2 text-xs sm:text-sm border border-gray-300 rounded-md focus:outline-hidden focus:ring-1 focus:ring-blue-500 focus:border-blue-500 bg-white"
+                className="w-full pl-9 pr-7 py-2 text-xs sm:text-sm border border-gray-300 rounded-md focus:outline-hidden focus:ring-1 focus:ring-[#48c9c0] focus:border-[#48c9c0] bg-white"
               />
               {searchTerm && (
                 <button
@@ -584,14 +584,14 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
               You can also examine our calculated daily{' '}
               <button
                 onClick={() => onNavigate?.('/common-number')}
-                className="text-blue-700 hover:underline font-medium cursor-pointer"
+                className="text-[#48c9c0] hover:underline font-medium cursor-pointer"
               >
                 Shillong Morning Teer Common Numbers
               </button>{' '}
               and explore traditional{' '}
               <button
                 onClick={() => onNavigate?.('/dream-number')}
-                className="text-blue-700 hover:underline font-medium cursor-pointer"
+                className="text-[#48c9c0] hover:underline font-medium cursor-pointer"
               >
                 Shillong Morning Teer Dream Numbers
               </button>{' '}
@@ -746,6 +746,7 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
     </div>
   );
 };
+
 
 
 

@@ -110,7 +110,7 @@ export const HomeEditorialArticle: React.FC = () => {
           </h3>
           <div className="overflow-x-auto border border-gray-200 rounded-xl overflow-hidden shadow-2xs">
             <table className="w-full text-left text-xs sm:text-sm border-collapse">
-              <thead className="bg-linear-to-r from-[#48c9c0] via-[#48c9c0] to-[#48c9c0] text-white font-medium border-b border-indigo-700">
+              <thead className="bg-linear-to-r from-[#48c9c0] via-[#48c9c0] to-[#48c9c0] text-white font-medium border-b border-[#48c9c0]">
                 <tr>
                   <th className="p-2.5 sm:p-3 border-r border-white/20 font-medium">Topic</th>
                   <th className="p-2.5 sm:p-3 font-medium">Description</th>
@@ -237,7 +237,7 @@ export const HomeEditorialArticle: React.FC = () => {
 
           <div className="overflow-x-auto my-2 border border-gray-200 rounded-xl overflow-hidden shadow-2xs">
             <table className="w-full text-left text-xs sm:text-sm border-collapse">
-              <thead className="bg-linear-to-r from-[#48c9c0] via-[#48c9c0] to-[#48c9c0] text-white font-medium border-b border-indigo-700">
+              <thead className="bg-linear-to-r from-[#48c9c0] via-[#48c9c0] to-[#48c9c0] text-white font-medium border-b border-[#48c9c0]">
                 <tr>
                   <th className="p-2.5 sm:p-3 border-r border-white/20 font-medium">Activity</th>
                   <th className="p-2.5 sm:p-3 font-medium">Purpose</th>
@@ -492,19 +492,19 @@ export const HomeEditorialArticle: React.FC = () => {
               return (
                 <div
                   key={idx}
-                  className="bg-white rounded-xl border border-gray-200 shadow-2xs hover:border-blue-400 transition-all overflow-hidden group"
+                  className="bg-white rounded-xl border border-gray-200 shadow-2xs hover:border-[#48c9c0] transition-all overflow-hidden group"
                 >
                   <button
                     onClick={() => toggleFaq(idx)}
                     className="w-full flex items-center justify-between p-3.5 text-left focus:outline-hidden cursor-pointer gap-3 bg-white hover:bg-gray-50/60 transition-colors"
                   >
-                    <span className="font-normal text-sm sm:text-[15px] text-gray-900 group-hover:text-blue-600 leading-snug">
+                    <span className="font-normal text-sm sm:text-[15px] text-gray-900 group-hover:text-[#48c9c0] leading-snug">
                       {faq.q}
                     </span>
                     {isOpen ? (
-                      <ChevronUp className="w-4 h-4 text-blue-600 shrink-0 transition-transform" />
+                      <ChevronUp className="w-4 h-4 text-[#48c9c0] shrink-0 transition-transform" />
                     ) : (
-                      <ChevronDown className="w-4 h-4 text-gray-400 group-hover:text-blue-600 shrink-0 transition-transform" />
+                      <ChevronDown className="w-4 h-4 text-gray-400 group-hover:text-[#48c9c0] shrink-0 transition-transform" />
                     )}
                   </button>
 
@@ -522,5 +522,6 @@ export const HomeEditorialArticle: React.FC = () => {
     </div>
   );
 };
+
 
 

@@ -6,7 +6,7 @@ export const initialSiteSettings: SiteSettings = {
   site_name: 'Shillongmorningteer',
   game_name: 'SHILLONG MORNING TEER',
   logo_url: '', // will render SVG target icon if empty or custom image if provided
-  top_bar_bg_color: '#3b82f6', // Aesthetic Blue palette matching user preference
+  top_bar_bg_color: '#48c9c0', // Aesthetic Blue palette matching user preference
   announcement_ticker: 'Live Shillong Morning Teer archery figures updated directly from ground archers. F/R 10:30 AM & S/R 11:30 AM.',
   updated_at: new Date().toISOString(),
 };
@@ -470,4 +470,5 @@ export const initialNotices: NoticeEntry[] = [
     created_at: '2026-09-10T12:00:00Z',
   },
 ];
+
 

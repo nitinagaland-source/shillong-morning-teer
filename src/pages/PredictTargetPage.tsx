@@ -69,18 +69,18 @@ export const PredictTargetPage: React.FC<PredictTargetPageProps> = ({
     <div className="w-full min-h-screen bg-gray-50 pb-16">
       {/* Top Bar Header */}
       <div
-        className="sticky top-0 z-30 px-4 py-3 border-b border-indigo-950/10 shadow-xs flex items-center justify-between"
+        className="sticky top-0 z-30 px-4 py-3 border-b border-[#48c9c0]/10 shadow-xs flex items-center justify-between"
         style={{ backgroundColor: settings.top_bar_bg_color || '#48c9c0' }}
       >
         <button
           onClick={onBack}
-          className="flex items-center gap-1.5 text-indigo-950 font-normal text-sm hover:opacity-80 cursor-pointer"
+          className="flex items-center gap-1.5 text-[#48c9c0] font-normal text-sm hover:opacity-80 cursor-pointer"
         >
           <ArrowLeft className="w-5 h-5" />
           <span>Home</span>
         </button>
 
-        <h1 className="text-base sm:text-lg font-medium text-indigo-950 font-sans uppercase tracking-tight">
+        <h1 className="text-base sm:text-lg font-medium text-[#48c9c0] font-sans uppercase tracking-tight">
           Predict Target
         </h1>
 
@@ -264,6 +264,7 @@ export const PredictTargetPage: React.FC<PredictTargetPageProps> = ({
     </div>
   );
 };
+
 
 
 

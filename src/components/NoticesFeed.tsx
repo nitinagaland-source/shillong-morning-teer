@@ -26,7 +26,7 @@ export const NoticesFeed: React.FC<NoticesFeedProps> = ({
         <button
           id="notices-view-all-btn"
           onClick={onViewAll}
-          className="text-sm font-normal text-blue-600 hover:text-blue-800 cursor-pointer hover:underline flex items-center gap-1 focus:outline-hidden"
+          className="text-sm font-normal text-[#48c9c0] hover:text-[#48c9c0] cursor-pointer hover:underline flex items-center gap-1 focus:outline-hidden"
         >
           View all
           <ChevronRight className="w-4 h-4" />
@@ -40,10 +40,10 @@ export const NoticesFeed: React.FC<NoticesFeedProps> = ({
             key={notice.id}
             id={`notice-item-${notice.id}`}
             onClick={() => onSelectNotice(notice)}
-            className="w-full bg-white rounded-xl p-4 border border-gray-200 hover:border-blue-300 transition-all cursor-pointer shadow-2xs hover:shadow-xs active:bg-gray-50/80 group"
+            className="w-full bg-white rounded-xl p-4 border border-gray-200 hover:border-[#48c9c0] transition-all cursor-pointer shadow-2xs hover:shadow-xs active:bg-gray-50/80 group"
           >
             <div className="flex items-start justify-between gap-2">
-              <h3 className="text-sm sm:text-base font-medium text-gray-900 group-hover:text-blue-600 transition-colors leading-snug">
+              <h3 className="text-sm sm:text-base font-medium text-gray-900 group-hover:text-[#48c9c0] transition-colors leading-snug">
                 {notice.title}
               </h3>
               {notice.priority === 'high' && (
@@ -61,7 +61,7 @@ export const NoticesFeed: React.FC<NoticesFeedProps> = ({
               {notice.body}
             </p>
 
-            <div className="mt-2.5 flex items-center gap-1 text-xs font-normal text-blue-600">
+            <div className="mt-2.5 flex items-center gap-1 text-xs font-normal text-[#48c9c0]">
               <span>Read notice</span>
               <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
             </div>
@@ -77,5 +77,6 @@ export const NoticesFeed: React.FC<NoticesFeedProps> = ({
     </section>
   );
 };
+
 
 

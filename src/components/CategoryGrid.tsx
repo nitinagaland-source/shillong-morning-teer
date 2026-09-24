@@ -254,3 +254,4 @@ export const CategoryGrid: React.FC<CategoryGridProps> = ({ onNavigate }) => {
 };
 
 
+

@@ -82,10 +82,10 @@ export const NavDrawer: React.FC<NavDrawerProps> = ({
         </div>
 
         {/* Timings Quick Banner */}
-        <div className="bg-[#b8e8e3]/60 border-b border-indigo-100 p-3 flex items-center gap-2.5 text-xs text-slate-700">
-          <Clock className="w-4 h-4 text-indigo-600 shrink-0" />
+        <div className="bg-[#b8e8e3]/60 border-b border-[#48c9c0] p-3 flex items-center gap-2.5 text-xs text-slate-700">
+          <Clock className="w-4 h-4 text-[#48c9c0] shrink-0" />
           <div>
-            <span className="font-medium text-indigo-950">Game Timings:</span> F/R 10:30 AM | S/R 11:30 AM
+            <span className="font-medium text-[#48c9c0]">Game Timings:</span> F/R 10:30 AM | S/R 11:30 AM
           </div>
         </div>
 
@@ -103,7 +103,7 @@ export const NavDrawer: React.FC<NavDrawerProps> = ({
                 className="w-full flex items-center justify-between p-3 rounded-xl hover:bg-[#b8e8e3]/60 active:bg-[#b8e8e3]/70 transition-colors text-left font-normal text-sm text-slate-800 cursor-pointer group"
               >
                 <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-[#b8e8e3] group-hover:bg-white flex items-center justify-center text-indigo-700 group-hover:text-indigo-900 border border-indigo-100 transition-colors">
+                  <div className="w-8 h-8 rounded-lg bg-[#b8e8e3] group-hover:bg-white flex items-center justify-center text-[#48c9c0] group-hover:text-[#48c9c0] border border-[#48c9c0] transition-colors">
                     <Icon className="w-4 h-4" />
                   </div>
                   <span className="font-normal text-slate-900">{item.label}</span>
@@ -114,7 +114,7 @@ export const NavDrawer: React.FC<NavDrawerProps> = ({
                     <span
                       className={`text-[10px] font-normal px-2 py-0.5 rounded-full ${
                         item.badge === 'Live'
-                          ? 'bg-[#b8e8e3] text-blue-800'
+                          ? 'bg-[#b8e8e3] text-[#48c9c0]'
                           : item.badge === 'Daily'
                           ? 'bg-amber-100 text-amber-800'
                           : item.badge === 'Archive'
@@ -146,5 +146,6 @@ export const NavDrawer: React.FC<NavDrawerProps> = ({
     </div>
   );
 };
+
 
 

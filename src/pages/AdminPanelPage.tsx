@@ -502,16 +502,16 @@ export const AdminPanelPage: React.FC<AdminPanelPageProps> = ({
         <div className="w-full max-w-sm bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden">
           {/* Header */}
           <div
-            className="p-5 text-center border-b border-indigo-950/10"
+            className="p-5 text-center border-b border-[#48c9c0]/10"
             style={{ backgroundColor: settings.top_bar_bg_color || '#48c9c0' }}
           >
-            <div className="w-12 h-12 bg-white rounded-full mx-auto flex items-center justify-center border-2 border-indigo-950 mb-2 shadow-xs">
-              <Shield className="w-6 h-6 text-indigo-950" />
+            <div className="w-12 h-12 bg-white rounded-full mx-auto flex items-center justify-center border-2 border-[#48c9c0] mb-2 shadow-xs">
+              <Shield className="w-6 h-6 text-[#48c9c0]" />
             </div>
-            <h1 className="text-xl font-medium text-indigo-950 font-sans">
+            <h1 className="text-xl font-medium text-[#48c9c0] font-sans">
               Admin Authentication
             </h1>
-            <p className="text-xs font-semibold text-indigo-900">
+            <p className="text-xs font-semibold text-[#48c9c0]">
               Shillong Morning Teer Content Management
             </p>
           </div>
@@ -535,7 +535,7 @@ export const AdminPanelPage: React.FC<AdminPanelPageProps> = ({
                 value={adminEmail}
                 onChange={(e) => setAdminEmail(e.target.value)}
                 placeholder="admin@example.com"
-                className="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-300 rounded-xl text-sm focus:outline-hidden focus:ring-2 focus:ring-sky-500 focus:bg-white"
+                className="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-300 rounded-xl text-sm focus:outline-hidden focus:ring-2 focus:ring-[#48c9c0] focus:bg-white"
               />
             </div>
 
@@ -550,7 +550,7 @@ export const AdminPanelPage: React.FC<AdminPanelPageProps> = ({
                   value={adminPassword}
                   onChange={(e) => setAdminPassword(e.target.value)}
                   placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢"
-                  className="w-full px-3.5 py-2.5 pr-11 bg-gray-50 border border-gray-300 rounded-xl text-sm focus:outline-hidden focus:ring-2 focus:ring-sky-500 focus:bg-white"
+                  className="w-full px-3.5 py-2.5 pr-11 bg-gray-50 border border-gray-300 rounded-xl text-sm focus:outline-hidden focus:ring-2 focus:ring-[#48c9c0] focus:bg-white"
                 />
                 <button
                   type="button"
@@ -609,7 +609,7 @@ export const AdminPanelPage: React.FC<AdminPanelPageProps> = ({
             >
               <ArrowLeft className="w-4 h-4" />
             </button>
-            <Shield className="w-5 h-5 text-indigo-400" />
+            <Shield className="w-5 h-5 text-[#48c9c0]" />
             <span className="font-medium text-sm sm:text-base tracking-tight font-sans">Admin Manager</span>
           </div>
           <div className="flex items-center gap-2">
@@ -706,7 +706,7 @@ export const AdminPanelPage: React.FC<AdminPanelPageProps> = ({
                   Updates are saved to Firebase and reflected on the public website automatically.
                 </p>
               </div>
-              <span className="px-2.5 py-1 bg-[#b8e8e3] text-indigo-800 rounded-full text-xs font-medium flex items-center gap-1">
+              <span className="px-2.5 py-1 bg-[#b8e8e3] text-[#48c9c0] rounded-full text-xs font-medium flex items-center gap-1">
                 <span className="w-2 h-2 rounded-full bg-[#48c9c0] animate-pulse"></span>
                 Live Feed
               </span>
@@ -728,8 +728,8 @@ export const AdminPanelPage: React.FC<AdminPanelPageProps> = ({
               </div>
 
               {/* F/R Configuration */}
-              <div className="bg-[#b8e8e3]/60 p-4 rounded-xl border border-indigo-200 space-y-3">
-                <span className="text-xs font-medium uppercase text-indigo-900 tracking-wider">
+              <div className="bg-[#b8e8e3]/60 p-4 rounded-xl border border-[#48c9c0] space-y-3">
+                <span className="text-xs font-medium uppercase text-[#48c9c0] tracking-wider">
                   First Round (F/R)
                 </span>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -754,7 +754,7 @@ export const AdminPanelPage: React.FC<AdminPanelPageProps> = ({
                     />
                   </div>
                   <div>
-                    <label className="block text-[11px] font-bold text-indigo-950 mb-1">
+                    <label className="block text-[11px] font-bold text-[#48c9c0] mb-1">
                       F/R Number (Live Result)
                     </label>
                     <input
@@ -763,15 +763,15 @@ export const AdminPanelPage: React.FC<AdminPanelPageProps> = ({
                       value={frNumber}
                       onChange={(e) => setFrNumber(e.target.value)}
                       placeholder="76"
-                      className="w-full px-3 py-1.5 bg-white border-2 border-indigo-500 rounded-lg text-lg font-medium text-center tabular-nums"
+                      className="w-full px-3 py-1.5 bg-white border-2 border-[#48c9c0] rounded-lg text-lg font-medium text-center tabular-nums"
                     />
                   </div>
                 </div>
               </div>
 
               {/* S/R Configuration */}
-              <div className="bg-[#b8e8e3]/60 p-4 rounded-xl border border-indigo-200 space-y-3">
-                <span className="text-xs font-medium uppercase text-indigo-900 tracking-wider">
+              <div className="bg-[#b8e8e3]/60 p-4 rounded-xl border border-[#48c9c0] space-y-3">
+                <span className="text-xs font-medium uppercase text-[#48c9c0] tracking-wider">
                   Second Round (S/R)
                 </span>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -796,7 +796,7 @@ export const AdminPanelPage: React.FC<AdminPanelPageProps> = ({
                     />
                   </div>
                   <div>
-                    <label className="block text-[11px] font-bold text-indigo-950 mb-1">
+                    <label className="block text-[11px] font-bold text-[#48c9c0] mb-1">
                       S/R Number (Live Result)
                     </label>
                     <input
@@ -805,7 +805,7 @@ export const AdminPanelPage: React.FC<AdminPanelPageProps> = ({
                       value={srNumber}
                       onChange={(e) => setSrNumber(e.target.value)}
                       placeholder="44"
-                      className="w-full px-3 py-1.5 bg-white border-2 border-indigo-500 rounded-lg text-lg font-medium text-center tabular-nums"
+                      className="w-full px-3 py-1.5 bg-white border-2 border-[#48c9c0] rounded-lg text-lg font-medium text-center tabular-nums"
                     />
                   </div>
                 </div>
@@ -886,7 +886,7 @@ export const AdminPanelPage: React.FC<AdminPanelPageProps> = ({
                     {[
                       { name: 'Original Light Teal', color: '#96d8ea' },
                       { name: 'Emerald Mint', color: '#6ee7b7' },
-                      { name: 'Sky Cerulean', color: '#7dd3fc' },
+                      { name: 'Sky Cerulean', color: '#48c9c0' },
                       { name: 'Clean White', color: '#ffffff' },
                       { name: 'Sunset Amber', color: '#fde68a' },
                     ].map((preset) => (
@@ -914,11 +914,11 @@ export const AdminPanelPage: React.FC<AdminPanelPageProps> = ({
                 >
                   <div className="flex items-center gap-2">
                     <span className="text-xl">ðŸŽ¯</span>
-                    <span className="font-medium text-indigo-950 font-sans text-base">
+                    <span className="font-medium text-[#48c9c0] font-sans text-base">
                       {siteName || 'Shillongmorningteer'}
                     </span>
                   </div>
-                  <div className="w-8 h-8 rounded border border-indigo-950/30 flex items-center justify-center bg-white/20">
+                  <div className="w-8 h-8 rounded border border-[#48c9c0]/30 flex items-center justify-center bg-white/20">
                     <span className="text-xs font-medium">â‰¡</span>
                   </div>
                 </div>
@@ -1213,7 +1213,7 @@ export const AdminPanelPage: React.FC<AdminPanelPageProps> = ({
                           <span className="text-xs font-medium text-gray-900 font-sans">
                             {item.keyword}
                           </span>
-                          <span className="text-xs font-mono font-bold bg-sky-50 text-sky-800 px-2 py-0.5 rounded border border-sky-200">
+                          <span className="text-xs font-mono font-bold bg-[#48c9c0] text-[#48c9c0] px-2 py-0.5 rounded border border-[#48c9c0]">
                             {item.number}
                           </span>
                         </div>
@@ -1229,7 +1229,7 @@ export const AdminPanelPage: React.FC<AdminPanelPageProps> = ({
                             setDnDesc(item.description);
                             window.scrollTo({ top: 120, behavior: 'smooth' });
                           }}
-                          className="p-1.5 text-gray-400 hover:text-sky-600 rounded cursor-pointer"
+                          className="p-1.5 text-gray-400 hover:text-[#48c9c0] rounded cursor-pointer"
                         >
                           <Edit2 className="w-3.5 h-3.5" />
                         </button>
@@ -1438,5 +1438,6 @@ export const AdminPanelPage: React.FC<AdminPanelPageProps> = ({
     </div>
   );
 };
+
 
 
