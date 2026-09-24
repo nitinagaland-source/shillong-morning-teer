@@ -313,27 +313,7 @@ export const DreamNumberPage: React.FC<DreamNumberPageProps> = ({
               <polygon points="-70,-30 -60,-35 -60,-25" fill="#38bdf8" />
             </g>
 
-            {/* Floating Lucky Number Bubbles matching screenshot */}
-            {/* Bubble 27 */}
-            <g transform="translate(320, 80)">
-              <circle cx="0" cy="0" r="26" fill="#0f172a" stroke="#38bdf8" strokeWidth="2.5" filter="url(#softGlow)" />
-              <text x="0" y="8" fill="#ffffff" fontSize="22" fontWeight="bold" textAnchor="middle" fontFamily="sans-serif">27</text>
-            </g>
-            {/* Bubble 45 */}
-            <g transform="translate(620, 75)">
-              <circle cx="0" cy="0" r="26" fill="#0f172a" stroke="#fbbf24" strokeWidth="2.5" filter="url(#softGlow)" />
-              <text x="0" y="8" fill="#ffffff" fontSize="22" fontWeight="bold" textAnchor="middle" fontFamily="sans-serif">45</text>
-            </g>
-            {/* Bubble 68 */}
-            <g transform="translate(290, 290)">
-              <circle cx="0" cy="0" r="26" fill="#0f172a" stroke="#34d399" strokeWidth="2.5" filter="url(#softGlow)" />
-              <text x="0" y="8" fill="#ffffff" fontSize="22" fontWeight="bold" textAnchor="middle" fontFamily="sans-serif">68</text>
-            </g>
-            {/* Bubble 97 */}
-            <g transform="translate(630, 295)">
-              <circle cx="0" cy="0" r="26" fill="#0f172a" stroke="#f472b6" strokeWidth="2.5" filter="url(#softGlow)" />
-              <text x="0" y="8" fill="#ffffff" fontSize="22" fontWeight="bold" textAnchor="middle" fontFamily="sans-serif">97</text>
-            </g>
+            {/* Floating Lucky Number Bubbles matching screenshot */}`r`n`r`n            
 
             {/* Laurel Leaves around Center */}
             <g opacity="0.6" stroke="#fbbf24" strokeWidth="2" fill="none">
@@ -805,4 +785,5 @@ export const DreamNumberPage: React.FC<DreamNumberPageProps> = ({
     </div>
   );
 };
+
 
