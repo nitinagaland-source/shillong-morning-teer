@@ -12,8 +12,8 @@ export const TodayResultCard: React.FC<TodayResultCardProps> = ({ result, settin
   const todayIST = getTodayISTDateString();
   const isCurrentDay = !result.date || result.date === todayIST;
   const isAwaiting = result.status === 'awaiting';
-  const round1Number = isCurrentDay && !isAwaiting ? (result.round_1_number?.trim() || 'X') : 'X';
-  const round2Number = isCurrentDay && !isAwaiting ? (result.round_2_number?.trim() || 'X') : 'X';
+  const round1Number = isCurrentDay && !isAwaiting ? (result.round_1_number?.trim() || 'XX') : 'XX';
+  const round2Number = isCurrentDay && !isAwaiting ? (result.round_2_number?.trim() || 'XX') : 'XX';
   const displayDate = isCurrentDay ? (result.date || todayIST) : todayIST;
 
   return (
@@ -28,6 +28,13 @@ export const TodayResultCard: React.FC<TodayResultCardProps> = ({ result, settin
         <div id="game-title-bar" className="w-full bg-[#eef1f5] py-3 sm:py-3.5 px-4 text-center border-b-2 border-black">
           <h1 className="text-[17px] sm:text-[20px] font-extrabold tracking-wide text-black uppercase font-sans">
             {settings.game_name || 'SHILLONG MORNING TEER'}
+<span className="ml-2 inline-flex items-center gap-1 align-middle">
+  <span className="relative inline-flex h-2.5 w-2.5">
+    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-500 opacity-75"></span>
+    <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-red-600"></span>
+  </span>
+  <span className="text-[10px] sm:text-[11px] font-black text-red-700">LIVE</span>
+</span>
           </h1>
         </div>
 
@@ -44,17 +51,18 @@ export const TodayResultCard: React.FC<TodayResultCardProps> = ({ result, settin
           </div>
         </div>
 
-        <div className="grid grid-cols-2 text-center bg-white min-h-[58px] sm:min-h-[64px]">
+        <div className="grid grid-cols-2 text-center bg-white min-h-[50px] sm:min-h-[56px]">
           <div id="fr-number-col" className="px-2 border-r-2 border-black flex items-center justify-center">
-            <span className="text-[39px] sm:text-[46px] leading-none font-extrabold text-black tabular-nums font-sans">{round1Number}</span>
+            <span className="text-[32px] sm:text-[38px] leading-none font-extrabold text-black tabular-nums font-sans">{round1Number}</span>
           </div>
           <div id="sr-number-col" className="px-2 flex items-center justify-center">
-            <span className="text-[39px] sm:text-[46px] leading-none font-extrabold text-black tabular-nums font-sans">{round2Number}</span>
+            <span className="text-[32px] sm:text-[38px] leading-none font-extrabold text-black tabular-nums font-sans">{round2Number}</span>
           </div>
         </div>
       </div>
     </section>
   );
 };
+
 
 
