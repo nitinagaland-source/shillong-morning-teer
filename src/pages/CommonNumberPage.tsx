@@ -135,8 +135,6 @@ export const CommonNumberPage: React.FC<CommonNumberPageProps> = ({
         </button>
 
         <div className="flex items-center gap-2">
-          <div className="w-7 h-7 rounded-full border-2 border-[#48c9c0] flex items-center justify-center bg-white shadow-2xs">
-            </div>
           <span className="text-base sm:text-lg font-medium text-[#111827] font-sans uppercase tracking-tight">
             {settings.site_name || 'Shillongmorningteer'}
           </span>
@@ -986,6 +984,7 @@ export const CommonNumberPage: React.FC<CommonNumberPageProps> = ({
     </div>
   );
 };
+
 
 
 
