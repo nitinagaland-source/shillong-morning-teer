@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { TeerResult, SiteSettings } from '../types';
 import { getTodayISTDateString } from '../lib/dateUtils';
 
@@ -44,7 +44,7 @@ export const TodayResultCard: React.FC<TodayResultCardProps> = ({ result, settin
           </div>
         </div>
 
-        <div className="grid grid-cols-2 text-center bg-white min-h-[102px] sm:min-h-[112px]">
+        <div className="grid grid-cols-2 text-center bg-white min-h-[76px] sm:min-h-[84px]">
           <div id="fr-number-col" className="px-2 border-r-2 border-black flex items-center justify-center">
             <span className="text-[39px] sm:text-[46px] leading-none font-extrabold text-black tabular-nums font-sans">{round1Number}</span>
           </div>
@@ -56,3 +56,4 @@ export const TodayResultCard: React.FC<TodayResultCardProps> = ({ result, settin
     </section>
   );
 };
+

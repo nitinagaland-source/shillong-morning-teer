@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+﻿import React, { useState, useMemo } from 'react';
 import { TeerResult, SiteSettings } from '../types';
 import {
   ArrowLeft,
@@ -24,43 +24,34 @@ interface PreviousResultsPageProps {
 }
 
 // Complete fallback historical records to provide comprehensive multi-month archives
-export const EXTENDED_HISTORICAL_RESULTS: TeerResult[] = [
-  { id: 'h-22-09-2026', date: '22/09/2026', round_1_label: 'F/R(10:30 AM)', round_1_time: '10:30 AM', round_1_number: '35', round_2_label: 'S/R(11:30 AM)', round_2_time: '11:30 AM', round_2_number: '99', status: 'completed', created_at: '', updated_at: '' },
-  { id: 'h-21-09-2026', date: '21/09/2026', round_1_label: 'F/R(10:30 AM)', round_1_time: '10:30 AM', round_1_number: '62', round_2_label: 'S/R(11:30 AM)', round_2_time: '11:30 AM', round_2_number: '18', status: 'completed', created_at: '', updated_at: '' },
-  { id: 'h-20-09-2026', date: '20/09/2026', round_1_label: 'F/R(10:30 AM)', round_1_time: '10:30 AM', round_1_number: '49', round_2_label: 'S/R(11:30 AM)', round_2_time: '11:30 AM', round_2_number: '31', status: 'completed', created_at: '', updated_at: '' },
-  { id: 'h-19-09-2026', date: '19/09/2026', round_1_label: 'F/R(10:30 AM)', round_1_time: '10:30 AM', round_1_number: '12', round_2_label: 'S/R(11:30 AM)', round_2_time: '11:30 AM', round_2_number: '85', status: 'completed', created_at: '', updated_at: '' },
-  { id: 'h-18-09-2026', date: '18/09/2026', round_1_label: 'F/R(10:30 AM)', round_1_time: '10:30 AM', round_1_number: '76', round_2_label: 'S/R(11:30 AM)', round_2_time: '11:30 AM', round_2_number: '44', status: 'completed', created_at: '', updated_at: '' },
-  { id: 'h-17-09-2026', date: '17/09/2026', round_1_label: 'F/R(10:30 AM)', round_1_time: '10:30 AM', round_1_number: '51', round_2_label: 'S/R(11:30 AM)', round_2_time: '11:30 AM', round_2_number: '89', status: 'completed', created_at: '', updated_at: '' },
-  { id: 'h-16-09-2026', date: '16/09/2026', round_1_label: 'F/R(10:30 AM)', round_1_time: '10:30 AM', round_1_number: '32', round_2_label: 'S/R(11:30 AM)', round_2_time: '11:30 AM', round_2_number: '14', status: 'completed', created_at: '', updated_at: '' },
-  { id: 'h-15-09-2026', date: '15/09/2026', round_1_label: 'F/R(10:30 AM)', round_1_time: '10:30 AM', round_1_number: '98', round_2_label: 'S/R(11:30 AM)', round_2_time: '11:30 AM', round_2_number: '07', status: 'completed', created_at: '', updated_at: '' },
-  { id: 'h-14-09-2026', date: '14/09/2026', round_1_label: 'F/R(10:30 AM)', round_1_time: '10:30 AM', round_1_number: '23', round_2_label: 'S/R(11:30 AM)', round_2_time: '11:30 AM', round_2_number: '65', status: 'completed', created_at: '', updated_at: '' },
-  { id: 'h-13-09-2026', date: '13/09/2026', round_1_label: 'F/R(10:30 AM)', round_1_time: '10:30 AM', round_1_number: '80', round_2_label: 'S/R(11:30 AM)', round_2_time: '11:30 AM', round_2_number: '33', status: 'completed', created_at: '', updated_at: '' },
-  { id: 'h-12-09-2026', date: '12/09/2026', round_1_label: 'F/R(10:30 AM)', round_1_time: '10:30 AM', round_1_number: '17', round_2_label: 'S/R(11:30 AM)', round_2_time: '11:30 AM', round_2_number: '59', status: 'completed', created_at: '', updated_at: '' },
-  { id: 'h-11-09-2026', date: '11/09/2026', round_1_label: 'F/R(10:30 AM)', round_1_time: '10:30 AM', round_1_number: '64', round_2_label: 'S/R(11:30 AM)', round_2_time: '11:30 AM', round_2_number: '92', status: 'completed', created_at: '', updated_at: '' },
-  { id: 'h-10-09-2026', date: '10/09/2026', round_1_label: 'F/R(10:30 AM)', round_1_time: '10:30 AM', round_1_number: '41', round_2_label: 'S/R(11:30 AM)', round_2_time: '11:30 AM', round_2_number: '28', status: 'completed', created_at: '', updated_at: '' },
-  { id: 'h-09-09-2026', date: '09/09/2026', round_1_label: 'F/R(10:30 AM)', round_1_time: '10:30 AM', round_1_number: '05', round_2_label: 'S/R(11:30 AM)', round_2_time: '11:30 AM', round_2_number: '73', status: 'completed', created_at: '', updated_at: '' },
-  { id: 'h-08-09-2026', date: '08/09/2026', round_1_label: 'F/R(10:30 AM)', round_1_time: '10:30 AM', round_1_number: '89', round_2_label: 'S/R(11:30 AM)', round_2_time: '11:30 AM', round_2_number: '16', status: 'completed', created_at: '', updated_at: '' },
-  { id: 'h-07-09-2026', date: '07/09/2026', round_1_label: 'F/R(10:30 AM)', round_1_time: '10:30 AM', round_1_number: '34', round_2_label: 'S/R(11:30 AM)', round_2_time: '11:30 AM', round_2_number: '50', status: 'completed', created_at: '', updated_at: '' },
-  { id: 'h-06-09-2026', date: '06/09/2026', round_1_label: 'F/R(10:30 AM)', round_1_time: '10:30 AM', round_1_number: '27', round_2_label: 'S/R(11:30 AM)', round_2_time: '11:30 AM', round_2_number: '83', status: 'completed', created_at: '', updated_at: '' },
-  { id: 'h-05-09-2026', date: '05/09/2026', round_1_label: 'F/R(10:30 AM)', round_1_time: '10:30 AM', round_1_number: '71', round_2_label: 'S/R(11:30 AM)', round_2_time: '11:30 AM', round_2_number: '09', status: 'completed', created_at: '', updated_at: '' },
-  { id: 'h-04-09-2026', date: '04/09/2026', round_1_label: 'F/R(10:30 AM)', round_1_time: '10:30 AM', round_1_number: '58', round_2_label: 'S/R(11:30 AM)', round_2_time: '11:30 AM', round_2_number: '42', status: 'completed', created_at: '', updated_at: '' },
-  { id: 'h-03-09-2026', date: '03/09/2026', round_1_label: 'F/R(10:30 AM)', round_1_time: '10:30 AM', round_1_number: '90', round_2_label: 'S/R(11:30 AM)', round_2_time: '11:30 AM', round_2_number: '66', status: 'completed', created_at: '', updated_at: '' },
-  { id: 'h-02-09-2026', date: '02/09/2026', round_1_label: 'F/R(10:30 AM)', round_1_time: '10:30 AM', round_1_number: '15', round_2_label: 'S/R(11:30 AM)', round_2_time: '11:30 AM', round_2_number: '37', status: 'completed', created_at: '', updated_at: '' },
-  { id: 'h-01-09-2026', date: '01/09/2026', round_1_label: 'F/R(10:30 AM)', round_1_time: '10:30 AM', round_1_number: '43', round_2_label: 'S/R(11:30 AM)', round_2_time: '11:30 AM', round_2_number: '88', status: 'completed', created_at: '', updated_at: '' },
-  // August 2026 archive
-  { id: 'h-31-08-2026', date: '31/08/2026', round_1_label: 'F/R(10:30 AM)', round_1_time: '10:30 AM', round_1_number: '67', round_2_label: 'S/R(11:30 AM)', round_2_time: '11:30 AM', round_2_number: '21', status: 'completed', created_at: '', updated_at: '' },
-  { id: 'h-30-08-2026', date: '30/08/2026', round_1_label: 'F/R(10:30 AM)', round_1_time: '10:30 AM', round_1_number: '84', round_2_label: 'S/R(11:30 AM)', round_2_time: '11:30 AM', round_2_number: '55', status: 'completed', created_at: '', updated_at: '' },
-  { id: 'h-29-08-2026', date: '29/08/2026', round_1_label: 'F/R(10:30 AM)', round_1_time: '10:30 AM', round_1_number: '19', round_2_label: 'S/R(11:30 AM)', round_2_time: '11:30 AM', round_2_number: '72', status: 'completed', created_at: '', updated_at: '' },
-  { id: 'h-28-08-2026', date: '28/08/2026', round_1_label: 'F/R(10:30 AM)', round_1_time: '10:30 AM', round_1_number: '52', round_2_label: 'S/R(11:30 AM)', round_2_time: '11:30 AM', round_2_number: '30', status: 'completed', created_at: '', updated_at: '' },
-  { id: 'h-27-08-2026', date: '27/08/2026', round_1_label: 'F/R(10:30 AM)', round_1_time: '10:30 AM', round_1_number: '38', round_2_label: 'S/R(11:30 AM)', round_2_time: '11:30 AM', round_2_number: '94', status: 'completed', created_at: '', updated_at: '' },
-  { id: 'h-26-08-2026', date: '26/08/2026', round_1_label: 'F/R(10:30 AM)', round_1_time: '10:30 AM', round_1_number: '47', round_2_label: 'S/R(11:30 AM)', round_2_time: '11:30 AM', round_2_number: '61', status: 'completed', created_at: '', updated_at: '' },
-  { id: 'h-25-08-2026', date: '25/08/2026', round_1_label: 'F/R(10:30 AM)', round_1_time: '10:30 AM', round_1_number: '77', round_2_label: 'S/R(11:30 AM)', round_2_time: '11:30 AM', round_2_number: '22', status: 'completed', created_at: '', updated_at: '' },
-  { id: 'h-24-08-2026', date: '24/08/2026', round_1_label: 'F/R(10:30 AM)', round_1_time: '10:30 AM', round_1_number: '03', round_2_label: 'S/R(11:30 AM)', round_2_time: '11:30 AM', round_2_number: '86', status: 'completed', created_at: '', updated_at: '' },
-  { id: 'h-23-08-2026', date: '23/08/2026', round_1_label: 'F/R(10:30 AM)', round_1_time: '10:30 AM', round_1_number: '91', round_2_label: 'S/R(11:30 AM)', round_2_time: '11:30 AM', round_2_number: '48', status: 'completed', created_at: '', updated_at: '' },
-  { id: 'h-22-08-2026', date: '22/08/2026', round_1_label: 'F/R(10:30 AM)', round_1_time: '10:30 AM', round_1_number: '26', round_2_label: 'S/R(11:30 AM)', round_2_time: '11:30 AM', round_2_number: '13', status: 'completed', created_at: '', updated_at: '' },
-  { id: 'h-21-08-2026', date: '21/08/2026', round_1_label: 'F/R(10:30 AM)', round_1_time: '10:30 AM', round_1_number: '69', round_2_label: 'S/R(11:30 AM)', round_2_time: '11:30 AM', round_2_number: '75', status: 'completed', created_at: '', updated_at: '' },
-  { id: 'h-20-08-2026', date: '20/08/2026', round_1_label: 'F/R(10:30 AM)', round_1_time: '10:30 AM', round_1_number: '11', round_2_label: 'S/R(11:30 AM)', round_2_time: '11:30 AM', round_2_number: '97', status: 'completed', created_at: '', updated_at: '' },
-];
+export const EXTENDED_HISTORICAL_RESULTS: TeerResult[] = (() => {
+  const records: TeerResult[] = [];
+  const start = new Date(2019, 0, 1);
+  const end = new Date();
+
+  for (const date = new Date(start); date <= end; date.setDate(date.getDate() + 1)) {
+    const dd = String(date.getDate()).padStart(2, '0');
+    const mm = String(date.getMonth() + 1).padStart(2, '0');
+    const yyyy = date.getFullYear();
+    const formattedDate = `${dd}/${mm}/${yyyy}`;
+
+    records.push({
+      id: `archive-${yyyy}-${mm}-${dd}`,
+      date: formattedDate,
+      round_1_label: 'F/R(10:30 AM)',
+      round_1_time: '10:30 AM',
+      round_1_number: '--',
+      round_2_label: 'S/R(11:30 AM)',
+      round_2_time: '11:30 AM',
+      round_2_number: '--',
+      status: 'completed',
+      created_at: '',
+      updated_at: '',
+    });
+  }
+
+  return records;
+})();
 
 export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
   results,
@@ -73,6 +64,8 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const [activeModal, setActiveModal] = useState<'about' | 'terms' | 'privacy' | 'contact' | null>(null);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const ITEMS_PER_PAGE = 50;
 
   // Merge live results with extended historical seed without duplicate dates
   const combinedResults = useMemo(() => {
@@ -119,6 +112,10 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
       return matchesSearch && matchesMonth;
     });
   }, [combinedResults, searchTerm, selectedMonth]);
+
+  const totalPages = Math.max(1, Math.ceil(filteredResults.length / ITEMS_PER_PAGE));
+
+  const paginatedResults = filteredResults.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE);
 
   const handleCopyRow = (id: string, date: string, fr: string, sr: string) => {
     const text = `Shillong Morning Teer (${date}) - F/R: ${fr}, S/R: ${sr}`;
@@ -268,23 +265,7 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
               <polygon points="-70,-30 -60,-35 -60,-25" fill="#38bdf8" />
             </g>
 
-            {/* Floating Historical Result Bubbles */}
-            <g transform="translate(320, 80)">
-              <circle cx="0" cy="0" r="26" fill="#0f172a" stroke="#38bdf8" strokeWidth="2.5" filter="url(#softGlowPrev)" />
-              <text x="0" y="8" fill="#ffffff" fontSize="22" fontWeight="normal" textAnchor="middle" fontFamily="sans-serif">35</text>
-            </g>
-            <g transform="translate(620, 75)">
-              <circle cx="0" cy="0" r="26" fill="#0f172a" stroke="#fbbf24" strokeWidth="2.5" filter="url(#softGlowPrev)" />
-              <text x="0" y="8" fill="#ffffff" fontSize="22" fontWeight="normal" textAnchor="middle" fontFamily="sans-serif">99</text>
-            </g>
-            <g transform="translate(290, 290)">
-              <circle cx="0" cy="0" r="26" fill="#0f172a" stroke="#34d399" strokeWidth="2.5" filter="url(#softGlowPrev)" />
-              <text x="0" y="8" fill="#ffffff" fontSize="22" fontWeight="normal" textAnchor="middle" fontFamily="sans-serif">62</text>
-            </g>
-            <g transform="translate(630, 295)">
-              <circle cx="0" cy="0" r="26" fill="#0f172a" stroke="#f472b6" strokeWidth="2.5" filter="url(#softGlowPrev)" />
-              <text x="0" y="8" fill="#ffffff" fontSize="22" fontWeight="normal" textAnchor="middle" fontFamily="sans-serif">18</text>
-            </g>
+            
 
             {/* Laurel Leaves around Center */}
             <g opacity="0.6" stroke="#fbbf24" strokeWidth="2" fill="none">
@@ -327,7 +308,7 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
                 textAnchor="middle"
                 fontFamily="sans-serif"
               >
-                ★ PREVIOUS RESULTS ARCHIVE ★
+                â˜… PREVIOUS RESULTS ARCHIVE â˜…
               </text>
             </g>
 
@@ -382,7 +363,7 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
               <input
                 type="text"
                 value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
+                onChange={(e) => { setSearchTerm(e.target.value); setCurrentPage(1); }}
                 placeholder="Search date (e.g. 22/09) or number..."
                 className="w-full pl-9 pr-7 py-2 text-xs sm:text-sm border border-gray-300 rounded-md focus:outline-hidden focus:ring-1 focus:ring-blue-500 focus:border-blue-500 bg-white"
               />
@@ -404,7 +385,7 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
               Filter Month:
             </span>
             <button
-              onClick={() => setSelectedMonth('all')}
+              onClick={() => { setSelectedMonth('all'); setCurrentPage(1); }}
               className={`px-3 py-1.5 rounded-md text-xs font-normal whitespace-nowrap transition-colors cursor-pointer ${
                 selectedMonth === 'all'
                   ? 'bg-blue-600 text-white shadow-xs'
@@ -416,7 +397,7 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
             {months.map((m) => (
               <button
                 key={m}
-                onClick={() => setSelectedMonth(m)}
+                onClick={() => { setSelectedMonth(m); setCurrentPage(1); }}
                 className={`px-3 py-1.5 rounded-md text-xs font-normal whitespace-nowrap transition-colors cursor-pointer ${
                   selectedMonth === m
                     ? 'bg-blue-600 text-white shadow-xs'
@@ -435,7 +416,7 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
               {selectedMonth !== 'all' && ` in ${formatMonthLabel(selectedMonth)}`}
               {searchTerm && ` matching "${searchTerm}"`}
             </span>
-            <span className="text-[11px] text-gray-400">Times: F/R (10:30 AM) • S/R (11:30 AM)</span>
+            <span className="text-[11px] text-gray-400">Times: F/R (10:30 AM) â€¢ S/R (11:30 AM)</span>
           </div>
         </div>
 
@@ -456,7 +437,7 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
               </tr>
             </thead>
             <tbody>
-              {filteredResults.map((row) => (
+              {paginatedResults.map((row) => (
                 <tr key={row.id} className="bg-white">
                   <td className="border-r-[1.5px] border-t-[1.5px] border-black px-1 py-[3px] text-[15px] sm:text-[17px] font-normal">Shillong</td>
                   <td className="border-r-[1.5px] border-t-[1.5px] border-black px-1 py-[3px] text-[15px] sm:text-[17px] tabular-nums">{row.date}</td>
@@ -464,7 +445,7 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
                   <td className="border-t-[1.5px] border-black px-1 py-[3px] text-[15px] sm:text-[17px] tabular-nums">{row.round_2_number || '--'}</td>
                 </tr>
               ))}
-              {filteredResults.length === 0 && (
+              {paginatedResults.length === 0 && (
                 <tr>
                   <td colSpan={4} className="border-t-[1.5px] border-black py-6 text-center text-gray-600">
                     No previous results found.
@@ -474,6 +455,28 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
             </tbody>
           </table>
         </div>
+        <div className="mx-auto w-full max-w-[650px] flex items-center justify-between gap-3">
+          <button
+            onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+            disabled={currentPage === 1}
+            className="px-4 py-2 rounded-md border border-gray-300 text-sm disabled:opacity-40 disabled:cursor-not-allowed"
+          >
+            Previous
+          </button>
+
+          <span className="text-sm text-gray-600">
+            Page {currentPage} of {totalPages}
+          </span>
+
+          <button
+            onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+            disabled={currentPage === totalPages}
+            className="px-4 py-2 rounded-md border border-gray-300 text-sm disabled:opacity-40 disabled:cursor-not-allowed"
+          >
+            Next
+          </button>
+        </div>
+
 
         {/* 6. Editorial Articles Below Table exactly matching Shillong Morning Teer website */}
         <div className="space-y-6 pt-4 text-gray-700 text-xs sm:text-sm font-normal leading-relaxed">
@@ -656,8 +659,8 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
                 a: 'The City column identifies Shillong as the location for the archived Morning Teer result.',
               },
               {
-                q: 'Where can I find today’s live Morning Teer results?',
-                a: 'Today’s live results are updated directly on our homepage with real-time indicators as soon as the arrow count is completed by ground officials.',
+                q: 'Where can I find todayâ€™s live Morning Teer results?',
+                a: 'Todayâ€™s live results are updated directly on our homepage with real-time indicators as soon as the arrow count is completed by ground officials.',
               },
               {
                 q: 'Are Shillong Morning Teer results updated on weekends?',
@@ -701,19 +704,19 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
             onClick={onBack}
             className="px-3 py-1.5 rounded-lg border border-gray-300 text-xs font-medium text-gray-700 hover:bg-gray-100 transition-colors cursor-pointer"
           >
-            ← Live Homepage
+            â† Live Homepage
           </button>
           <button
             onClick={() => onNavigate?.('/common-number')}
             className="px-3 py-1.5 rounded-lg border border-gray-300 text-xs font-medium text-gray-700 hover:bg-gray-100 transition-colors cursor-pointer"
           >
-            Common Numbers →
+            Common Numbers â†’
           </button>
           <button
             onClick={() => onNavigate?.('/dream-number')}
             className="px-3 py-1.5 rounded-lg border border-gray-300 text-xs font-medium text-gray-700 hover:bg-gray-100 transition-colors cursor-pointer"
           >
-            Dream Numbers →
+            Dream Numbers â†’
           </button>
         </div>
       </div>
@@ -729,4 +732,8 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
     </div>
   );
 };
+
+
+
+
 
