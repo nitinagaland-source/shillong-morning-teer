@@ -31,25 +31,56 @@ const makeArchiveNumber = (value: number) => {
 
 export const EXTENDED_HISTORICAL_RESULTS: TeerResult[] = (() => {
   const records: TeerResult[] = [];
-  const start = new Date(2019, 0, 1);
-  const end = new Date();
 
-  for (const date = new Date(start); date <= end; date.setDate(date.getDate() + 1)) {
+  const start = new Date(2019, 0, 1);
+
+  const end = new Date();
+  end.setHours(0, 0, 0, 0);
+  end.setDate(end.getDate() - 1);
+
+  const randomCutoff = new Date(2026, 7, 31);
+  randomCutoff.setHours(23, 59, 59, 999);
+
+  for (
+    const date = new Date(start);
+    date <= end;
+    date.setDate(date.getDate() + 1)
+  ) {
     const dd = String(date.getDate()).padStart(2, '0');
     const mm = String(date.getMonth() + 1).padStart(2, '0');
     const yyyy = date.getFullYear();
+
     const formattedDate = `${dd}/${mm}/${yyyy}`;
+
+    const useGeneratedArchive = date <= randomCutoff;
 
     records.push({
       id: `archive-${yyyy}-${mm}-${dd}`,
       date: formattedDate,
+
       round_1_label: 'F/R(10:30 AM)',
       round_1_time: '10:30 AM',
-      round_1_number: makeArchiveNumber(((date.getDate() * 7 + date.getMonth() * 13 + yyyy) % 90) + 10),
+
+      round_1_number: useGeneratedArchive
+        ? makeArchiveNumber(
+            ((date.getDate() * 7 + date.getMonth() * 13 + yyyy) % 90) + 10
+          )
+        : '',
+
       round_2_label: 'S/R(11:30 AM)',
       round_2_time: '11:30 AM',
-      round_2_number: makeArchiveNumber(((date.getDate() * 11 + date.getMonth() * 17 + yyyy * 3) % 90) + 10),
-      status: 'completed',
+
+      round_2_number: useGeneratedArchive
+        ? makeArchiveNumber(
+            ((date.getDate() * 11 +
+              date.getMonth() * 17 +
+              yyyy * 3) %
+              90) +
+              10
+          )
+        : '',
+
+      status: useGeneratedArchive ? 'completed' : 'awaiting',
       created_at: '',
       updated_at: '',
     });
@@ -69,8 +100,6 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const [activeModal, setActiveModal] = useState<'about' | 'terms' | 'privacy' | 'contact' | null>(null);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-  const [currentPage, setCurrentPage] = useState(1);
-  const ITEMS_PER_PAGE = 50;
 
   // Merge live results with extended historical seed without duplicate dates
   const combinedResults = useMemo(() => {
@@ -117,10 +146,6 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
       return matchesSearch && matchesMonth;
     });
   }, [combinedResults, searchTerm, selectedMonth]);
-
-  const totalPages = Math.max(1, Math.ceil(filteredResults.length / ITEMS_PER_PAGE));
-
-  const paginatedResults = filteredResults.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE);
 
   const handleCopyRow = (id: string, date: string, fr: string, sr: string) => {
     const text = `Shillong Morning Teer (${date}) - F/R: ${fr}, S/R: ${sr}`;
@@ -377,7 +402,7 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
               <input
                 type="text"
                 value={searchTerm}
-                onChange={(e) => { setSearchTerm(e.target.value); setCurrentPage(1); }}
+                onChange={(e) => setSearchTerm(e.target.value)}
                 placeholder="Search date (e.g. 22/09) or number..."
                 className="w-full pl-9 pr-7 py-2 text-xs sm:text-sm border border-gray-300 rounded-md focus:outline-hidden focus:ring-1 focus:ring-[#48c9c0] focus:border-[#48c9c0] bg-white"
               />
@@ -399,7 +424,7 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
               Filter Month:
             </span>
             <button
-              onClick={() => { setSelectedMonth('all'); setCurrentPage(1); }}
+              onClick={() => setSelectedMonth('all')}
               className={`px-3 py-1.5 rounded-md text-xs font-normal whitespace-nowrap transition-colors cursor-pointer ${
                 selectedMonth === 'all'
                   ? 'bg-[#48c9c0] text-white shadow-xs'
@@ -411,7 +436,7 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
             {months.map((m) => (
               <button
                 key={m}
-                onClick={() => { setSelectedMonth(m); setCurrentPage(1); }}
+                onClick={() => setSelectedMonth(m)}
                 className={`px-3 py-1.5 rounded-md text-xs font-normal whitespace-nowrap transition-colors cursor-pointer ${
                   selectedMonth === m
                     ? 'bg-[#48c9c0] text-white shadow-xs'
@@ -451,15 +476,15 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
               </tr>
             </thead>
             <tbody>
-              {paginatedResults.map((row) => (
+              {filteredResults.map((row) => (
                 <tr key={row.id} className="bg-white">
                   <td className="border-r-[1.5px] border-t-[1.5px] border-black px-1 py-[3px] text-[15px] sm:text-[17px] font-normal">Shillong</td>
                   <td className="border-r-[1.5px] border-t-[1.5px] border-black px-1 py-[3px] text-[15px] sm:text-[17px] tabular-nums">{row.date}</td>
-                  <td className="border-r-[1.5px] border-t-[1.5px] border-black px-1 py-[3px] text-[15px] sm:text-[17px] tabular-nums">{row.round_1_number || '--'}</td>
-                  <td className="border-t-[1.5px] border-black px-1 py-[3px] text-[15px] sm:text-[17px] tabular-nums">{row.round_2_number || '--'}</td>
+                  <td className="border-r-[1.5px] border-t-[1.5px] border-black px-1 py-[3px] text-[15px] sm:text-[17px] tabular-nums">{row.round_1_number || ""}</td>
+                  <td className="border-t-[1.5px] border-black px-1 py-[3px] text-[15px] sm:text-[17px] tabular-nums">{row.round_2_number || ""}</td>
                 </tr>
               ))}
-              {paginatedResults.length === 0 && (
+              {filteredResults.length === 0 && (
                 <tr>
                   <td colSpan={4} className="border-t-[1.5px] border-black py-6 text-center text-gray-600">
                     No previous results found.
@@ -469,28 +494,6 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
             </tbody>
           </table>
         </div>
-        <div className="mx-auto w-full max-w-[650px] flex items-center justify-between gap-3">
-          <button
-            onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
-            disabled={currentPage === 1}
-            className="px-4 py-2 rounded-md border border-gray-300 text-sm disabled:opacity-40 disabled:cursor-not-allowed"
-          >
-            Previous
-          </button>
-
-          <span className="text-sm text-gray-600">
-            Page {currentPage} of {totalPages}
-          </span>
-
-          <button
-            onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
-            disabled={currentPage === totalPages}
-            className="px-4 py-2 rounded-md border border-gray-300 text-sm disabled:opacity-40 disabled:cursor-not-allowed"
-          >
-            Next
-          </button>
-        </div>
-
 
         {/* 6. Editorial Articles Below Table exactly matching Shillong Morning Teer website */}
         <div className="space-y-6 pt-4 text-gray-700 text-xs sm:text-sm font-normal leading-relaxed">
@@ -746,6 +749,7 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
     </div>
   );
 };
+
 
 
 
