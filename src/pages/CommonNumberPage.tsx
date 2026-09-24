@@ -124,7 +124,7 @@ export const CommonNumberPage: React.FC<CommonNumberPageProps> = ({
       {/* 1. TOP BAR (Exact Screenshot Style) */}
       <header
         className="sticky top-0 z-30 px-4 py-3 border-b border-[#48c9c0]/10 shadow-xs flex items-center justify-between"
-        style={{ backgroundColor: settings.top_bar_bg_color || '#48c9c0' }}
+        style={{ backgroundColor: '#48c9c0' }}
       >
         <button
           onClick={onBack}
@@ -995,6 +995,7 @@ export const CommonNumberPage: React.FC<CommonNumberPageProps> = ({
     </div>
   );
 };
+
 
 
 

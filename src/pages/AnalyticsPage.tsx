@@ -133,7 +133,7 @@ export const AnalyticsPage: React.FC<AnalyticsPageProps> = ({
       {/* Top Bar Header */}
       <div
         className="sticky top-0 z-30 px-4 py-3 border-b border-[#48c9c0]/10 shadow-xs flex items-center justify-between"
-        style={{ backgroundColor: settings.top_bar_bg_color || '#48c9c0' }}
+        style={{ backgroundColor: '#48c9c0' }}
       >
         <button
           onClick={onBack}
@@ -337,6 +337,7 @@ export const AnalyticsPage: React.FC<AnalyticsPageProps> = ({
     </div>
   );
 };
+
 
 
 

@@ -34,16 +34,15 @@ export const EXTENDED_HISTORICAL_RESULTS: TeerResult[] = (() => {
 
   const start = new Date(2019, 0, 1);
 
-  const end = new Date();
-  end.setHours(0, 0, 0, 0);
-  end.setDate(end.getDate() - 1);
+  const yesterday = new Date();
+  yesterday.setHours(0, 0, 0, 0);
+  yesterday.setDate(yesterday.getDate() - 1);
 
-  const randomCutoff = new Date(2026, 7, 31);
-  randomCutoff.setHours(23, 59, 59, 999);
+  const randomCutoff = new Date(2026, 7, 31, 23, 59, 59, 999);
 
   for (
     const date = new Date(start);
-    date <= end;
+    date <= yesterday;
     date.setDate(date.getDate() + 1)
   ) {
     const dd = String(date.getDate()).padStart(2, '0');
@@ -204,7 +203,7 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
       {/* 1. Top Bar with Home Back Button */}
       <div
         className="sticky top-0 z-30 px-4 py-3 border-b border-[#48c9c0]/10 shadow-xs flex items-center justify-between"
-        style={{ backgroundColor: settings.top_bar_bg_color || '#48c9c0' }}
+        style={{ backgroundColor: '#48c9c0' }}
       >
         <button
           onClick={onBack}
@@ -489,7 +488,7 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
                   RESULTS
                 </th>
               </tr>
-              <tr className="bg-[#43cfbf]">
+              <tr className="bg-[#48c9c0]">
                 <th className="w-[42%] border-r-[1.5px] border-black py-1 font-medium text-[16px] sm:text-[18px]">CITY</th>
                 <th className="w-[30%] border-r-[1.5px] border-black py-1 font-medium text-[16px] sm:text-[18px]">DATE</th>
                 <th className="w-[14%] border-r-[1.5px] border-black py-1 font-medium text-[16px] sm:text-[18px]">F/R</th>
@@ -770,6 +769,9 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
     </div>
   );
 };
+
+
+
 
 
 

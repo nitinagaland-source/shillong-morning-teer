@@ -503,7 +503,7 @@ export const AdminPanelPage: React.FC<AdminPanelPageProps> = ({
           {/* Header */}
           <div
             className="p-5 text-center border-b border-[#48c9c0]/10"
-            style={{ backgroundColor: settings.top_bar_bg_color || '#48c9c0' }}
+            style={{ backgroundColor: '#48c9c0' }}
           >
             <div className="w-12 h-12 bg-white rounded-full mx-auto flex items-center justify-center border-2 border-[#48c9c0] mb-2 shadow-xs">
               <Shield className="w-6 h-6 text-[#111827]" />
@@ -1438,6 +1438,7 @@ export const AdminPanelPage: React.FC<AdminPanelPageProps> = ({
     </div>
   );
 };
+
 
 
 
