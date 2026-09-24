@@ -61,24 +61,22 @@ export const EXTENDED_HISTORICAL_RESULTS: TeerResult[] = (() => {
       round_1_label: 'F/R(10:30 AM)',
       round_1_time: '10:30 AM',
 
-      round_1_number: useGeneratedArchive
-        ? makeArchiveNumber(
+      round_1_number: useGeneratedArchive ? makeArchiveNumber(
             ((date.getDate() * 7 + date.getMonth() * 13 + yyyy) % 90) + 10
           )
-        : '',
+        : 'X',
 
       round_2_label: 'S/R(11:30 AM)',
       round_2_time: '11:30 AM',
 
-      round_2_number: useGeneratedArchive
-        ? makeArchiveNumber(
+      round_2_number: useGeneratedArchive ? makeArchiveNumber(
             ((date.getDate() * 11 +
               date.getMonth() * 17 +
               yyyy * 3) %
               90) +
               10
           )
-        : '',
+        : 'X',
 
       status: useGeneratedArchive ? 'completed' : 'awaiting',
       created_at: '',
@@ -105,9 +103,37 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
   const combinedResults = useMemo(() => {
     const map = new Map<string, TeerResult>();
     // First fill with extended records
-    EXTENDED_HISTORICAL_RESULTS.forEach((r) => map.set(r.date, r));
+    EXTENDED_HISTORICAL_RESULTS.forEach((r: any) => {
+      const parts = r.date.split('/');
+      const isSeptember2026 =
+        parts.length === 3 &&
+        parts[1] === '09' &&
+        parts[2] === '2026';
+
+      const isTrustedRealResult =
+        r.source === 'manual' ||
+        r.source === 'live';
+
+      if (!isSeptember2026 || isTrustedRealResult) {
+        map.set(r.date, r);
+      }
+    });
     // Live results take precedence
-    results.forEach((r) => map.set(r.date, r));
+    results.forEach((r: any) => {
+      const parts = r.date.split('/');
+      const isSeptember2026 =
+        parts.length === 3 &&
+        parts[1] === '09' &&
+        parts[2] === '2026';
+
+      const isTrustedRealResult =
+        r.source === 'manual' ||
+        r.source === 'live';
+
+      if (!isSeptember2026 || isTrustedRealResult) {
+        map.set(r.date, r);
+      }
+    });
     // Convert to list sorted newest first
     return Array.from(map.values()).sort((a, b) => {
       const [d1, m1, y1] = a.date.split('/').map(Number);
@@ -480,8 +506,8 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
                 <tr key={row.id} className="bg-white">
                   <td className="border-r-[1.5px] border-t-[1.5px] border-black px-1 py-[3px] text-[15px] sm:text-[17px] font-normal">Shillong</td>
                   <td className="border-r-[1.5px] border-t-[1.5px] border-black px-1 py-[3px] text-[15px] sm:text-[17px] tabular-nums">{row.date}</td>
-                  <td className="border-r-[1.5px] border-t-[1.5px] border-black px-1 py-[3px] text-[15px] sm:text-[17px] tabular-nums">{row.round_1_number || ""}</td>
-                  <td className="border-t-[1.5px] border-black px-1 py-[3px] text-[15px] sm:text-[17px] tabular-nums">{row.round_2_number || ""}</td>
+                  <td className="border-r-[1.5px] border-t-[1.5px] border-black px-1 py-[3px] text-[15px] sm:text-[17px] tabular-nums">{row.round_1_number || 'X'}</td>
+                  <td className="border-t-[1.5px] border-black px-1 py-[3px] text-[15px] sm:text-[17px] tabular-nums">{row.round_2_number || 'X'}</td>
                 </tr>
               ))}
               {filteredResults.length === 0 && (
@@ -749,6 +775,9 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
     </div>
   );
 };
+
+
+
 
 
 

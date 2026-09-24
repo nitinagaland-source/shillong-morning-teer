@@ -682,6 +682,7 @@ app.post('/api/results/today', requireAdmin, async (req, res, next) => {
       round_2_number: r2,
       round_2_published_at: r2 === 'X' ? null : now,
       status,
+      source: 'live',
       updated_at: now,
     };
     const ref = getDb().collection('results').doc(todayKey);
@@ -1018,4 +1019,6 @@ app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
 });
 
 export default app;
+
+
 
