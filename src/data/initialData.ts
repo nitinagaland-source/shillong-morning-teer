@@ -454,14 +454,6 @@ export const initialNotices: NoticeEntry[] = [
     created_at: '2026-09-18T06:30:00Z',
   },
   {
-    id: 'notice-3',
-    title: 'Sunday & Public Holiday Archery Schedules',
-    date: '15/09/2026',
-    body: 'Archery contests strictly follow the calendar of the Meghalaya Khasi Hills Archery Sports Institute. Special holiday sessions will be announced 24 hours in advance in this section.',
-    priority: 'normal',
-    created_at: '2026-09-15T09:00:00Z',
-  },
-  {
     id: 'notice-4',
     title: 'Safe Archery Community Guidelines',
     date: '10/09/2026',
