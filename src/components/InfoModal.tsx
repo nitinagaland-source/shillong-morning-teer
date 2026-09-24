@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { X, ShieldCheck, FileText, Info, Mail, Send, CheckCircle2 } from 'lucide-react';
 
 interface InfoModalProps {
@@ -110,7 +110,7 @@ export const InfoModal: React.FC<InfoModalProps> = ({ type, onClose }) => {
             <div>
               {formSent ? (
                 <div className="py-8 flex flex-col items-center text-center space-y-3">
-                  <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center text-blue-600">
+                  <div className="w-12 h-12 rounded-full bg-[#b8e8e3] flex items-center justify-center text-blue-600">
                     <CheckCircle2 className="w-7 h-7" />
                   </div>
                   <h4 className="font-bold text-indigo-950 text-base">Message Sent Successfully!</h4>
@@ -158,7 +158,7 @@ export const InfoModal: React.FC<InfoModalProps> = ({ type, onClose }) => {
                   </div>
                   <button
                     type="submit"
-                    className="w-full py-2.5 px-4 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-lg text-sm transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-sm"
+                    className="w-full py-2.5 px-4 bg-[#48c9c0] hover:bg-[#48c9c0] text-white font-bold rounded-lg text-sm transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-sm"
                   >
                     <Send className="w-4 h-4" />
                     <span>Send Message</span>
@@ -175,3 +175,4 @@ export const InfoModal: React.FC<InfoModalProps> = ({ type, onClose }) => {
     </div>
   );
 };
+

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import { getTodayISTDateString } from '../lib/dateUtils';
 
@@ -25,7 +25,7 @@ export const HomeEditorialArticle: React.FC = () => {
     },
     {
       q: '4. Can previous results predict future outcomes?',
-      a: 'Previous results provide historical context, frequency charts, and trend patterns. While they cannot guarantee future winning outcomes due to the independent nature of each day’s archery round, many analytical players review past outcomes to identify repeating or missing number cycles.',
+      a: 'Previous results provide historical context, frequency charts, and trend patterns. While they cannot guarantee future winning outcomes due to the independent nature of each dayâ€™s archery round, many analytical players review past outcomes to identify repeating or missing number cycles.',
     },
     {
       q: '5. Why is Teer different from other lottery games?',
@@ -110,7 +110,7 @@ export const HomeEditorialArticle: React.FC = () => {
           </h3>
           <div className="overflow-x-auto border border-gray-200 rounded-xl overflow-hidden shadow-2xs">
             <table className="w-full text-left text-xs sm:text-sm border-collapse">
-              <thead className="bg-linear-to-r from-blue-600 via-indigo-600 to-blue-700 text-white font-medium border-b border-indigo-700">
+              <thead className="bg-linear-to-r from-[#48c9c0] via-[#48c9c0] to-[#48c9c0] text-white font-medium border-b border-indigo-700">
                 <tr>
                   <th className="p-2.5 sm:p-3 border-r border-white/20 font-medium">Topic</th>
                   <th className="p-2.5 sm:p-3 font-medium">Description</th>
@@ -237,7 +237,7 @@ export const HomeEditorialArticle: React.FC = () => {
 
           <div className="overflow-x-auto my-2 border border-gray-200 rounded-xl overflow-hidden shadow-2xs">
             <table className="w-full text-left text-xs sm:text-sm border-collapse">
-              <thead className="bg-linear-to-r from-blue-600 via-indigo-600 to-blue-700 text-white font-medium border-b border-indigo-700">
+              <thead className="bg-linear-to-r from-[#48c9c0] via-[#48c9c0] to-[#48c9c0] text-white font-medium border-b border-indigo-700">
                 <tr>
                   <th className="p-2.5 sm:p-3 border-r border-white/20 font-medium">Activity</th>
                   <th className="p-2.5 sm:p-3 font-medium">Purpose</th>
@@ -522,3 +522,4 @@ export const HomeEditorialArticle: React.FC = () => {
     </div>
   );
 };
+

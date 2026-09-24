@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { SiteSettings } from '../types';
 import { ArrowLeft, Tag, Copy, Check, ShieldCheck, Ticket, Users, ExternalLink, Calendar } from 'lucide-react';
 import { Footer } from '../components/Footer';
@@ -19,7 +19,7 @@ export const DealPage: React.FC<DealPageProps> = ({ settings, onBack }) => {
       title: 'Polo Ground Shillong - Archery Ground Entry Pass',
       category: 'Ground Access',
       badge: 'OFFICIAL PASS',
-      badgeColor: 'bg-indigo-100 text-indigo-800 border-indigo-300',
+      badgeColor: 'bg-[#b8e8e3] text-indigo-800 border-indigo-300',
       description: 'Official spectator entrance to the Shillong archery shooting ring at Polo Ground. Witness the 50 traditional archers live during Morning F/R & S/R shooting.',
       validity: 'Valid Monday to Saturday',
       code: 'POLO-GROUND-ENTRY-2026',
@@ -30,7 +30,7 @@ export const DealPage: React.FC<DealPageProps> = ({ settings, onBack }) => {
       title: 'Morning Teer Club Daily Common Number Alerts',
       category: 'Community Club',
       badge: 'VERIFIED CLUB',
-      badgeColor: 'bg-blue-100 text-blue-800 border-blue-300',
+      badgeColor: 'bg-[#b8e8e3] text-blue-800 border-blue-300',
       description: 'Join the registered Meghalaya archery enthusiast community. Receive verified morning house and ending calculation sheets directly at 9:30 AM before shooting commences.',
       validity: 'Daily 09:30 AM IST',
       code: 'TEER-VIP-ALERT-MORNING',
@@ -71,7 +71,7 @@ export const DealPage: React.FC<DealPageProps> = ({ settings, onBack }) => {
       {/* Top Bar Header */}
       <div
         className="sticky top-0 z-30 px-4 py-3 border-b border-indigo-950/10 shadow-xs flex items-center justify-between"
-        style={{ backgroundColor: settings.top_bar_bg_color || '#3b82f6' }}
+        style={{ backgroundColor: settings.top_bar_bg_color || '#48c9c0' }}
       >
         <button
           onClick={onBack}
@@ -92,7 +92,7 @@ export const DealPage: React.FC<DealPageProps> = ({ settings, onBack }) => {
         {/* Intro */}
         <div className="bg-white rounded-2xl p-4 border border-gray-200 shadow-2xs space-y-2">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-indigo-100 text-indigo-800 flex items-center justify-center font-normal">
+            <div className="w-8 h-8 rounded-lg bg-[#b8e8e3] text-indigo-800 flex items-center justify-center font-normal">
               <Tag className="w-4 h-4" />
             </div>
             <div>
@@ -120,7 +120,7 @@ export const DealPage: React.FC<DealPageProps> = ({ settings, onBack }) => {
                 >
                   {deal.badge}
                 </span>
-                <span className="text-xs font-normal text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded-md border border-indigo-200">
+                <span className="text-xs font-normal text-indigo-700 bg-[#b8e8e3] px-2 py-0.5 rounded-md border border-indigo-200">
                   {deal.discount}
                 </span>
               </div>
@@ -148,7 +148,7 @@ export const DealPage: React.FC<DealPageProps> = ({ settings, onBack }) => {
                 </div>
                 <button
                   onClick={() => handleCopy(deal.code)}
-                  className="py-1.5 px-3 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold rounded-lg cursor-pointer flex items-center gap-1 transition-colors shrink-0 shadow-xs"
+                  className="py-1.5 px-3 bg-[#48c9c0] hover:bg-[#48c9c0] text-white text-xs font-bold rounded-lg cursor-pointer flex items-center gap-1 transition-colors shrink-0 shadow-xs"
                 >
                   {copiedCode === deal.code ? (
                     <>
@@ -168,7 +168,7 @@ export const DealPage: React.FC<DealPageProps> = ({ settings, onBack }) => {
         </div>
 
         {/* Verification note */}
-        <div className="bg-indigo-50/70 p-3.5 rounded-xl border border-indigo-200 text-xs text-indigo-950 space-y-1">
+        <div className="bg-[#b8e8e3]/70 p-3.5 rounded-xl border border-indigo-200 text-xs text-indigo-950 space-y-1">
           <div className="flex items-center gap-1.5 font-bold">
             <ShieldCheck className="w-4 h-4 text-indigo-700" />
             <span>Community Verified Archery Programs</span>
@@ -190,3 +190,4 @@ export const DealPage: React.FC<DealPageProps> = ({ settings, onBack }) => {
     </div>
   );
 };
+

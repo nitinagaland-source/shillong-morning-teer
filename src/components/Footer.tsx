@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 
 interface FooterProps {
   onNavigateHome?: () => void;
@@ -61,3 +61,4 @@ export const Footer: React.FC<FooterProps> = ({
     </footer>
   );
 };
+

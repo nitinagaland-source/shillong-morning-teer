@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+﻿import React, { useState, useMemo } from 'react';
 import { TeerResult, SiteSettings } from '../types';
 import { ArrowLeft, BarChart2, TrendingUp, Search, Calendar, Activity, Zap } from 'lucide-react';
 import { Footer } from '../components/Footer';
@@ -133,7 +133,7 @@ export const AnalyticsPage: React.FC<AnalyticsPageProps> = ({
       {/* Top Bar Header */}
       <div
         className="sticky top-0 z-30 px-4 py-3 border-b border-indigo-950/10 shadow-xs flex items-center justify-between"
-        style={{ backgroundColor: settings.top_bar_bg_color || '#3b82f6' }}
+        style={{ backgroundColor: settings.top_bar_bg_color || '#48c9c0' }}
       >
         <button
           onClick={onBack}
@@ -155,7 +155,7 @@ export const AnalyticsPage: React.FC<AnalyticsPageProps> = ({
         <div className="bg-white rounded-2xl p-4 border border-gray-200 shadow-2xs space-y-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-lg bg-blue-100 text-blue-800 flex items-center justify-center font-normal">
+              <div className="w-8 h-8 rounded-lg bg-[#b8e8e3] text-blue-800 flex items-center justify-center font-normal">
                 <BarChart2 className="w-4 h-4" />
               </div>
               <div>
@@ -178,7 +178,7 @@ export const AnalyticsPage: React.FC<AnalyticsPageProps> = ({
                 onClick={() => setTimeRange(r)}
                 className={`px-3 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer ${
                   timeRange === r
-                    ? 'bg-indigo-600 text-white shadow-xs'
+                    ? 'bg-[#48c9c0] text-white shadow-xs'
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                 }`}
               >
@@ -206,7 +206,7 @@ export const AnalyticsPage: React.FC<AnalyticsPageProps> = ({
           </div>
 
           {lookupData && (
-            <div className="bg-blue-50/70 p-3 rounded-xl border border-blue-200 text-xs space-y-1.5 animate-in fade-in duration-150">
+            <div className="bg-[#b8e8e3]/70 p-3 rounded-xl border border-blue-200 text-xs space-y-1.5 animate-in fade-in duration-150">
               <div className="flex items-center justify-between font-normal text-gray-900">
                 <span>Target #{lookupData.number}</span>
                 <span className="text-blue-700">Appeared {lookupData.totalHits} times</span>
@@ -236,12 +236,12 @@ export const AnalyticsPage: React.FC<AnalyticsPageProps> = ({
             {stats.topNumbers.map(([num, count]) => (
               <div
                 key={num}
-                className="bg-gray-50 border border-gray-200 rounded-xl p-2 text-center hover:bg-blue-50 hover:border-blue-300 transition-colors"
+                className="bg-gray-50 border border-gray-200 rounded-xl p-2 text-center hover:bg-[#b8e8e3] hover:border-blue-300 transition-colors"
               >
                 <span className="text-2xl font-normal text-gray-900 font-sans tabular-nums block">
                   {num}
                 </span>
-                <span className="text-[10px] font-bold text-blue-700 bg-blue-100/70 px-1.5 py-0.5 rounded-full inline-block mt-1">
+                <span className="text-[10px] font-bold text-blue-700 bg-[#b8e8e3]/70 px-1.5 py-0.5 rounded-full inline-block mt-1">
                   {count} hits
                 </span>
               </div>
@@ -337,3 +337,4 @@ export const AnalyticsPage: React.FC<AnalyticsPageProps> = ({
     </div>
   );
 };
+

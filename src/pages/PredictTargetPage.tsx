@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { TeerResult, CommonNumberEntry, SiteSettings } from '../types';
 import { ArrowLeft, Target, Calculator, Check, ArrowRight, Info, ShieldCheck } from 'lucide-react';
 import { Footer } from '../components/Footer';
@@ -70,7 +70,7 @@ export const PredictTargetPage: React.FC<PredictTargetPageProps> = ({
       {/* Top Bar Header */}
       <div
         className="sticky top-0 z-30 px-4 py-3 border-b border-indigo-950/10 shadow-xs flex items-center justify-between"
-        style={{ backgroundColor: settings.top_bar_bg_color || '#3b82f6' }}
+        style={{ backgroundColor: settings.top_bar_bg_color || '#48c9c0' }}
       >
         <button
           onClick={onBack}
@@ -215,7 +215,7 @@ export const PredictTargetPage: React.FC<PredictTargetPageProps> = ({
 
             <button
               type="submit"
-              className="w-full py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-normal transition-colors cursor-pointer flex items-center justify-center gap-1.5 shadow-xs"
+              className="w-full py-2.5 bg-[#48c9c0] hover:bg-[#48c9c0] text-white rounded-xl text-xs font-normal transition-colors cursor-pointer flex items-center justify-center gap-1.5 shadow-xs"
             >
               <span>Calculate Projected Targets</span>
               <ArrowRight className="w-3.5 h-3.5" />
@@ -264,3 +264,4 @@ export const PredictTargetPage: React.FC<PredictTargetPageProps> = ({
     </div>
   );
 };
+

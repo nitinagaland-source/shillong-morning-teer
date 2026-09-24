@@ -14,7 +14,7 @@ export const TopBar: React.FC<TopBarProps> = ({ settings, onOpenDrawer, isDrawer
     <header
       id="top-bar-header"
       className="sticky top-0 z-40 w-full border-b border-black/10 shadow-xs"
-      style={{ backgroundColor: '#b8e1ec' }}
+      style={{ backgroundColor: '#48c9c0' }}
     >
       <div className="max-w-md mx-auto px-3 sm:px-4 h-[72px] sm:h-[78px] flex items-center justify-between">
         <a
@@ -77,6 +77,8 @@ export const TopBar: React.FC<TopBarProps> = ({ settings, onOpenDrawer, isDrawer
     </header>
   );
 };
+
+
 
 
 

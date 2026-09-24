@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import {
   SiteSettings,
   TeerResult,
@@ -490,7 +490,7 @@ export const AdminPanelPage: React.FC<AdminPanelPageProps> = ({
   if (authChecking) {
     return (
       <div className="w-full min-h-screen bg-gray-100 flex items-center justify-center">
-        <div className="flex items-center gap-2 text-sm text-gray-600"><RefreshCw className="w-4 h-4 animate-spin" /> Checking admin session…</div>
+        <div className="flex items-center gap-2 text-sm text-gray-600"><RefreshCw className="w-4 h-4 animate-spin" /> Checking admin sessionâ€¦</div>
       </div>
     );
   }
@@ -503,7 +503,7 @@ export const AdminPanelPage: React.FC<AdminPanelPageProps> = ({
           {/* Header */}
           <div
             className="p-5 text-center border-b border-indigo-950/10"
-            style={{ backgroundColor: settings.top_bar_bg_color || '#3b82f6' }}
+            style={{ backgroundColor: settings.top_bar_bg_color || '#48c9c0' }}
           >
             <div className="w-12 h-12 bg-white rounded-full mx-auto flex items-center justify-center border-2 border-indigo-950 mb-2 shadow-xs">
               <Shield className="w-6 h-6 text-indigo-950" />
@@ -549,7 +549,7 @@ export const AdminPanelPage: React.FC<AdminPanelPageProps> = ({
                   required
                   value={adminPassword}
                   onChange={(e) => setAdminPassword(e.target.value)}
-                  placeholder="••••••••••••"
+                  placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢"
                   className="w-full px-3.5 py-2.5 pr-11 bg-gray-50 border border-gray-300 rounded-xl text-sm focus:outline-hidden focus:ring-2 focus:ring-sky-500 focus:bg-white"
                 />
                 <button
@@ -650,7 +650,7 @@ export const AdminPanelPage: React.FC<AdminPanelPageProps> = ({
               )}
               <span>{statusMessage.text}</span>
             </div>
-            <button onClick={() => setStatusMessage(null)} className="text-gray-500 hover:text-gray-900 text-xl leading-none">×</button>
+            <button onClick={() => setStatusMessage(null)} className="text-gray-500 hover:text-gray-900 text-xl leading-none">Ã—</button>
           </div>
         </div>
       )}
@@ -670,7 +670,7 @@ export const AdminPanelPage: React.FC<AdminPanelPageProps> = ({
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id as any)}
                   className={`w-full px-3 py-2.5 rounded-xl text-xs font-semibold flex items-center gap-2.5 transition-colors cursor-pointer text-left ${
-                    isActive ? 'bg-indigo-600 text-white' : 'text-gray-300 hover:text-white hover:bg-gray-800'
+                    isActive ? 'bg-[#48c9c0] text-white' : 'text-gray-300 hover:text-white hover:bg-gray-800'
                   }`}
                 >
                   <Icon className="w-4 h-4 shrink-0" />
@@ -706,8 +706,8 @@ export const AdminPanelPage: React.FC<AdminPanelPageProps> = ({
                   Updates are saved to Firebase and reflected on the public website automatically.
                 </p>
               </div>
-              <span className="px-2.5 py-1 bg-indigo-100 text-indigo-800 rounded-full text-xs font-medium flex items-center gap-1">
-                <span className="w-2 h-2 rounded-full bg-indigo-500 animate-pulse"></span>
+              <span className="px-2.5 py-1 bg-[#b8e8e3] text-indigo-800 rounded-full text-xs font-medium flex items-center gap-1">
+                <span className="w-2 h-2 rounded-full bg-[#48c9c0] animate-pulse"></span>
                 Live Feed
               </span>
             </div>
@@ -728,7 +728,7 @@ export const AdminPanelPage: React.FC<AdminPanelPageProps> = ({
               </div>
 
               {/* F/R Configuration */}
-              <div className="bg-indigo-50/60 p-4 rounded-xl border border-indigo-200 space-y-3">
+              <div className="bg-[#b8e8e3]/60 p-4 rounded-xl border border-indigo-200 space-y-3">
                 <span className="text-xs font-medium uppercase text-indigo-900 tracking-wider">
                   First Round (F/R)
                 </span>
@@ -770,7 +770,7 @@ export const AdminPanelPage: React.FC<AdminPanelPageProps> = ({
               </div>
 
               {/* S/R Configuration */}
-              <div className="bg-indigo-50/60 p-4 rounded-xl border border-indigo-200 space-y-3">
+              <div className="bg-[#b8e8e3]/60 p-4 rounded-xl border border-indigo-200 space-y-3">
                 <span className="text-xs font-medium uppercase text-indigo-900 tracking-wider">
                   Second Round (S/R)
                 </span>
@@ -813,7 +813,7 @@ export const AdminPanelPage: React.FC<AdminPanelPageProps> = ({
 
               <button
                 type="submit"
-                className="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-medium text-sm rounded-xl transition-all cursor-pointer shadow-md flex items-center justify-center gap-2"
+                className="w-full py-3 bg-[#48c9c0] hover:bg-[#48c9c0] text-white font-medium text-sm rounded-xl transition-all cursor-pointer shadow-md flex items-center justify-center gap-2"
               >
                 <Check className="w-5 h-5" />
                 <span>Publish Numbers Live to Public</span>
@@ -913,13 +913,13 @@ export const AdminPanelPage: React.FC<AdminPanelPageProps> = ({
                   style={{ backgroundColor: topBarBgColor }}
                 >
                   <div className="flex items-center gap-2">
-                    <span className="text-xl">🎯</span>
+                    <span className="text-xl">ðŸŽ¯</span>
                     <span className="font-medium text-indigo-950 font-sans text-base">
                       {siteName || 'Shillongmorningteer'}
                     </span>
                   </div>
                   <div className="w-8 h-8 rounded border border-indigo-950/30 flex items-center justify-center bg-white/20">
-                    <span className="text-xs font-medium">≡</span>
+                    <span className="text-xs font-medium">â‰¡</span>
                   </div>
                 </div>
               </div>
@@ -1018,7 +1018,7 @@ export const AdminPanelPage: React.FC<AdminPanelPageProps> = ({
 
                 <button
                   type="submit"
-                  className="py-2.5 px-4 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm rounded-xl cursor-pointer shadow-xs flex items-center gap-1.5"
+                  className="py-2.5 px-4 bg-[#48c9c0] hover:bg-[#48c9c0] text-white font-bold text-sm rounded-xl cursor-pointer shadow-xs flex items-center gap-1.5"
                 >
                   <Plus className="w-4 h-4" />
                   <span>Add Common Numbers</span>
@@ -1104,7 +1104,7 @@ export const AdminPanelPage: React.FC<AdminPanelPageProps> = ({
                     <input value={dailyDreamEnding} onChange={(e) => setDailyDreamEnding(e.target.value)} maxLength={2} className="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-xl text-sm" />
                   </div>
                 </div>
-                <button type="submit" className="py-2.5 px-5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm rounded-xl cursor-pointer">Save Today's Dream Pick</button>
+                <button type="submit" className="py-2.5 px-5 bg-[#48c9c0] hover:bg-[#48c9c0] text-white font-bold text-sm rounded-xl cursor-pointer">Save Today's Dream Pick</button>
               </form>
             </div>
 
@@ -1292,7 +1292,7 @@ export const AdminPanelPage: React.FC<AdminPanelPageProps> = ({
                 <div className="flex items-end">
                   <button
                     type="submit"
-                    className="w-full py-2 px-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs rounded-xl cursor-pointer"
+                    className="w-full py-2 px-3 bg-[#48c9c0] hover:bg-[#48c9c0] text-white font-bold text-xs rounded-xl cursor-pointer"
                   >
                     Save Record
                   </button>
@@ -1438,3 +1438,4 @@ export const AdminPanelPage: React.FC<AdminPanelPageProps> = ({
     </div>
   );
 };
+

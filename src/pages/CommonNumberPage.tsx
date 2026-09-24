@@ -124,7 +124,7 @@ export const CommonNumberPage: React.FC<CommonNumberPageProps> = ({
       {/* 1. TOP BAR (Exact Screenshot Style) */}
       <header
         className="sticky top-0 z-30 px-4 py-3 border-b border-indigo-900/10 shadow-xs flex items-center justify-between"
-        style={{ backgroundColor: settings.top_bar_bg_color || '#3b82f6' }}
+        style={{ backgroundColor: settings.top_bar_bg_color || '#48c9c0' }}
       >
         <button
           onClick={onBack}
@@ -159,7 +159,7 @@ export const CommonNumberPage: React.FC<CommonNumberPageProps> = ({
             SHILLONG
           </div>
 
-          <div className="grid grid-cols-3 border-b border-black bg-[#b8e1ec] text-center text-[16px] sm:text-[18px] font-normal leading-none">
+          <div className="grid grid-cols-3 border-b border-black bg-[#48c9c0] text-center text-[16px] sm:text-[18px] font-normal leading-none">
             <div className="py-1.5 border-r border-black">Direct</div>
             <div className="py-1.5 border-r border-black">House</div>
             <div className="py-1.5">Ending</div>
@@ -171,7 +171,7 @@ export const CommonNumberPage: React.FC<CommonNumberPageProps> = ({
             <div className="py-1.5">{tableData.table1.ending}</div>
           </div>
 
-          <div className="grid grid-cols-3 border-b border-black bg-[#b8e1ec] text-center text-[16px] sm:text-[18px] font-normal leading-none">
+          <div className="grid grid-cols-3 border-b border-black bg-[#48c9c0] text-center text-[16px] sm:text-[18px] font-normal leading-none">
             <div className="py-1.5 border-r border-black">Direct</div>
             <div className="py-1.5 border-r border-black">House</div>
             <div className="py-1.5">Ending</div>
@@ -339,7 +339,7 @@ export const CommonNumberPage: React.FC<CommonNumberPageProps> = ({
             {/* Table: Analysis Type | Purpose */}
             <div className="overflow-x-auto my-3 border border-slate-200 rounded-xl shadow-xs overflow-hidden">
               <table className="w-full text-left text-xs sm:text-sm border-collapse">
-                <thead className="bg-linear-to-r from-blue-600 via-indigo-600 to-blue-700 text-white font-medium border-b border-indigo-700">
+                <thead className="bg-linear-to-r from-[#48c9c0] via-[#48c9c0] to-[#48c9c0] text-white font-medium border-b border-indigo-700">
                   <tr>
                     <th className="p-2.5 border-r border-white/20">Analysis Type</th>
                     <th className="p-2.5">Purpose</th>
@@ -433,23 +433,23 @@ export const CommonNumberPage: React.FC<CommonNumberPageProps> = ({
               There are many misconceptions about common numbers. Understanding these myths can help create realistic expectations.
             </p>
             <div className="space-y-2.5">
-              <div className="bg-indigo-50/50 p-3 rounded-xl border border-indigo-200/80">
+              <div className="bg-[#b8e8e3]/50 p-3 rounded-xl border border-indigo-200/80">
                 <h3 className="font-medium text-gray-900 text-sm">Myth 1: Common Numbers Always Win</h3>
                 <p className="text-xs text-gray-600 mt-0.5">This is false. Common numbers are predictions, not guarantees.</p>
               </div>
-              <div className="bg-indigo-50/50 p-3 rounded-xl border border-indigo-200/80">
+              <div className="bg-[#b8e8e3]/50 p-3 rounded-xl border border-indigo-200/80">
                 <h3 className="font-medium text-gray-900 text-sm">Myth 2: One Method Knows Everything</h3>
                 <p className="text-xs text-gray-600 mt-0.5">No prediction method is perfect. Every system has limitations.</p>
               </div>
-              <div className="bg-indigo-50/50 p-3 rounded-xl border border-indigo-200/80">
+              <div className="bg-[#b8e8e3]/50 p-3 rounded-xl border border-indigo-200/80">
                 <h3 className="font-medium text-gray-900 text-sm">Myth 3: Past Results Guarantee Future Results</h3>
                 <p className="text-xs text-gray-600 mt-0.5">Historical data can reveal trends, but it cannot predict outcomes with certainty.</p>
               </div>
-              <div className="bg-indigo-50/50 p-3 rounded-xl border border-indigo-200/80">
+              <div className="bg-[#b8e8e3]/50 p-3 rounded-xl border border-indigo-200/80">
                 <h3 className="font-medium text-gray-900 text-sm">Myth 4: More Common Numbers Mean Better Chances</h3>
                 <p className="text-xs text-gray-600 mt-0.5">A long list of numbers does not automatically improve accuracy.</p>
               </div>
-              <div className="bg-indigo-50/50 p-3 rounded-xl border border-indigo-200/80">
+              <div className="bg-[#b8e8e3]/50 p-3 rounded-xl border border-indigo-200/80">
                 <h3 className="font-medium text-gray-900 text-sm">Myth 5: Experts Never Make Mistakes</h3>
                 <p className="text-xs text-gray-600 mt-0.5">Even experienced analysts can be wrong. Predictions are always subject to uncertainty.</p>
               </div>
@@ -516,7 +516,7 @@ export const CommonNumberPage: React.FC<CommonNumberPageProps> = ({
             {/* Table: Category | Description */}
             <div className="overflow-x-auto my-3 border border-slate-200 rounded-xl shadow-xs overflow-hidden">
               <table className="w-full text-left text-xs sm:text-sm border-collapse">
-                <thead className="bg-linear-to-r from-blue-600 via-indigo-600 to-blue-700 text-white font-medium border-b border-indigo-700">
+                <thead className="bg-linear-to-r from-[#48c9c0] via-[#48c9c0] to-[#48c9c0] text-white font-medium border-b border-indigo-700">
                   <tr>
                     <th className="p-2.5 border-r border-white/20">Category</th>
                     <th className="p-2.5">Description</th>
@@ -586,7 +586,7 @@ export const CommonNumberPage: React.FC<CommonNumberPageProps> = ({
             {/* Table: Statistical Measure | Purpose */}
             <div className="overflow-x-auto my-3 border border-slate-200 rounded-xl shadow-xs overflow-hidden">
               <table className="w-full text-left text-xs sm:text-sm border-collapse">
-                <thead className="bg-linear-to-r from-blue-600 via-indigo-600 to-blue-700 text-white font-medium border-b border-indigo-700">
+                <thead className="bg-linear-to-r from-[#48c9c0] via-[#48c9c0] to-[#48c9c0] text-white font-medium border-b border-indigo-700">
                   <tr>
                     <th className="p-2.5 border-r border-white/20">Statistical Measure</th>
                     <th className="p-2.5">Purpose</th>
@@ -718,7 +718,7 @@ export const CommonNumberPage: React.FC<CommonNumberPageProps> = ({
             {/* Table: Date | Common Number | Result | Notes */}
             <div className="overflow-x-auto my-3 border border-slate-200 rounded-xl shadow-xs overflow-hidden">
               <table className="w-full text-left text-xs sm:text-sm border-collapse">
-                <thead className="bg-linear-to-r from-blue-600 via-indigo-600 to-blue-700 text-white font-medium border-b border-indigo-700">
+                <thead className="bg-linear-to-r from-[#48c9c0] via-[#48c9c0] to-[#48c9c0] text-white font-medium border-b border-indigo-700">
                   <tr>
                     <th className="p-2 border-r border-white/20">Date</th>
                     <th className="p-2 border-r border-white/20">Common Number</th>
@@ -911,7 +911,7 @@ export const CommonNumberPage: React.FC<CommonNumberPageProps> = ({
                   >
                     <button
                       onClick={() => toggleFaq(index)}
-                      className="w-full text-left p-3.5 flex items-center justify-between gap-3 font-bold text-sm sm:text-base text-blue-700 hover:bg-blue-50/50 transition-colors cursor-pointer"
+                      className="w-full text-left p-3.5 flex items-center justify-between gap-3 font-bold text-sm sm:text-base text-blue-700 hover:bg-[#b8e8e3]/50 transition-colors cursor-pointer"
                     >
                       <span>{faq.q}</span>
                       <span className="shrink-0 text-red-500">
@@ -936,7 +936,7 @@ export const CommonNumberPage: React.FC<CommonNumberPageProps> = ({
         <div className="grid grid-cols-3 sm:grid-cols-6 gap-2 my-8 pt-6 border-t border-gray-200">
           <button
             onClick={() => handleNavClick('/')}
-            className="flex flex-col items-center justify-center p-2 rounded-xl bg-[#b8e1ec] text-white hover:bg-[#b8e1ec] transition-all text-center aspect-square shadow-xs cursor-pointer group"
+            className="flex flex-col items-center justify-center p-2 rounded-xl bg-[#48c9c0] text-white hover:bg-[#48c9c0] transition-all text-center aspect-square shadow-xs cursor-pointer group"
           >
             <span className="text-lg mb-1 group-hover:scale-110 transition-transform">ðŸŽ¯</span>
             <span className="text-[10px] sm:text-xs font-normal uppercase tracking-tight">Teer Result</span>
@@ -976,7 +976,7 @@ export const CommonNumberPage: React.FC<CommonNumberPageProps> = ({
 
           <button
             onClick={() => handleNavClick('/predict-target')}
-            className="flex flex-col items-center justify-center p-2 rounded-xl bg-indigo-600 text-white hover:bg-indigo-700 transition-all text-center aspect-square shadow-xs cursor-pointer group"
+            className="flex flex-col items-center justify-center p-2 rounded-xl bg-[#48c9c0] text-white hover:bg-[#48c9c0] transition-all text-center aspect-square shadow-xs cursor-pointer group"
           >
             <span className="text-lg mb-1 group-hover:scale-110 transition-transform">ðŸ¹</span>
             <span className="text-[10px] sm:text-xs font-normal uppercase tracking-tight">Predict Target</span>
@@ -995,5 +995,6 @@ export const CommonNumberPage: React.FC<CommonNumberPageProps> = ({
     </div>
   );
 };
+
 
 

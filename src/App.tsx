@@ -253,7 +253,7 @@ export default function App() {
 
   // 5. Default Public Homepage (Exact replica of mobile screenshot)
   return (
-    <div className="w-full min-h-screen bg-[#eef9f7] text-gray-900 antialiased selection:bg-indigo-200">
+    <div className="w-full min-h-screen bg-[#eef9f7] text-gray-900 antialiased selection:bg-[#b8e8e3]">
       {/* Fixed/Sticky Top Bar matching exact reference */}
       <TopBar
         settings={settings}
@@ -313,6 +313,7 @@ export default function App() {
     </div>
   );
 }
+
 
 
 

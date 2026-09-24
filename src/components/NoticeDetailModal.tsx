@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { X, Calendar, Bell, ShieldCheck } from 'lucide-react';
 import { NoticeEntry } from '../types';
 
@@ -20,11 +20,11 @@ export const NoticeDetailModal: React.FC<NoticeDetailModalProps> = ({ notice, on
         {/* Header */}
         <div className="flex items-start justify-between pb-3 border-b border-gray-100">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-indigo-50 text-indigo-700 flex items-center justify-center">
+            <div className="w-8 h-8 rounded-lg bg-[#b8e8e3] text-indigo-700 flex items-center justify-center">
               <Bell className="w-4 h-4" />
             </div>
             <div>
-              <span className="text-[11px] font-bold uppercase tracking-wider text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded-full border border-indigo-200/60">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-indigo-700 bg-[#b8e8e3] px-2 py-0.5 rounded-full border border-indigo-200/60">
                 Official Notice
               </span>
               <p className="text-xs text-gray-500 font-medium flex items-center gap-1 mt-1">
@@ -46,7 +46,7 @@ export const NoticeDetailModal: React.FC<NoticeDetailModalProps> = ({ notice, on
           <h2 className="text-lg sm:text-xl font-black text-indigo-950 font-sans leading-snug">
             {notice.title}
           </h2>
-          <div className="text-sm text-gray-700 leading-relaxed whitespace-pre-line bg-indigo-50/30 p-3.5 rounded-xl border border-indigo-100">
+          <div className="text-sm text-gray-700 leading-relaxed whitespace-pre-line bg-[#b8e8e3]/30 p-3.5 rounded-xl border border-indigo-100">
             {notice.body}
           </div>
           <div className="flex items-center gap-2 text-xs text-gray-500 pt-2 border-t border-gray-100">
@@ -59,7 +59,7 @@ export const NoticeDetailModal: React.FC<NoticeDetailModalProps> = ({ notice, on
         <div className="pt-2 border-t border-gray-100">
           <button
             onClick={onClose}
-            className="w-full py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-bold text-sm transition-colors cursor-pointer shadow-xs"
+            className="w-full py-2.5 bg-[#48c9c0] hover:bg-[#48c9c0] text-white rounded-xl font-bold text-sm transition-colors cursor-pointer shadow-xs"
           >
             Close Notice
           </button>
@@ -68,3 +68,4 @@ export const NoticeDetailModal: React.FC<NoticeDetailModalProps> = ({ notice, on
     </div>
   );
 };
+

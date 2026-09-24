@@ -158,7 +158,7 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
       {/* 1. Top Bar with Home Back Button */}
       <div
         className="sticky top-0 z-30 px-4 py-3 border-b border-indigo-950/10 shadow-xs flex items-center justify-between"
-        style={{ backgroundColor: settings.top_bar_bg_color || '#3b82f6' }}
+        style={{ backgroundColor: settings.top_bar_bg_color || '#48c9c0' }}
       >
         <button
           onClick={onBack}
@@ -197,7 +197,7 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
 
         {/* 3. Realistic Premium Graphic Banner matching the Shillong Morning Teer aesthetic */}
         <div className="w-full rounded-2xl overflow-hidden shadow-lg border border-slate-700 relative bg-linear-to-r from-[#0d1f1c] via-[#102b23] to-[#0b1715] text-white">
-          <div id="previous-banner-live" className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none">
+          <div id="previous-banner-live" className="absolute top-3 sm:top-4 left-1/2 -translate-x-1/2 z-20 pointer-events-none">
             <div className="inline-flex items-center gap-2 rounded-full bg-white/95 px-5 py-2.5 shadow-xl border border-red-200">
               <span className="relative flex h-4 w-4">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-500 opacity-75"></span>
@@ -338,7 +338,7 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
                 F/R 10:30 AM &amp; S/R 11:30 AM
               </text>
 
-              <rect x="335" y="0" width="140" height="24" rx="12" fill="#1d4ed8" opacity="0.9" />
+              <rect x="335" y="0" width="140" height="24" rx="12" fill="#48c9c0" opacity="0.9" />
               <text x="405" y="16" fill="#ffffff" fontSize="9" fontWeight="normal" textAnchor="middle" fontFamily="sans-serif">
                 ACCURATE &amp; VERIFIED
               </text>
@@ -402,7 +402,7 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
               onClick={() => { setSelectedMonth('all'); setCurrentPage(1); }}
               className={`px-3 py-1.5 rounded-md text-xs font-normal whitespace-nowrap transition-colors cursor-pointer ${
                 selectedMonth === 'all'
-                  ? 'bg-[#b8e1ec] text-white shadow-xs'
+                  ? 'bg-[#48c9c0] text-white shadow-xs'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
             >
@@ -414,7 +414,7 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
                 onClick={() => { setSelectedMonth(m); setCurrentPage(1); }}
                 className={`px-3 py-1.5 rounded-md text-xs font-normal whitespace-nowrap transition-colors cursor-pointer ${
                   selectedMonth === m
-                    ? 'bg-[#b8e1ec] text-white shadow-xs'
+                    ? 'bg-[#48c9c0] text-white shadow-xs'
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                 }`}
               >
@@ -746,6 +746,8 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
     </div>
   );
 };
+
+
 
 
 

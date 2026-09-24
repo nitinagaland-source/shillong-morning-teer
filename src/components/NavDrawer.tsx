@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import {
   X,
   Home,
@@ -58,11 +58,11 @@ export const NavDrawer: React.FC<NavDrawerProps> = ({
         {/* Top Header of Drawer */}
         <div
           className="p-4 flex items-center justify-between border-b border-slate-900/10"
-          style={{ backgroundColor: settings.top_bar_bg_color || '#3b82f6' }}
+          style={{ backgroundColor: settings.top_bar_bg_color || '#48c9c0' }}
         >
           <div className="flex items-center gap-2">
             <div className="w-8 h-8 rounded-full border border-slate-900/40 flex items-center justify-center bg-white shadow-2xs">
-              <span className="text-slate-950 font-medium text-xs">🎯</span>
+              <span className="text-slate-950 font-medium text-xs">ðŸŽ¯</span>
             </div>
             <div>
               <h2 className="text-base font-medium text-slate-950 font-sans leading-tight">
@@ -82,7 +82,7 @@ export const NavDrawer: React.FC<NavDrawerProps> = ({
         </div>
 
         {/* Timings Quick Banner */}
-        <div className="bg-indigo-50/60 border-b border-indigo-100 p-3 flex items-center gap-2.5 text-xs text-slate-700">
+        <div className="bg-[#b8e8e3]/60 border-b border-indigo-100 p-3 flex items-center gap-2.5 text-xs text-slate-700">
           <Clock className="w-4 h-4 text-indigo-600 shrink-0" />
           <div>
             <span className="font-medium text-indigo-950">Game Timings:</span> F/R 10:30 AM | S/R 11:30 AM
@@ -100,10 +100,10 @@ export const NavDrawer: React.FC<NavDrawerProps> = ({
                   onNavigate(item.path);
                   onClose();
                 }}
-                className="w-full flex items-center justify-between p-3 rounded-xl hover:bg-indigo-50/60 active:bg-indigo-100/70 transition-colors text-left font-normal text-sm text-slate-800 cursor-pointer group"
+                className="w-full flex items-center justify-between p-3 rounded-xl hover:bg-[#b8e8e3]/60 active:bg-[#b8e8e3]/70 transition-colors text-left font-normal text-sm text-slate-800 cursor-pointer group"
               >
                 <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-indigo-50 group-hover:bg-white flex items-center justify-center text-indigo-700 group-hover:text-indigo-900 border border-indigo-100 transition-colors">
+                  <div className="w-8 h-8 rounded-lg bg-[#b8e8e3] group-hover:bg-white flex items-center justify-center text-indigo-700 group-hover:text-indigo-900 border border-indigo-100 transition-colors">
                     <Icon className="w-4 h-4" />
                   </div>
                   <span className="font-normal text-slate-900">{item.label}</span>
@@ -114,7 +114,7 @@ export const NavDrawer: React.FC<NavDrawerProps> = ({
                     <span
                       className={`text-[10px] font-normal px-2 py-0.5 rounded-full ${
                         item.badge === 'Live'
-                          ? 'bg-blue-100 text-blue-800'
+                          ? 'bg-[#b8e8e3] text-blue-800'
                           : item.badge === 'Daily'
                           ? 'bg-amber-100 text-amber-800'
                           : item.badge === 'Archive'
@@ -146,3 +146,4 @@ export const NavDrawer: React.FC<NavDrawerProps> = ({
     </div>
   );
 };
+

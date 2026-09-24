@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { NoticeEntry } from '../types';
 import { ChevronRight } from 'lucide-react';
 
@@ -77,3 +77,4 @@ export const NoticesFeed: React.FC<NoticesFeedProps> = ({
     </section>
   );
 };
+
