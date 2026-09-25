@@ -14,6 +14,7 @@ import {
   ChevronRight,
 } from 'lucide-react';
 import { SiteSettings } from '../types';
+import logo from '../assets/logo.webp';
 
 interface NavDrawerProps {
   isOpen: boolean;
@@ -58,12 +59,10 @@ export const NavDrawer: React.FC<NavDrawerProps> = ({
         {/* Top Header of Drawer */}
         <div
           className="p-4 flex items-center justify-between border-b border-slate-900/10"
-          style={{ backgroundColor: settings.top_bar_bg_color || '#48c9c0' }}
+          style={{ backgroundColor: '#b8e1ec' }}
         >
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-full border border-slate-900/40 flex items-center justify-center bg-white shadow-2xs">
-              <span className="text-slate-950 font-medium text-xs">ðŸŽ¯</span>
-            </div>
+            <img src={logo} alt='Shillong Morning Teer logo' className='w-8 h-8 object-contain shrink-0' />
             <div>
               <h2 className="text-base font-medium text-slate-950 font-sans leading-tight">
                 {settings.site_name || 'Shillongmorningteer'}
