@@ -449,7 +449,7 @@ export const initialNotices: NoticeEntry[] = [
     id: 'notice-2',
     title: 'Morning Teer Timings and Verification Procedure',
     date: '18/09/2026',
-    body: 'Morning Teer First Round target shooting commences promptly at 10:15 AM; the official verified figure is recorded at 10:30 AM. Second round target shooting commences at 11:15 AM; final score recorded at 11:30 AM sharp. Results undergo dual ground verification before being published on our live dashboard.',
+    body: 'Morning Teer First Round target shooting commences promptly at 10:20 AM; the official verified figure is recorded at 10:30 AM. Second round target shooting commences at 11:20 AM; final score recorded at 11:30 AM sharp. Results undergo dual ground verification before being published on our live dashboard.',
     priority: 'normal',
     created_at: '2026-09-18T06:30:00Z',
   },
@@ -462,6 +462,7 @@ export const initialNotices: NoticeEntry[] = [
     created_at: '2026-09-10T12:00:00Z',
   },
 ];
+
 
 
 

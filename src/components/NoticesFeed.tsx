@@ -53,10 +53,6 @@ export const NoticesFeed: React.FC<NoticesFeedProps> = ({
               )}
             </div>
 
-            <p className="text-xs text-gray-400 font-normal mt-1 mb-2">
-              {notice.date}
-            </p>
-
             <p className="text-xs sm:text-sm text-gray-600 leading-relaxed line-clamp-2 font-normal">
               {notice.body}
             </p>
@@ -77,6 +73,7 @@ export const NoticesFeed: React.FC<NoticesFeedProps> = ({
     </section>
   );
 };
+
 
 
 
