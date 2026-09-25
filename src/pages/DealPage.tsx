@@ -37,17 +37,6 @@ export const DealPage: React.FC<DealPageProps> = ({ settings, onBack }) => {
       discount: '100% FREE',
     },
     {
-      id: 'khanapara-pass',
-      title: 'Khanapara Archery Tournament Club Access',
-      category: 'Tournament',
-      badge: 'TOURNAMENT',
-      badgeColor: 'bg-amber-100 text-amber-800 border-amber-300',
-      description: 'Spectator gallery accreditation for inter-district Meghalaya & Assam archers division. Official archery verification scorecard included.',
-      validity: 'Weekend Specials',
-      code: 'KHANAPARA-ACCESS-PASS',
-      discount: 'VERIFIED',
-    },
-    {
       id: 'dream-dictionary-pdf',
       title: 'Traditional Khasi Archery Dream Interpretations PDF',
       category: 'Guide',
@@ -190,6 +179,8 @@ export const DealPage: React.FC<DealPageProps> = ({ settings, onBack }) => {
     </div>
   );
 };
+
+
 
 
 
