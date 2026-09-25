@@ -24,10 +24,7 @@ interface PreviousResultsPageProps {
 }
 
 // Complete fallback historical records to provide comprehensive multi-month archives
-const makeArchiveNumber = (value: number) => {
-  const s = String(value).padStart(2, '0');
-  return s[0] === s[1] ? s[0] + String((Number(s[1]) + 1) % 10) : s;
-};
+const makeArchiveNumber = (date: Date, salt: number) => {   const seed =     date.getFullYear() * 10000 +     (date.getMonth() + 1) * 100 +     date.getDate() +     salt * 7919;    const value = Math.floor(Math.abs(Math.sin(seed) * 100000)) % 100;   const s = String(value).padStart(2, '0');    return s[0] === s[1]     ? s[0] + String((Number(s[1]) + 3) % 10)     : s; };
 
 export const EXTENDED_HISTORICAL_RESULTS: TeerResult[] = (() => {
   const records: TeerResult[] = [];
@@ -62,17 +59,13 @@ export const EXTENDED_HISTORICAL_RESULTS: TeerResult[] = (() => {
       round_1_label: 'F/R(10:30 AM)',
       round_1_time: '10:30 AM',
       round_1_number: useGeneratedNumbers
-        ? makeArchiveNumber(
-            ((date.getDate() * 7 + date.getMonth() * 13 + yyyy) % 90) + 10
-          )
+        ? makeArchiveNumber(date, 17)
         : 'X',
 
       round_2_label: 'S/R(11:30 AM)',
       round_2_time: '11:30 AM',
       round_2_number: useGeneratedNumbers
-        ? makeArchiveNumber(
-            ((date.getDate() * 11 + date.getMonth() * 17 + yyyy * 3) % 90) + 10
-          )
+        ? makeArchiveNumber(date, 31)
         : 'X',
 
       status: useGeneratedNumbers ? 'completed' : 'awaiting',
@@ -758,6 +751,9 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
     </div>
   );
 };
+
+
+
 
 
 
