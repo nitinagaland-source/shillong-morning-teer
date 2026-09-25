@@ -124,7 +124,7 @@ export const CommonNumberPage: React.FC<CommonNumberPageProps> = ({
       {/* 1. TOP BAR (Exact Screenshot Style) */}
       <header
         className="sticky top-0 z-30 px-4 py-3 border-b border-[#48c9c0]/10 shadow-xs flex items-center justify-between"
-        style={{ backgroundColor: '#48c9c0' }}
+        style={{ backgroundColor: '#b8e1ec' }}
       >
         <button
           onClick={onBack}
@@ -156,7 +156,7 @@ export const CommonNumberPage: React.FC<CommonNumberPageProps> = ({
             SHILLONG
           </div>
 
-          <div className="grid grid-cols-3 border-b border-black bg-[#48c9c0] text-center text-[16px] sm:text-[18px] font-normal leading-none">
+          <div className="grid grid-cols-3 border-b border-black bg-[#b8e1ec] text-center text-[16px] sm:text-[18px] font-normal leading-none">
             <div className="py-1.5 border-r border-black">Direct</div>
             <div className="py-1.5 border-r border-black">House</div>
             <div className="py-1.5">Ending</div>
@@ -168,7 +168,7 @@ export const CommonNumberPage: React.FC<CommonNumberPageProps> = ({
             <div className="py-1.5">{tableData.table1.ending}</div>
           </div>
 
-          <div className="grid grid-cols-3 border-b border-black bg-[#48c9c0] text-center text-[16px] sm:text-[18px] font-normal leading-none">
+          <div className="grid grid-cols-3 border-b border-black bg-[#b8e1ec] text-center text-[16px] sm:text-[18px] font-normal leading-none">
             <div className="py-1.5 border-r border-black">Direct</div>
             <div className="py-1.5 border-r border-black">House</div>
             <div className="py-1.5">Ending</div>
@@ -905,7 +905,7 @@ export const CommonNumberPage: React.FC<CommonNumberPageProps> = ({
                   >
                     <button
                       onClick={() => toggleFaq(index)}
-                      className="w-full text-left p-3.5 flex items-center justify-between gap-3 font-bold text-sm sm:text-base text-[#111827] hover:bg-[#48c9c0]/50 transition-colors cursor-pointer"
+                      className="w-full text-left p-3.5 flex items-center justify-between gap-3 font-bold text-sm sm:text-base text-[#111827] hover:bg-[#b8e1ec]/50 transition-colors cursor-pointer"
                     >
                       <span>{faq.q}</span>
                       <span className="shrink-0 text-red-500">
@@ -930,7 +930,7 @@ export const CommonNumberPage: React.FC<CommonNumberPageProps> = ({
         <div className="grid grid-cols-3 sm:grid-cols-6 gap-2 my-8 pt-6 border-t border-gray-200">
           <button
             onClick={() => handleNavClick('/')}
-            className="flex flex-col items-center justify-center p-2 rounded-xl bg-[#48c9c0] text-white hover:bg-[#48c9c0] transition-all text-center aspect-square shadow-xs cursor-pointer group"
+            className="flex flex-col items-center justify-center p-2 rounded-xl bg-[#b8e1ec] text-white hover:bg-[#b8e1ec] transition-all text-center aspect-square shadow-xs cursor-pointer group"
           >
             <span className="text-[10px] sm:text-xs font-normal uppercase tracking-tight">Teer Result</span>
           </button>
@@ -966,7 +966,7 @@ export const CommonNumberPage: React.FC<CommonNumberPageProps> = ({
 
           <button
             onClick={() => handleNavClick('/predict-target')}
-            className="flex flex-col items-center justify-center p-2 rounded-xl bg-[#48c9c0] text-white hover:bg-[#48c9c0] transition-all text-center aspect-square shadow-xs cursor-pointer group"
+            className="flex flex-col items-center justify-center p-2 rounded-xl bg-[#b8e1ec] text-white hover:bg-[#b8e1ec] transition-all text-center aspect-square shadow-xs cursor-pointer group"
           >
             <span className="text-[10px] sm:text-xs font-normal uppercase tracking-tight">Predict Target</span>
           </button>
@@ -984,6 +984,7 @@ export const CommonNumberPage: React.FC<CommonNumberPageProps> = ({
     </div>
   );
 };
+
 
 
 

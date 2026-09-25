@@ -133,7 +133,7 @@ export const AnalyticsPage: React.FC<AnalyticsPageProps> = ({
       {/* Top Bar Header */}
       <div
         className="sticky top-0 z-30 px-4 py-3 border-b border-[#48c9c0]/10 shadow-xs flex items-center justify-between"
-        style={{ backgroundColor: '#48c9c0' }}
+        style={{ backgroundColor: '#b8e1ec' }}
       >
         <button
           onClick={onBack}
@@ -178,7 +178,7 @@ export const AnalyticsPage: React.FC<AnalyticsPageProps> = ({
                 onClick={() => setTimeRange(r)}
                 className={`px-3 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer ${
                   timeRange === r
-                    ? 'bg-[#48c9c0] text-white shadow-xs'
+                    ? 'bg-[#b8e1ec] text-white shadow-xs'
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                 }`}
               >
@@ -266,7 +266,7 @@ export const AnalyticsPage: React.FC<AnalyticsPageProps> = ({
               </div>
               <div
                 style={{ width: `${stats.evenPercent}%` }}
-                className="bg-[#48c9c0] h-full flex items-center justify-center text-[9px] font-normal text-white"
+                className="bg-[#b8e1ec] h-full flex items-center justify-center text-[9px] font-normal text-white"
               >
                 {stats.evenPercent}% Even
               </div>
@@ -337,6 +337,7 @@ export const AnalyticsPage: React.FC<AnalyticsPageProps> = ({
     </div>
   );
 };
+
 
 
 

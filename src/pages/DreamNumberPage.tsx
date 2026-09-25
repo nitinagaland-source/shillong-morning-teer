@@ -159,7 +159,7 @@ export const DreamNumberPage: React.FC<DreamNumberPageProps> = ({
       {/* Top Bar with Home Back Button */}
       <div
         className="sticky top-0 z-30 px-4 py-3 border-b border-[#48c9c0]/10 shadow-xs flex items-center justify-between"
-        style={{ backgroundColor: '#48c9c0' }}
+        style={{ backgroundColor: '#b8e1ec' }}
       >
         <button
           onClick={onBack}
@@ -194,7 +194,7 @@ export const DreamNumberPage: React.FC<DreamNumberPageProps> = ({
                 SHILLONG
               </div>
 
-              <div className="grid grid-cols-3 border-b border-black bg-[#48c9c0] text-center text-[16px] sm:text-[18px] font-normal leading-none">
+              <div className="grid grid-cols-3 border-b border-black bg-[#b8e1ec] text-center text-[16px] sm:text-[18px] font-normal leading-none">
                 <div className="py-1.5 border-r border-black">Direct</div>
                 <div className="py-1.5 border-r border-black">House</div>
                 <div className="py-1.5">Ending</div>
@@ -802,6 +802,7 @@ export const DreamNumberPage: React.FC<DreamNumberPageProps> = ({
     </div>
   );
 };
+
 
 
 

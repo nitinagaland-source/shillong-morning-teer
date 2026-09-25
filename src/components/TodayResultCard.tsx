@@ -12,8 +12,8 @@ export const TodayResultCard: React.FC<TodayResultCardProps> = ({ result, settin
   const todayIST = getTodayISTDateString();
   const isCurrentDay = !result.date || result.date === todayIST;
   const isAwaiting = result.status === 'awaiting';
-  const round1Number = isCurrentDay && !isAwaiting ? (result.round_1_number?.trim() || 'XX') : 'XX';
-  const round2Number = isCurrentDay && !isAwaiting ? (result.round_2_number?.trim() || 'XX') : 'XX';
+  const round1Number = isCurrentDay && result.round_1_number?.trim() && result.round_1_number.trim() !== 'X' ? result.round_1_number.trim() : 'Waiting for result...';
+  const round2Number = isCurrentDay && result.round_2_number?.trim() && result.round_2_number.trim() !== 'X' ? result.round_2_number.trim() : 'Waiting for result...';
   const displayDate = isCurrentDay ? (result.date || todayIST) : todayIST;
 
   return (
@@ -63,6 +63,8 @@ export const TodayResultCard: React.FC<TodayResultCardProps> = ({ result, settin
     </section>
   );
 };
+
+
 
 
 

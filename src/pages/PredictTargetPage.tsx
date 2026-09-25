@@ -70,7 +70,7 @@ export const PredictTargetPage: React.FC<PredictTargetPageProps> = ({
       {/* Top Bar Header */}
       <div
         className="sticky top-0 z-30 px-4 py-3 border-b border-[#48c9c0]/10 shadow-xs flex items-center justify-between"
-        style={{ backgroundColor: '#48c9c0' }}
+        style={{ backgroundColor: '#b8e1ec' }}
       >
         <button
           onClick={onBack}
@@ -215,7 +215,7 @@ export const PredictTargetPage: React.FC<PredictTargetPageProps> = ({
 
             <button
               type="submit"
-              className="w-full py-2.5 bg-[#48c9c0] hover:bg-[#48c9c0] text-white rounded-xl text-xs font-normal transition-colors cursor-pointer flex items-center justify-center gap-1.5 shadow-xs"
+              className="w-full py-2.5 bg-[#b8e1ec] hover:bg-[#b8e1ec] text-white rounded-xl text-xs font-normal transition-colors cursor-pointer flex items-center justify-center gap-1.5 shadow-xs"
             >
               <span>Calculate Projected Targets</span>
               <ArrowRight className="w-3.5 h-3.5" />
@@ -264,6 +264,7 @@ export const PredictTargetPage: React.FC<PredictTargetPageProps> = ({
     </div>
   );
 };
+
 
 
 

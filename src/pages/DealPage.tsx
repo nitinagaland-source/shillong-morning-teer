@@ -71,7 +71,7 @@ export const DealPage: React.FC<DealPageProps> = ({ settings, onBack }) => {
       {/* Top Bar Header */}
       <div
         className="sticky top-0 z-30 px-4 py-3 border-b border-[#48c9c0]/10 shadow-xs flex items-center justify-between"
-        style={{ backgroundColor: '#48c9c0' }}
+        style={{ backgroundColor: '#b8e1ec' }}
       >
         <button
           onClick={onBack}
@@ -148,7 +148,7 @@ export const DealPage: React.FC<DealPageProps> = ({ settings, onBack }) => {
                 </div>
                 <button
                   onClick={() => handleCopy(deal.code)}
-                  className="py-1.5 px-3 bg-[#48c9c0] hover:bg-[#48c9c0] text-white text-xs font-bold rounded-lg cursor-pointer flex items-center gap-1 transition-colors shrink-0 shadow-xs"
+                  className="py-1.5 px-3 bg-[#b8e1ec] hover:bg-[#b8e1ec] text-white text-xs font-bold rounded-lg cursor-pointer flex items-center gap-1 transition-colors shrink-0 shadow-xs"
                 >
                   {copiedCode === deal.code ? (
                     <>
@@ -190,6 +190,7 @@ export const DealPage: React.FC<DealPageProps> = ({ settings, onBack }) => {
     </div>
   );
 };
+
 
 
 
