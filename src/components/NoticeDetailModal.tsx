@@ -1,5 +1,5 @@
 ﻿import React from 'react';
-import { X, Calendar, Bell, ShieldCheck } from 'lucide-react';
+import { X, Bell, ShieldCheck } from 'lucide-react';
 import { NoticeEntry } from '../types';
 
 interface NoticeDetailModalProps {
@@ -28,8 +28,6 @@ export const NoticeDetailModal: React.FC<NoticeDetailModalProps> = ({ notice, on
                 Official Notice
               </span>
               <p className="text-xs text-gray-500 font-medium flex items-center gap-1 mt-1">
-                <Calendar className="w-3.5 h-3.5" />
-                <span>{notice.date}</span>
               </p>
             </div>
           </div>
@@ -68,6 +66,8 @@ export const NoticeDetailModal: React.FC<NoticeDetailModalProps> = ({ notice, on
     </div>
   );
 };
+
+
 
 
 
