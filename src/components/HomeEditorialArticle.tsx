@@ -53,7 +53,7 @@ export const HomeEditorialArticle: React.FC = () => {
     },
     {
       q: '11. What is the difference between Morning Teer and Shillong Teer?',
-      a: 'Morning Teer takes place earlier in the day with morning archery rounds (usually between 10:30 AM and 11:45 AM), whereas regular Shillong Teer takes place during the late afternoon (around 3:45 PM and 4:45 PM). Both follow the same traditional archery counting rules.',
+      a: 'Morning Teer takes place earlier in the day with morning archery rounds (usually between 10:20 AM and 11:20 AM), whereas regular Shillong Teer takes place during the late afternoon (around 3:45 PM and 4:45 PM). Both follow the same traditional archery counting rules.',
     },
     {
       q: '12. Can previous Teer results predict upcoming Morning Teer live results?',
@@ -61,7 +61,7 @@ export const HomeEditorialArticle: React.FC = () => {
     },
     {
       q: '13. What is the name of a reliable website for Morning Teer results?',
-      a: 'Shillongmorningteer (shillongmorningteer.com / shillongmorningteer.com) is the premier trusted online source for fast, reliable, and verified morning archery results, daily common numbers, and historical archive tables.',
+      a: 'Shillongmorningteer (shillongmorningteer.site / shillongmorningteer.site) is the premier trusted online source for fast, reliable, and verified morning archery results, daily common numbers, and historical archive tables.',
     },
   ];
 
@@ -522,6 +522,8 @@ export const HomeEditorialArticle: React.FC = () => {
     </div>
   );
 };
+
+
 
 
 
