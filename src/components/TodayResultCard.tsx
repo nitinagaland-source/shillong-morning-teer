@@ -53,16 +53,17 @@ export const TodayResultCard: React.FC<TodayResultCardProps> = ({ result, settin
 
         <div className="grid grid-cols-2 text-center bg-white min-h-[50px] sm:min-h-[56px]">
           <div id="fr-number-col" className="px-2 border-r-2 border-black flex items-center justify-center">
-            <span className="text-[32px] sm:text-[38px] leading-none font-extrabold text-black tabular-nums font-sans">{round1Number}</span>
+            <span className={round1Number === 'Waiting for result...' ? 'text-[15px] sm:text-[16px] font-normal text-gray-500 whitespace-nowrap' : 'text-[32px] sm:text-[38px] leading-none font-extrabold text-black tabular-nums font-sans'}>{round1Number}</span>
           </div>
           <div id="sr-number-col" className="px-2 flex items-center justify-center">
-            <span className="text-[32px] sm:text-[38px] leading-none font-extrabold text-black tabular-nums font-sans">{round2Number}</span>
+            <span className={round2Number === 'Waiting for result...' ? 'text-[15px] sm:text-[16px] font-normal text-gray-500 whitespace-nowrap' : 'text-[32px] sm:text-[38px] leading-none font-extrabold text-black tabular-nums font-sans'}>{round2Number}</span>
           </div>
         </div>
       </div>
     </section>
   );
 };
+
 
 
 
