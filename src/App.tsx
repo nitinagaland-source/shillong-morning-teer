@@ -79,7 +79,7 @@ export default function App() {
       if (p.status === 'fulfilled') setPreviousResults(p.value);
       if (c.status === 'fulfilled') setCommonNumbers(c.value);
       if (d.status === 'fulfilled') setDreamNumbers(d.value);
-      if (n.status === 'fulfilled') setNotices(n.value.filter((notice) => notice.title !== 'Sunday & Public Holiday Archery Schedules'));
+      if (n.status === 'fulfilled') setNotices(n.value.filter((notice) => notice.title !== 'Sunday & Public Holiday Archery Schedules').map((notice) => ({ ...notice, body: (notice.body || '').replaceAll('10:15 AM', '10:20 AM').replaceAll('11:15 AM', '11:20 AM') })));
     } catch (err) {
       console.warn('Backend sync failed, continuing with cached seed:', err);
     }
@@ -313,6 +313,7 @@ export default function App() {
     </div>
   );
 }
+
 
 
 
