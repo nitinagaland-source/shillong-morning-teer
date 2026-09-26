@@ -26,6 +26,8 @@ interface PreviousResultsPageProps {
 // Complete fallback historical records to provide comprehensive multi-month archives
 const makeArchiveNumber = (date: Date, salt: number) => {   const seed =     date.getFullYear() * 10000 +     (date.getMonth() + 1) * 100 +     date.getDate() +     salt * 7919;    const value = Math.floor(Math.abs(Math.sin(seed) * 100000)) % 100;   const s = String(value).padStart(2, '0');    return s[0] === s[1]     ? s[0] + String((Number(s[1]) + 3) % 10)     : s; };
 
+const suppliedHistoricalResults: Record<string, { fr: string; sr: string }> = {"01/08/2026":{"fr":"18","sr":"31"},"02/08/2026":{"fr":"45","sr":"29"},"03/08/2026":{"fr":"83","sr":"55"},"04/08/2026":{"fr":"39","sr":"05"},"05/08/2026":{"fr":"06","sr":"66"},"06/08/2026":{"fr":"82","sr":"76"},"07/08/2026":{"fr":"55","sr":"81"},"08/08/2026":{"fr":"92","sr":"26"},"09/08/2026":{"fr":"02","sr":"14"},"10/08/2026":{"fr":"27","sr":"32"},"11/08/2026":{"fr":"78","sr":"87"},"12/08/2026":{"fr":"47","sr":"57"},"13/08/2026":{"fr":"63","sr":"94"},"14/08/2026":{"fr":"86","sr":"44"},"15/08/2026":{"fr":"99","sr":"22"},"16/08/2026":{"fr":"78","sr":"08"},"17/08/2026":{"fr":"04","sr":"48"},"18/08/2026":{"fr":"29","sr":"29"},"19/08/2026":{"fr":"97","sr":"84"},"20/08/2026":{"fr":"69","sr":"77"},"21/08/2026":{"fr":"37","sr":"74"},"22/08/2026":{"fr":"42","sr":"69"},"23/08/2026":{"fr":"96","sr":"44"},"24/08/2026":{"fr":"53","sr":"71"},"25/08/2026":{"fr":"88","sr":"93"},"26/08/2026":{"fr":"19","sr":"41"},"27/08/2026":{"fr":"35","sr":"73"},"28/08/2026":{"fr":"98","sr":"74"},"29/08/2026":{"fr":"06","sr":"67"},"30/08/2026":{"fr":"57","sr":"76"},"31/08/2026":{"fr":"33","sr":"82"},"01/09/2026":{"fr":"81","sr":"73"},"02/09/2026":{"fr":"04","sr":"21"},"03/09/2026":{"fr":"40","sr":"67"},"04/09/2026":{"fr":"43","sr":"54"},"05/09/2026":{"fr":"81","sr":"33"},"06/09/2026":{"fr":"42","sr":"97"},"07/09/2026":{"fr":"79","sr":"22"},"08/09/2026":{"fr":"92","sr":"03"},"09/09/2026":{"fr":"35","sr":"89"},"10/09/2026":{"fr":"80","sr":"66"},"11/09/2026":{"fr":"52","sr":"17"},"12/09/2026":{"fr":"44","sr":"97"},"13/09/2026":{"fr":"88","sr":"43"},"14/09/2026":{"fr":"63","sr":"13"},"15/09/2026":{"fr":"19","sr":"71"},"16/09/2026":{"fr":"95","sr":"80"},"17/09/2026":{"fr":"13","sr":"58"},"18/09/2026":{"fr":"76","sr":"44"},"19/09/2026":{"fr":"21","sr":"82"},"20/09/2026":{"fr":"63","sr":"53"},"21/09/2026":{"fr":"02","sr":"47"},"22/09/2026":{"fr":"71","sr":"19"},"23/09/2026":{"fr":"39","sr":"57"},"24/09/2026":{"fr":"94","sr":"25"},"25/09/2026":{"fr":"26","sr":"95"},"26/09/2026":{"fr":"00","sr":"57"}};
+
 export const EXTENDED_HISTORICAL_RESULTS: TeerResult[] = (() => {
   const records: TeerResult[] = [];
 
@@ -94,6 +96,7 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
     const map = new Map<string, TeerResult>();
     // First fill with extended records
     EXTENDED_HISTORICAL_RESULTS.forEach((r) => map.set(r.date, r));
+    Object.entries(suppliedHistoricalResults).forEach(([date, values]) => map.set(date, { id: 'supplied-' + date.replaceAll('/', '-'), date, round_1_label: 'F/R(10:30 AM)', round_1_time: '10:30 AM', round_1_number: values.fr, round_2_label: 'S/R(11:30 AM)', round_2_time: '11:30 AM', round_2_number: values.sr, status: 'completed', created_at: '', updated_at: '' }));
     // Live results take precedence
     results.forEach((r: any) => {
       const parts = r.date.split('/');
@@ -752,6 +755,7 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
     </div>
   );
 };
+
 
 
 
