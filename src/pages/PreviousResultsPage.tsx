@@ -663,7 +663,7 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
             {[
               {
                 q: 'What time are Shillong Morning Teer results declared daily?',
-                a: 'Shillong Morning Teer results are declared in two rounds: the First Round (F/R) is announced at 10:20 AM, and the Second Round (S/R) is announced at 11:20 AM daily.',
+                a: 'Shillong Morning Teer results are declared in two rounds: the First Round (F/R) is announced at 10:30 AM, and the Second Round (S/R) is announced at 11:30 AM daily.',
               },
               {
                 q: 'How are Morning Teer winning numbers determined?',
@@ -751,6 +751,7 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
     </div>
   );
 };
+
 
 
 
