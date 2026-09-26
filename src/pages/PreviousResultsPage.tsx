@@ -198,6 +198,7 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
 
         <h1 className="text-base sm:text-lg font-medium text-[#111827] tracking-tight">
           Shillong Morning Teer
+          <span className='ml-1 inline-block animate-pulse text-[12px] sm:text-[13px] font-black text-red-700'>● LIVE</span>
         </h1>
 
         <div className="w-12"></div>
@@ -429,7 +430,7 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
               onClick={() => setSelectedMonth('all')}
               className={`px-3 py-1.5 rounded-md text-xs font-normal whitespace-nowrap transition-colors cursor-pointer ${
                 selectedMonth === 'all'
-                  ? 'bg-[#b8e1ec] text-white shadow-xs'
+                  ? 'bg-[#43cfbf] text-white shadow-xs'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
             >
@@ -441,7 +442,7 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
                 onClick={() => setSelectedMonth(m)}
                 className={`px-3 py-1.5 rounded-md text-xs font-normal whitespace-nowrap transition-colors cursor-pointer ${
                   selectedMonth === m
-                    ? 'bg-[#b8e1ec] text-white shadow-xs'
+                    ? 'bg-[#43cfbf] text-white shadow-xs'
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                 }`}
               >
@@ -470,7 +471,7 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
                   RESULTS
                 </th>
               </tr>
-              <tr className="bg-[#b8e1ec]">
+              <tr className="bg-[#43cfbf]">
                 <th className="w-[42%] border-r-[1.5px] border-black py-1 font-medium text-[16px] sm:text-[18px]">CITY</th>
                 <th className="w-[30%] border-r-[1.5px] border-black py-1 font-medium text-[16px] sm:text-[18px]">DATE</th>
                 <th className="w-[14%] border-r-[1.5px] border-black py-1 font-medium text-[16px] sm:text-[18px]">F/R</th>
@@ -751,6 +752,8 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
     </div>
   );
 };
+
+
 
 
 
