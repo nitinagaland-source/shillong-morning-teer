@@ -173,6 +173,7 @@ function resultRowToApi(row: any) {
     round_2_time: row.round_2_time,
     round_2_number: row.round_2_number,
     status: row.status,
+    source: row.source,
     created_at: row.created_at,
     updated_at: row.updated_at,
   };
@@ -1019,6 +1020,7 @@ app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
 });
 
 export default app;
+
 
 
 
