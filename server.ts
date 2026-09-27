@@ -696,15 +696,15 @@ app.post('/api/results/today', requireAdmin, async (req, res, next) => {
 app.get('/api/results/previous', async (req, res, next) => {
   try {
     const todayKey = await ensureDailyState();
-    const baseResults = await cached(`previous:${todayKey}`, 10 * 60_000, async () => {
+    const baseResults = await cached(`previous:${todayKey}`, 5_000, async () => {
       const snap = await getDb().collection('results')
-        .where('result_date', '<', todayKey)
+        .where('result_date', '<=', todayKey)
         .orderBy('result_date', 'desc')
         .limit(120)
         .get();
       return snap.docs.map((d) => resultRowToApi({ id: d.id, ...d.data() }));
     });
-    let results = [...baseResults];
+    let results = baseResults.filter((r: any) => r.date !== keyToDisplay(todayKey) || r.round_1_number !== 'X');
     const search = cleanText(req.query.search, 50).toLowerCase();
     if (search) results = results.filter((r: any) => JSON.stringify(r).toLowerCase().includes(search));
     res.json(results);
@@ -1019,6 +1019,8 @@ app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
 });
 
 export default app;
+
+
 
 
 
