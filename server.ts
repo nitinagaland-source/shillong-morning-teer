@@ -1,4 +1,4 @@
-﻿import 'dotenv/config';
+import 'dotenv/config';
 import express from 'express';
 import type { NextFunction, Request, Response } from 'express';
 import crypto from 'crypto';
@@ -705,7 +705,13 @@ app.get('/api/results/previous', async (req, res, next) => {
         .get();
       return snap.docs.map((d) => resultRowToApi({ id: d.id, ...d.data() }));
     });
-    let results = baseResults.filter((r: any) => r.date !== keyToDisplay(todayKey) || r.round_1_number !== 'X');
+    let results = baseResults.filter((r: any) =>
+      r.date !== keyToDisplay(todayKey) ||
+      Boolean(
+        (r.round_1_number && r.round_1_number !== 'X') ||
+        (r.round_2_number && r.round_2_number !== 'X')
+      )
+    );
     const search = cleanText(req.query.search, 50).toLowerCase();
     if (search) results = results.filter((r: any) => JSON.stringify(r).toLowerCase().includes(search));
     res.json(results);

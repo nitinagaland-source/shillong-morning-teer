@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
   SiteSettings,
   TeerResult,
@@ -45,7 +45,18 @@ export default function App() {
   // Application Data States
   const [settings, setSettings] = useState<SiteSettings>(initialSiteSettings);
   const [todayResult, setTodayResult] = useState<TeerResult>(initialTodayResult);
-  const [previousResults, setPreviousResults] = useState<TeerResult[]>(initialPreviousResults);
+  const [previousResults, setPreviousResults] = useState<TeerResult[]>(() => {
+    try {
+      const saved = localStorage.getItem('teer-previous-results-cache');
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.length > 0) return parsed as TeerResult[];
+      }
+    } catch {
+      // Ignore unavailable or invalid local cache.
+    }
+    return initialPreviousResults;
+  });
   const [commonNumbers, setCommonNumbers] = useState<CommonNumberEntry[]>(initialCommonNumbers);
   const [dreamNumbers, setDreamNumbers] = useState<DreamNumberEntry[]>(initialDreamNumbers);
   const [notices, setNotices] = useState<NoticeEntry[]>(initialNotices.filter((notice) => notice.title !== 'Sunday & Public Holiday Archery Schedules'));
@@ -76,7 +87,14 @@ export default function App() {
 
       if (s.status === 'fulfilled') setSettings(s.value);
       if (t.status === 'fulfilled') { setTodayResult(t.value); setLiveConnected(true); } else { setLiveConnected(false); }
-      if (p.status === 'fulfilled') setPreviousResults(p.value);
+      if (p.status === 'fulfilled' && Array.isArray(p.value) && p.value.length > 0) {
+        setPreviousResults(p.value);
+        try {
+          localStorage.setItem('teer-previous-results-cache', JSON.stringify(p.value));
+        } catch {
+          // Keep the in-memory results if browser storage is unavailable.
+        }
+      }
       if (c.status === 'fulfilled') setCommonNumbers(c.value);
       if (d.status === 'fulfilled') setDreamNumbers(d.value);
       if (n.status === 'fulfilled') setNotices(n.value.filter((notice) => notice.title !== 'Sunday & Public Holiday Archery Schedules').map((notice) => ({ ...notice, body: (notice.body || '').replaceAll('10:15 AM', '10:20 AM').replaceAll('11:15 AM', '11:20 AM') })));
