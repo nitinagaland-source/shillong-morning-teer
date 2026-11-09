@@ -15,6 +15,8 @@ import {
 } from 'lucide-react';
 import { Footer } from '../components/Footer';
 import { InfoModal } from '../components/InfoModal';
+import { EMERGENCY_RESULTS } from '../lib/emergencyResults';
+import { getTodayISTDateString } from '../lib/dateUtils';
 
 interface PreviousResultsPageProps {
   results: TeerResult[];
@@ -94,11 +96,32 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   // Merge live results with extended historical seed without duplicate dates
+  const todayHistoryKey = getTodayISTDateString().split('/').reverse().join('-');
   const combinedResults = useMemo(() => {
     const map = new Map<string, TeerResult>();
     // First fill with extended records
     EXTENDED_HISTORICAL_RESULTS.forEach((r) => map.set(r.date, r));
     Object.entries(suppliedHistoricalResults).forEach(([date, values]) => map.set(date, { id: 'supplied-' + date.replaceAll('/', '-'), date, round_1_label: 'F/R(10:30 AM)', round_1_time: '10:30 AM', round_1_number: values.fr, round_2_label: 'S/R(11:30 AM)', round_2_time: '11:30 AM', round_2_number: values.sr, status: 'completed', created_at: '', updated_at: '' }));
+    // Add emergency results to history only after their IST date has passed.
+    Object.entries(EMERGENCY_RESULTS).forEach(([date, values]) => {
+      const [day, month, year] = date.split('/');
+      const recordKey = `${year}-${month}-${day}`;
+      if (recordKey < todayHistoryKey) {
+        map.set(date, {
+          id: 'emergency-' + date.replaceAll('/', '-'),
+          date,
+          round_1_label: 'F/R(10:30 AM)',
+          round_1_time: '10:30 AM',
+          round_1_number: values.fr,
+          round_2_label: 'S/R(11:30 AM)',
+          round_2_time: '11:30 AM',
+          round_2_number: values.sr,
+          status: 'completed',
+          created_at: '',
+          updated_at: '',
+        });
+      }
+    });
     // Real admin/live results take precedence over supplied fallback values
     results.forEach((r: any) => {
     const existing = map.get(r.date);
@@ -120,7 +143,7 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
       const timeB = new Date(y2, m2 - 1, d2).getTime();
       return timeB - timeA;
     });
-  }, [results]);
+  }, [results, todayHistoryKey]);
 
   // Extract distinct available months (e.g. "09/2026", "08/2026")
   const months = useMemo(() => {
