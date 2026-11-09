@@ -106,7 +106,7 @@ export const PreviousResultsPage: React.FC<PreviousResultsPageProps> = ({
     Object.entries(EMERGENCY_RESULTS).forEach(([date, values]) => {
       const [day, month, year] = date.split('/');
       const recordKey = `${year}-${month}-${day}`;
-      if (recordKey < todayHistoryKey) {
+      if (recordKey <= todayHistoryKey) {
         map.set(date, {
           id: 'emergency-' + date.replaceAll('/', '-'),
           date,
