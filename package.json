@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "tsx dev-server.ts",
     "build": "vite build",
-    "start": "tsx server.js",
+    "start": "node --import tsx server.js",
     "lint": "tsc --noEmit",
     "seed:firebase": "tsx firebase_seed.ts"
   },

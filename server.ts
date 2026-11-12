@@ -647,7 +647,8 @@ app.put('/api/site-settings', requireAdmin, async (req, res, next) => {
 
 app.get('/api/results/today', async (_req, res, next) => {
   try {
-    const todayKey = await ensureDailyState();
+    const todayKey = getTodayISTKey();
+    await ensureTodayResult(todayKey);
     const payload = await cached(`today:${todayKey}`, 15_000, async () => {
       const data = snapshotToData(await getDb().collection('results').doc(todayKey).get());
       if (!data) throw new HttpError(404, 'Today result not found.');
@@ -659,7 +660,8 @@ app.get('/api/results/today', async (_req, res, next) => {
 
 app.post('/api/results/today', requireAdmin, async (req, res, next) => {
   try {
-    const todayKey = await ensureDailyState();
+    const todayKey = getTodayISTKey();
+    await ensureTodayResult(todayKey);
     const r1 = normalizeResultNumber(req.body?.round_1_number);
     const r2 = normalizeResultNumber(req.body?.round_2_number);
     const minuteOfDay = getISTMinuteOfDay();
@@ -696,7 +698,7 @@ app.post('/api/results/today', requireAdmin, async (req, res, next) => {
 
 app.get('/api/results/previous', async (req, res, next) => {
   try {
-    const todayKey = await ensureDailyState();
+    const todayKey = getTodayISTKey();
     const baseResults = await cached(`previous:${todayKey}`, 5_000, async () => {
       const snap = await getDb().collection('results')
         .where('result_date', '<=', todayKey)
