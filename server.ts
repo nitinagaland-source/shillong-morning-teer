@@ -673,22 +673,36 @@ app.post('/api/results/today', requireAdmin, async (req, res, next) => {
       throw new HttpError(400, 'S/R can only be published at or after 11:30 AM IST.');
     }
 
-    const status = r1 !== 'X' && r2 !== 'X' ? 'completed' : r1 !== 'X' || r2 !== 'X' ? 'partial' : 'awaiting';
     const now = new Date().toISOString();
+    const ref = getDb().collection('results').doc(todayKey);
+
+    // Read what is already stored for today so that a save which arrives with
+    // an empty / "X" value can never erase a number that was already published.
+    // A published number can still be CORRECTED by sending a different number.
+    const existingSnap = await ref.get();
+    const existing: any = existingSnap.exists ? (existingSnap.data() || {}) : {};
+    const prev1 = String(existing.round_1_number || 'X').toUpperCase();
+    const prev2 = String(existing.round_2_number || 'X').toUpperCase();
+
+    const final1 = r1 === 'X' && prev1 !== 'X' ? prev1 : r1;
+    const final2 = r2 === 'X' && prev2 !== 'X' ? prev2 : r2;
+
+    const status = final1 !== 'X' && final2 !== 'X' ? 'completed' : final1 !== 'X' || final2 !== 'X' ? 'partial' : 'awaiting';
     const patch = {
       round_1_label: cleanText(req.body?.round_1_label || 'F/R(10:30 AM)', 60),
       round_1_time: cleanText(req.body?.round_1_time || '10:30 AM', 20),
-      round_1_number: r1,
-      round_1_published_at: r1 === 'X' ? null : now,
+      round_1_number: final1,
+      round_1_published_at:
+        final1 === 'X' ? null : (final1 === prev1 && existing.round_1_published_at ? existing.round_1_published_at : now),
       round_2_label: cleanText(req.body?.round_2_label || 'S/R(11:30 AM)', 60),
       round_2_time: cleanText(req.body?.round_2_time || '11:30 AM', 20),
-      round_2_number: r2,
-      round_2_published_at: r2 === 'X' ? null : now,
+      round_2_number: final2,
+      round_2_published_at:
+        final2 === 'X' ? null : (final2 === prev2 && existing.round_2_published_at ? existing.round_2_published_at : now),
       status,
       source: 'live',
       updated_at: now,
     };
-    const ref = getDb().collection('results').doc(todayKey);
     await ref.set(patch, { merge: true });
     const data = snapshotToData(await ref.get());
     await audit('TODAY_RESULT_UPDATED', req, { round1: r1, round2: r2 }, 'results', ref.id);

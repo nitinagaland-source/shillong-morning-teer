@@ -159,7 +159,13 @@ export const AdminPanelPage: React.FC<AdminPanelPageProps> = ({
     setLogoUrl(settings.logo_url || '');
   }, [settings]);
 
+  const syncedDateRef = React.useRef('');
   useEffect(() => {
+    // Only reset the form when the DAY actually changes.
+    // Re-syncing on every background refresh / window focus used to wipe the
+    // F/R and S/R numbers the admin was still typing, which then published "X".
+    if (syncedDateRef.current === todayResult.date) return;
+    syncedDateRef.current = todayResult.date;
     setTodayDate(todayResult.date);
     setFrLabel(todayResult.round_1_label);
     setFrTime(todayResult.round_1_time);
