@@ -85,6 +85,20 @@ export default function App() {
         fetchNotices(),
       ]);
 
+      // Log individual failures that Promise.allSettled otherwise hides.
+      const refreshChecks = [
+        ['site settings', s],
+        ['today view', t],
+        ['archive view', p],
+        ['other public data 1', c],
+        ['other public data 2', d],
+        ['notices', n],
+      ] as const;
+      for (const [label, outcome] of refreshChecks) {
+        if (outcome.status === 'rejected') {
+          console.warn(`[refresh] ${label} failed`, outcome.reason);
+        }
+      }
       if (s.status === 'fulfilled') setSettings(s.value);
       if (t.status === 'fulfilled') { setTodayResult(t.value); setLiveConnected(true); } else { setLiveConnected(false); }
       if (p.status === 'fulfilled' && Array.isArray(p.value) && p.value.length > 0) {
@@ -145,10 +159,12 @@ export default function App() {
       if (event.key === 'teer-data-updated') loadAllData();
     };
     window.addEventListener('focus', onFocus);
+    window.addEventListener('online', onFocus);
     window.addEventListener('storage', onStorage);
     return () => {
       window.clearInterval(interval);
       window.removeEventListener('focus', onFocus);
+      window.removeEventListener('online', onFocus);
       window.removeEventListener('storage', onStorage);
     };
   }, [loadAllData]);
