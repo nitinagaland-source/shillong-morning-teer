@@ -11,19 +11,33 @@ const app = express();
 // can share the same Firestore reads instead of exhausting the free daily quota.
 type ApiCacheEntry = { expires: number; value: unknown };
 const apiCache = new Map<string, ApiCacheEntry>();
+const pendingCacheLoads = new Map<string, Promise<unknown>>();
+let cacheGeneration = 0;
 async function cached<T>(key: string, ttlMs: number, loader: () => Promise<T>): Promise<T> {
   const hit = apiCache.get(key);
   if (hit && hit.expires > Date.now()) return hit.value as T;
-  const value = await loader();
-  apiCache.set(key, { expires: Date.now() + ttlMs, value });
-  return value;
+  const pending = pendingCacheLoads.get(key);
+  if (pending) return pending as Promise<T>;
+  const generation = cacheGeneration;
+  const request: Promise<T> = loader()
+    .then((value) => {
+      if (generation === cacheGeneration) {
+        apiCache.set(key, { expires: Date.now() + ttlMs, value });
+      }
+      return value;
+    })
+    .finally(() => {
+      if (pendingCacheLoads.get(key) === request) pendingCacheLoads.delete(key);
+    });
+  pendingCacheLoads.set(key, request);
+  return request;
 }
 
 // Any successful admin mutation invalidates cached public data immediately.
 app.use('/api', (req, res, next) => {
   if (req.method !== 'GET' && req.method !== 'HEAD') {
     res.on('finish', () => {
-      if (res.statusCode < 400) apiCache.clear();
+      if (res.statusCode < 400) { cacheGeneration += 1; apiCache.clear(); pendingCacheLoads.clear(); }
     });
   }
   next();
@@ -1023,13 +1037,27 @@ app.get('/api/health', async (_req, res) => {
     env('SESSION_SECRET') &&
     env('CRON_SECRET')
   );
-  res.status(configured ? 200 : 503).json({
-    ok: configured,
-    configured,
-    database: 'firebase-firestore',
-    timezone: 'Asia/Kolkata',
-    now: new Date().toISOString(),
-  });
+  if (!configured) return res.status(503).json({ ok: false, configured: false, firestore: 'not-checked' });
+  try {
+    // Probe a real Firestore read; this endpoint is for diagnostics, not continuous polling.
+    await Promise.race([
+      getDb().collection('site_settings').doc('main').get(),
+      new Promise<never>((_, reject) =>
+        setTimeout(() => reject(new Error('Firestore health probe timed out')), 5000)
+      ),
+    ]);
+    return res.json({ ok: true, configured: true, firestore: 'reachable', now: new Date().toISOString() });
+  } catch (error: any) {
+    const code = String(error?.code ?? 'UNKNOWN');
+    console.error('Firestore health probe failed:', code, error?.message);
+    return res.status(503).json({
+      ok: false,
+      configured: true,
+      firestore: 'unreachable',
+      errorCode: code,
+      now: new Date().toISOString(),
+    });
+  }
 });
 
 app.use('/api', (_req, res) => res.status(404).json({ error: 'API route not found.' }));
@@ -1037,8 +1065,15 @@ app.use('/api', (_req, res) => res.status(404).json({ error: 'API route not foun
 app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
   console.error(err);
   if (err instanceof HttpError) return res.status(err.status).json({ error: err.message });
+  const firebaseCode = String(err?.code ?? '').toUpperCase();
+  if (firebaseCode === '8' || firebaseCode === 'RESOURCE_EXHAUSTED') {
+    return res.status(503).json({ error: 'Database quota or capacity exhausted.', code: 'DATABASE_QUOTA' });
+  }
+  if (['4', '14', 'DEADLINE_EXCEEDED', 'UNAVAILABLE'].includes(firebaseCode)) {
+    return res.status(503).json({ error: 'Database temporarily unavailable.', code: 'DATABASE_UNAVAILABLE' });
+  }
   const message = err?.message || 'Internal server error';
-  res.status(500).json({ error: IS_PRODUCTION ? 'Internal server error.' : message });
+  return res.status(500).json({ error: IS_PRODUCTION ? 'Internal server error.' : message });
 });
 
 export default app;
