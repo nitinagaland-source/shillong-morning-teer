@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+﻿import React, { useState, useEffect, useCallback } from 'react';
 import {
   SiteSettings,
   TeerResult,
@@ -283,7 +283,7 @@ export default function App() {
       <main className="max-w-[440px] md:max-w-2xl mx-auto px-4 pt-2 pb-5 space-y-6">
         {/* Section 1: Today's Result Table */}
         <TodayResultCard
-          result={todayResult}
+          result={(!liveConnected && previousResults.find((r) => r.date === getTodayISTDateString())) || todayResult}
           settings={settings}
           isLiveUpdating={liveConnected}
         />
@@ -331,6 +331,7 @@ export default function App() {
     </div>
   );
 }
+
 
 
 
