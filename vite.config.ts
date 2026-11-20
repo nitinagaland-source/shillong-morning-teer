@@ -10,7 +10,7 @@ export default defineConfig(() => ({
     emptyOutDir: true,
   },
   resolve: {
-    alias: { '@': path.resolve(__dirname, '.') },
+    alias: { '@': path.resolve(import.meta.dirname, '.') },
   },
   server: {
     hmr: process.env.DISABLE_HMR !== 'true',
