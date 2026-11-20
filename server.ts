@@ -3,7 +3,7 @@ import express from 'express';
 import type { NextFunction, Request, Response } from 'express';
 import crypto from 'crypto';
 import { cert, getApps, initializeApp } from 'firebase-admin/app';
-import { DocumentSnapshot, Firestore, QueryDocumentSnapshot, getFirestore } from 'firebase-admin/firestore';
+import { DocumentSnapshot, Firestore, getFirestore } from 'firebase-admin/firestore';
 
 const app = express();
 
@@ -668,8 +668,9 @@ app.put('/api/site-settings', requireAdmin, async (req, res, next) => {
 
 app.get('/api/results/today', async (_req, res, next) => {
   try {
-    const todayKey = getTodayISTKey();
-    await ensureTodayResult(todayKey);
+    // The daily initializer has an in-process once-per-IST-day guard.
+    // Do not run a Firestore transaction on every public results request.
+    const todayKey = await ensureDailyState();
     const payload = await cached(`today:${todayKey}`, 15_000, async () => {
       const data = snapshotToData(await getDb().collection('results').doc(todayKey).get());
       if (!data) throw new HttpError(404, 'Today result not found.');
@@ -734,7 +735,8 @@ app.post('/api/results/today', requireAdmin, async (req, res, next) => {
 app.get('/api/results/previous', async (req, res, next) => {
   try {
     const todayKey = getTodayISTKey();
-    const baseResults = await cached(`previous:${todayKey}`, 5_000, async () => {
+    // Historical results change infrequently; admin mutations clear the in-process cache.
+    const baseResults = await cached(`previous:${todayKey}`, 30 * 60_000, async () => {
       const snap = await getDb().collection('results')
         .where('result_date', '<=', todayKey)
         .orderBy('result_date', 'desc')
@@ -798,43 +800,57 @@ app.delete('/api/results/entry/:id', requireAdmin, async (req, res, next) => {
   } catch (error) { next(error); }
 });
 
-app.get('/api/common-numbers/today', async (_req, res, next) => {
-  try {
-    const todayKey = await ensureDailyState();
+// Read-only common-number data is shared across the three public endpoints.
+// Historical records are held longer; today-specific records stay relatively fresh.
+async function getTodayCommonRows(todayKey: string) {
+  return cached(`common:today:${todayKey}`, 5 * 60_000, async () => {
     const snap = await getDb().collection('common_numbers').where('result_date', '==', todayKey).get();
     const rows = snap.docs.map((d) => commonRowToApi({ id: d.id, ...d.data() }));
     rows.sort((a: any, b: any) => a.category_label.localeCompare(b.category_label));
-    res.json(rows);
+    return rows;
+  });
+}
+
+app.get('/api/common-numbers/today', async (_req, res, next) => {
+  try {
+    const todayKey = await ensureDailyState();
+    res.json(await getTodayCommonRows(todayKey));
   } catch (error) { next(error); }
 });
 
 app.get('/api/common-numbers/daily', async (_req, res, next) => {
   try {
     const todayKey = await ensureDailyState();
-    const snap = await getDb().collection('common_numbers').where('result_date', '==', todayKey).get();
-    const rows = snap.docs.map((d) => commonRowToApi({ id: d.id, ...d.data() }));
-    rows.sort((a: any, b: any) => a.category_label.localeCompare(b.category_label));
-    res.json({ date: keyToDisplay(todayKey), entries: rows });
+    res.json({ date: keyToDisplay(todayKey), entries: await getTodayCommonRows(todayKey) });
   } catch (error) { next(error); }
 });
 
 app.get('/api/common-numbers', async (req, res, next) => {
   try {
-    await ensureDailyState();
+    const todayKey = getTodayISTKey();
     const rawDate = cleanText(req.query.date, 20);
-    let docs: QueryDocumentSnapshot[] = [];
     if (rawDate) {
       const key = displayToKey(rawDate);
-      const snap = await getDb().collection('common_numbers').where('result_date', '==', key).get();
-      docs = snap.docs;
-    } else {
-      const snap = await getDb().collection('common_numbers').orderBy('result_date', 'desc').limit(120).get();
-      docs = snap.docs;
+      if (key === todayKey) {
+        await ensureDailyState();
+        return res.json(await getTodayCommonRows(todayKey));
+      }
+      const rows = await cached(`common:date:${key}`, 60 * 60_000, async () => {
+        const snap = await getDb().collection('common_numbers').where('result_date', '==', key).get();
+        return snap.docs.map((d) => commonRowToApi({ id: d.id, ...d.data() }));
+      });
+      return res.json([...rows].sort((a: any, b: any) => a.category_label.localeCompare(b.category_label)));
     }
-    const rows = docs.map((d) => commonRowToApi({ id: d.id, ...d.data() }));
-    rows.sort((a: any, b: any) => {
-      const byDate = displayToKey(b.date).localeCompare(displayToKey(a.date));
-      return byDate || a.category_label.localeCompare(b.category_label);
+
+    await ensureDailyState();
+    const rows = await cached(`common:all:${todayKey}`, 30 * 60_000, async () => {
+      const snap = await getDb().collection('common_numbers').orderBy('result_date', 'desc').limit(120).get();
+      const records = snap.docs.map((d) => commonRowToApi({ id: d.id, ...d.data() }));
+      records.sort((a: any, b: any) => {
+        const byDate = displayToKey(b.date).localeCompare(displayToKey(a.date));
+        return byDate || a.category_label.localeCompare(b.category_label);
+      });
+      return records;
     });
     res.json(rows);
   } catch (error) { next(error); }

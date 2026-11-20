@@ -73,15 +73,19 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [liveConnected, setLiveConnected] = useState(false);
 
-  // Fetch all data from server
-  const loadAllData = useCallback(async () => {
+  // Home only needs settings, today's result and notices. Load large collections
+  // when their pages are opened (and load everything on the admin dashboard).
+  const loadAllData = useCallback(async (view = 'admin') => {
+    const needsHistory = ['admin', 'previous-results', 'analytics'].includes(view);
+    const needsCommon = ['admin', 'common-number', 'predict-target'].includes(view);
+    const needsDream = ['admin', 'dream-number'].includes(view);
     try {
       const [s, t, p, c, d, n] = await Promise.allSettled([
         fetchSiteSettings(),
         fetchTodayResult(),
-        fetchPreviousResults(),
-        fetchCommonNumbers(),
-        fetchDreamNumbers(),
+        needsHistory ? fetchPreviousResults() : Promise.resolve(null),
+        needsCommon ? fetchCommonNumbers() : Promise.resolve(null),
+        needsDream ? fetchDreamNumbers() : Promise.resolve(null),
         fetchNotices(),
       ]);
 
@@ -109,8 +113,8 @@ export default function App() {
           // Keep the in-memory results if browser storage is unavailable.
         }
       }
-      if (c.status === 'fulfilled') setCommonNumbers(c.value);
-      if (d.status === 'fulfilled') setDreamNumbers(d.value);
+      if (c.status === 'fulfilled' && c.value !== null) setCommonNumbers(c.value);
+      if (d.status === 'fulfilled' && d.value !== null) setDreamNumbers(d.value);
       if (n.status === 'fulfilled') setNotices(n.value.filter((notice) => notice.title !== 'Sunday & Public Holiday Archery Schedules').map((notice) => ({ ...notice, body: (notice.body || '').replaceAll('10:15 AM', '10:20 AM').replaceAll('11:15 AM', '11:20 AM') })));
     } catch (err) {
       console.warn('Backend sync failed, continuing with cached seed:', err);
@@ -149,14 +153,21 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  // Keep public pages synced with Firebase-backed admin changes.
-  // Polling is the serverless-safe fallback; the storage event makes another open tab refresh immediately after an admin save.
+  // Refresh only the currently visible public datasets. Prevent a rapid sequence
+  // of tab-focus events from triggering a new set of requests every time.
   useEffect(() => {
-    loadAllData();
-    const interval = window.setInterval(loadAllData, 5 * 60 * 1000);
-    const onFocus = () => loadAllData();
+    let lastRefresh = 0;
+    const refresh = () => {
+      lastRefresh = Date.now();
+      void loadAllData(currentView);
+    };
+    refresh();
+    const interval = window.setInterval(refresh, 5 * 60 * 1000);
+    const onFocus = () => {
+      if (document.visibilityState === 'visible' && Date.now() - lastRefresh >= 2 * 60 * 1000) refresh();
+    };
     const onStorage = (event: StorageEvent) => {
-      if (event.key === 'teer-data-updated') loadAllData();
+      if (event.key === 'teer-data-updated') refresh();
     };
     window.addEventListener('focus', onFocus);
     window.addEventListener('online', onFocus);
@@ -167,7 +178,7 @@ export default function App() {
       window.removeEventListener('online', onFocus);
       window.removeEventListener('storage', onStorage);
     };
-  }, [loadAllData]);
+  }, [loadAllData, currentView]);
 
   // Reset the visible live result exactly at 12:00 AM IST, then fetch the new day's Firebase state.
   // This prevents yesterday's numbers from remaining on an already-open browser tab.
@@ -186,14 +197,14 @@ export default function App() {
           status: 'awaiting',
           updated_at: new Date().toISOString(),
         }));
-        await loadAllData();
+        await loadAllData(currentView);
         scheduleMidnightReset();
       }, getMsUntilNextMidnightIST() + 250);
     };
 
     scheduleMidnightReset();
     return () => { if (timer) window.clearTimeout(timer); };
-  }, [loadAllData]);
+  }, [loadAllData, currentView]);
 
   // Handle tile click from CategoryGrid (all 6 tiles are live!)
   const handleCategoryClick = (path: string) => {
@@ -279,7 +290,7 @@ export default function App() {
         commonNumbers={commonNumbers}
         dreamNumbers={dreamNumbers}
         notices={notices}
-        onRefreshAll={loadAllData}
+        onRefreshAll={() => loadAllData('admin')}
         onBackToHome={() => navigateTo('/')}
       />
     );
