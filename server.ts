@@ -635,13 +635,16 @@ app.post('/api/auth/change-password', requireAdmin, async (req, res, next) => {
 
 app.get('/api/site-settings', async (_req, res, next) => {
   try {
-    const ref = getDb().collection('site_settings').doc('main');
-    let snap = await ref.get();
-    if (!snap.exists) {
-      await ensureSiteSettings();
-      snap = await ref.get();
-    }
-    res.json(snapshotToData(snap));
+    const payload = await cached('site-settings', 60_000, async () => {
+      const ref = getDb().collection('site_settings').doc('main');
+      let snap = await ref.get();
+      if (!snap.exists) {
+        await ensureSiteSettings();
+        snap = await ref.get();
+      }
+      return snapshotToData(snap);
+    });
+    res.json(payload);
   } catch (error) { next(error); }
 });
 
