@@ -1,5 +1,6 @@
 import 'dotenv/config';
 import express from 'express';
+import { rateLimit } from 'express-rate-limit';
 import type { NextFunction, Request, Response } from 'express';
 import crypto from 'crypto';
 import { cert, getApps, initializeApp } from 'firebase-admin/app';
@@ -51,6 +52,17 @@ app.use('/api', (_req, res, next) => {
   next();
 });
 app.set('trust proxy', 1);
+app.use('/api', rateLimit({
+  windowMs: 60_000,
+  limit: 60,
+  standardHeaders: 'draft-8',
+  legacyHeaders: false,
+  skip: (req) => req.method !== 'GET',
+  message: {
+    error: 'Too many requests. Please retry shortly.'
+  },
+}));
+
 
 const IS_PRODUCTION = process.env.NODE_ENV === 'production' || Boolean(process.env.VERCEL);
 const COOKIE_NAME = 'teer_admin_session';
