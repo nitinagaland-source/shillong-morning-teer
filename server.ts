@@ -1034,6 +1034,13 @@ app.get('/api/cron/daily', async (req, res, next) => {
   } catch (error) { next(error); }
 });
 
+app.get('/api/live', (_req, res) => {
+  res.json({
+    ok: true,
+    service: 'running',
+    now: new Date().toISOString(),
+  });
+});
 app.get('/api/health', async (_req, res) => {
   const configured = Boolean(
     env('FIREBASE_PROJECT_ID') &&
